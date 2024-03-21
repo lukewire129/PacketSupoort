@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BytePacketSupport", "BytePacketSupport\BytePacketSupport.csproj", "{9646D3DB-DAB7-41ED-8300-8B4AC0430232}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacketWriterSample", "PacketWriterSample\PacketWriterSample.csproj", "{FDB9CFA9-BEB4-4120-B970-9A71D266894E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9646D3DB-DAB7-41ED-8300-8B4AC0430232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9646D3DB-DAB7-41ED-8300-8B4AC0430232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9646D3DB-DAB7-41ED-8300-8B4AC0430232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9646D3DB-DAB7-41ED-8300-8B4AC0430232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDB9CFA9-BEB4-4120-B970-9A71D266894E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDB9CFA9-BEB4-4120-B970-9A71D266894E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDB9CFA9-BEB4-4120-B970-9A71D266894E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDB9CFA9-BEB4-4120-B970-9A71D266894E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B64C059-6D1A-4E07-A5ED-A36BDE7CA1CB}
+	EndGlobalSection
+EndGlobal

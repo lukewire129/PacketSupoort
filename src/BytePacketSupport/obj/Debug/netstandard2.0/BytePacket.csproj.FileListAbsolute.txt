@@ -1,0 +1,10 @@
+D:\Project\지우지우\BytePacket\BytePacket\bin\Debug\netstandard2.0\BytePacket.deps.json
+D:\Project\지우지우\BytePacket\BytePacket\bin\Debug\netstandard2.0\BytePacket.dll
+D:\Project\지우지우\BytePacket\BytePacket\bin\Debug\netstandard2.0\BytePacket.pdb
+D:\Project\지우지우\BytePacket\BytePacket\obj\Debug\netstandard2.0\BytePacket.csproj.AssemblyReference.cache
+D:\Project\지우지우\BytePacket\BytePacket\obj\Debug\netstandard2.0\BytePacket.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\지우지우\BytePacket\BytePacket\obj\Debug\netstandard2.0\BytePacket.AssemblyInfoInputs.cache
+D:\Project\지우지우\BytePacket\BytePacket\obj\Debug\netstandard2.0\BytePacket.AssemblyInfo.cs
+D:\Project\지우지우\BytePacket\BytePacket\obj\Debug\netstandard2.0\BytePacket.csproj.CoreCompileInputs.cache
+D:\Project\지우지우\BytePacket\BytePacket\obj\Debug\netstandard2.0\BytePacket.dll
+D:\Project\지우지우\BytePacket\BytePacket\obj\Debug\netstandard2.0\BytePacket.pdb

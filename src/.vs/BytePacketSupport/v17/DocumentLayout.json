@@ -1,0 +1,162 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Project\\\uC9C0\uC6B0\uC9C0\uC6B0\\BytePacket\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FDB9CFA9-BEB4-4120-B970-9A71D266894E}|PacketWriterSample\\PacketWriterSample.csproj|d:\\project\\\uC9C0\uC6B0\uC9C0\uC6B0\\bytepacket\\packetwritersample\\packetwritersample.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{FDB9CFA9-BEB4-4120-B970-9A71D266894E}|PacketWriterSample\\PacketWriterSample.csproj|solutionrelative:packetwritersample\\packetwritersample.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDB9CFA9-BEB4-4120-B970-9A71D266894E}|PacketWriterSample\\PacketWriterSample.csproj|d:\\project\\\uC9C0\uC6B0\uC9C0\uC6B0\\bytepacket\\packetwritersample\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDB9CFA9-BEB4-4120-B970-9A71D266894E}|PacketWriterSample\\PacketWriterSample.csproj|solutionrelative:packetwritersample\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\1.SmartPokerRFID\\1.source\\CardReader\\CardReaderTest\\ViewModel\\MainViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\1.SmartPokerRFID\\1.source\\CardReader\\CardReaderTest\\ViewModel\\SmartRFIDViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|d:\\project\\\uC9C0\uC6B0\uC9C0\uC6B0\\bytepacket\\bytepacket\\displayhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:bytepacket\\displayhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|d:\\project\\\uC9C0\uC6B0\uC9C0\uC6B0\\bytepacket\\bytepacket\\packetwriter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:bytepacket\\packetwriter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|d:\\project\\\uC9C0\uC6B0\uC9C0\uC6B0\\bytepacket\\bytepacket\\appenhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:bytepacket\\appenhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 1933,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{79664857-03bf-4bca-aa54-ec998b3328f8}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PacketWriterSample.csproj",
+              "DocumentMoniker": "D:\\Project\\\uC9C0\uC6B0\uC9C0\uC6B0\\BytePacket\\PacketWriterSample\\PacketWriterSample.csproj",
+              "RelativeDocumentMoniker": "PacketWriterSample\\PacketWriterSample.csproj",
+              "ToolTip": "D:\\Project\\\uC9C0\uC6B0\uC9C0\uC6B0\\BytePacket\\PacketWriterSample\\PacketWriterSample.csproj",
+              "RelativeToolTip": "PacketWriterSample\\PacketWriterSample.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-03-21T03:28:06.752Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DisplayHelper.cs",
+              "DocumentMoniker": "D:\\Project\\\uC9C0\uC6B0\uC9C0\uC6B0\\BytePacket\\BytePacket\\DisplayHelper.cs",
+              "RelativeDocumentMoniker": "BytePacket\\DisplayHelper.cs",
+              "ToolTip": "D:\\Project\\\uC9C0\uC6B0\uC9C0\uC6B0\\BytePacket\\BytePacket\\DisplayHelper.cs",
+              "RelativeToolTip": "BytePacket\\DisplayHelper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-21T02:57:48.504Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PacketWriter.cs",
+              "DocumentMoniker": "D:\\Project\\\uC9C0\uC6B0\uC9C0\uC6B0\\BytePacket\\BytePacket\\PacketWriter.cs",
+              "RelativeDocumentMoniker": "BytePacket\\PacketWriter.cs",
+              "ToolTip": "D:\\Project\\\uC9C0\uC6B0\uC9C0\uC6B0\\BytePacket\\BytePacket\\PacketWriter.cs",
+              "RelativeToolTip": "BytePacket\\PacketWriter.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-20T09:04:43.348Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1975,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e78e0cf7-2e4e-48a7-bf7f-a94d9330a3be}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c93a910a-0fa6-4307-93a4-f2bd61ec7828}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AppenHelper.cs",
+              "DocumentMoniker": "D:\\Project\\\uC9C0\uC6B0\uC9C0\uC6B0\\BytePacket\\BytePacket\\AppenHelper.cs",
+              "RelativeDocumentMoniker": "BytePacket\\AppenHelper.cs",
+              "ToolTip": "D:\\Project\\\uC9C0\uC6B0\uC9C0\uC6B0\\BytePacket\\BytePacket\\AppenHelper.cs",
+              "RelativeToolTip": "BytePacket\\AppenHelper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-21T03:27:54.258Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "D:\\Project\\1.SmartPokerRFID\\1.source\\CardReader\\CardReaderTest\\ViewModel\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "..\\..\\1.SmartPokerRFID\\1.source\\CardReader\\CardReaderTest\\ViewModel\\MainViewModel.cs",
+              "ToolTip": "D:\\Project\\1.SmartPokerRFID\\1.source\\CardReader\\CardReaderTest\\ViewModel\\MainViewModel.cs",
+              "RelativeToolTip": "..\\..\\1.SmartPokerRFID\\1.source\\CardReader\\CardReaderTest\\ViewModel\\MainViewModel.cs",
+              "ViewState": "AQIAAHUBAAAAAAAAAAAAAGMBAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-21T02:51:43.964Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Project\\\uC9C0\uC6B0\uC9C0\uC6B0\\BytePacket\\PacketWriterSample\\Program.cs",
+              "RelativeDocumentMoniker": "PacketWriterSample\\Program.cs",
+              "ToolTip": "D:\\Project\\\uC9C0\uC6B0\uC9C0\uC6B0\\BytePacket\\PacketWriterSample\\Program.cs",
+              "RelativeToolTip": "PacketWriterSample\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-21T02:42:23.625Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SmartRFIDViewModel.cs",
+              "DocumentMoniker": "D:\\Project\\1.SmartPokerRFID\\1.source\\CardReader\\CardReaderTest\\ViewModel\\SmartRFIDViewModel.cs",
+              "RelativeDocumentMoniker": "..\\..\\1.SmartPokerRFID\\1.source\\CardReader\\CardReaderTest\\ViewModel\\SmartRFIDViewModel.cs",
+              "ToolTip": "D:\\Project\\1.SmartPokerRFID\\1.source\\CardReader\\CardReaderTest\\ViewModel\\SmartRFIDViewModel.cs",
+              "RelativeToolTip": "..\\..\\1.SmartPokerRFID\\1.source\\CardReader\\CardReaderTest\\ViewModel\\SmartRFIDViewModel.cs",
+              "ViewState": "AQIAAHsAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-21T02:51:49.346Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
