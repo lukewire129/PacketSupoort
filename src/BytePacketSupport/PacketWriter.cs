@@ -1,19 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 
 namespace BytePacketSupport
 {
-    public class PacketWriter
+    public partial class PacketWriter
     {
         byte[] bytes;
         public PacketWriter()
         {
             bytes = new byte[0];
-        }
-
-        public PacketWriter(int length)
-        {
-            bytes = new byte[length];
         }
 
         public PacketWriter Append(byte packet)
@@ -25,12 +19,6 @@ namespace BytePacketSupport
         public PacketWriter Append(byte[] packet)
         {
             this.bytes = bytes.Append (packet);
-            return this;
-        }
-        public PacketWriter Append(string ascii)
-        {
-            this.bytes = bytes.Append (ascii);
-
             return this;
         }
 
