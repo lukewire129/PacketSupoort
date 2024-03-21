@@ -18,37 +18,37 @@ namespace BytePacketSupport
 
         public PacketWriter Append(byte packet)
         {
-            this.bytes = bytes.AppendByte (packet);
+            this.bytes = bytes.Append (packet);
             return this;
         }
 
         public PacketWriter Append(byte[] packet)
         {
-            this.bytes = bytes.AppendBytes (packet);
+            this.bytes = bytes.Append (packet);
             return this;
         }
         public PacketWriter Append(string ascii)
         {
-            this.bytes = bytes.AppendASCII (ascii);
+            this.bytes = bytes.Append (ascii);
 
             return this;
         }
 
         public PacketWriter Append(byte[] packet, int offset, int count)
         {
-            this.bytes = bytes.AppendBytes (packet, offset, count);
+            this.bytes = bytes.Append (packet, offset, count);
             return this;
         }
 
         public PacketWriter Append(List<byte> packet)
         {
-            this.bytes = bytes.AppendBytes (packet.ToArray());
+            this.bytes = bytes.Append (packet.ToArray());
             return this;
         }
 
         public PacketWriter Append(List<byte> packet, int offset, int count)
         {
-            this.bytes = bytes.AppendBytes (packet.ToArray (), offset, count);
+            this.bytes = bytes.Append (packet.ToArray (), offset, count);
             return this;
         }
 
