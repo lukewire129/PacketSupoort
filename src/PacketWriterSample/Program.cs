@@ -29,7 +29,7 @@ byte addBytes = 0x51;
 Console.WriteLine ("Original Data : {0}", aByte.Display ());
 Console.WriteLine ("Add Data 2 : {0}", addBytes.Display ());
 
-summaryByts = aByte.AppendByte (addBytes);
+summaryByts = aByte.Append (addBytes);
 Console.WriteLine (summaryByts.Display ());
 Console.WriteLine (summaryByts.DisplayAscii ());
 Console.WriteLine ();
@@ -40,7 +40,7 @@ byte[] bByte = new byte[2]{ 0x50, 0x51 };
 addBytes = 0x52;
 Console.WriteLine ("Original Data : {0}", bByte.Display ());
 Console.WriteLine ("Add Data 2 : {0}", addBytes.Display ());
-summaryByts = bByte.AppendByte (addBytes);
+summaryByts = bByte.Append (addBytes);
 
 Console.WriteLine (summaryByts.Display ());
 Console.WriteLine (summaryByts.DisplayAscii ());
@@ -50,7 +50,7 @@ Console.WriteLine ();
 // Example4
 Console.WriteLine ("Example4");
 byte[] cByte = new byte[2] { 0x50, 0x51 };
-summaryByts = cByte.AppendBytes (new List<byte>
+summaryByts = cByte.Append (new List<byte>
 {
     0x52, 0x53
 });
@@ -61,7 +61,7 @@ Console.WriteLine ();
 // Example5
 Console.WriteLine ("Example5");
 byte[] dByte = new byte[1] { 0x50};
-summaryByts = dByte.AppendASCII ("hihi");
+summaryByts = dByte.Append ("hihi");
 
 Console.WriteLine (summaryByts.Display ());
 Console.WriteLine (summaryByts.DisplayAscii ());
