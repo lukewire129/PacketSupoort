@@ -70,7 +70,7 @@ Console.WriteLine (bytes.DisplayAscii ());
 byte[] summaryByts;
 byte testByte = 0x51;
 
-summaryByts = testByte.AppendBytes(new byte[]
+summaryByts = testByte.Append(new byte[]
                               {
                                 0x52,
                                 0x53
@@ -89,13 +89,13 @@ Console.WriteLine (summaryByts.DisplayAscii ());
 byte[] summaryByts;
 byte testByte = 0x51;
 
-summaryByts = testByte.AppendBytes(new List<byte>
+summaryByts = testByte.Append(new List<byte>
                                  {
                                    0x52,
                                    0x53
                                  });
 /* and
-summaryByts = testByte.AppendBytes(new byte[]()
+summaryByts = testByte.Append(new byte[]()
                                  {
                                    0x52,
                                    0x53
@@ -115,7 +115,7 @@ Console.WriteLine (summaryByts.DisplayAscii ());
 byte[] summaryByts;
 List<byte> testByte = new List<byte>(){0x51, 0x52, 0x53};
 
-summaryByts = testByte.AppendBytes(new List<byte>
+summaryByts = testByte.Append(new List<byte>
                                  {
                                    0x54,
                                    0x55
