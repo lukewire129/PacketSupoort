@@ -29,11 +29,11 @@ namespace BytePacketSupport
         }
         public PacketWriter Append(string ascii)
         {
-            byte[] asciibyte = Encoding.ASCII.GetBytes (ascii);
-            this.bytes = bytes.AppendBytes (asciibyte);
+            this.bytes = bytes.AppendASCII (ascii);
 
             return this;
         }
+
         public PacketWriter Append(byte[] packet, int offset, int count)
         {
             this.bytes = bytes.AppendBytes (packet, offset, count);
