@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "PacketWriterSample/1.0.0": {
+        "dependencies": {
+          "BytePacketSupport": "1.0.0"
+        },
+        "runtime": {
+          "PacketWriterSample.dll": {}
+        }
+      },
+      "BytePacketSupport/1.0.0": {
+        "runtime": {
+          "BytePacketSupport.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PacketWriterSample/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BytePacketSupport/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

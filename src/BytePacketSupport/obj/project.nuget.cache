@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "YNtlYMT2uMRuuhUj5vWo5DVHFD2Cfu+HANjWG1vvmAWWJmEGD2teamLEd+JKA13NQCbvySyxaez0VVQ+DgTOyQ==",
+  "success": true,
+  "projectFilePath": "D:\\Project\\지우지우\\BytePacket\\BytePacketSupport\\BytePacketSupport.csproj",
+  "expectedPackageFiles": [
+    "D:\\Nuget\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "D:\\Nuget\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
