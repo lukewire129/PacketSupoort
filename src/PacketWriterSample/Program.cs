@@ -44,3 +44,23 @@ summaryByts = bByte.AppendByte (addBytes);
 Console.WriteLine (summaryByts.Display ());
 Console.WriteLine (summaryByts.DisplayAscii ());
 Console.WriteLine ();
+
+
+// Example4
+Console.WriteLine ("Example4");
+byte[] cByte = new byte[2] { 0x50, 0x51 };
+summaryByts = cByte.AppendBytes (new List<byte>
+{
+    0x52, 0x53
+});
+Console.WriteLine (summaryByts.Display ());
+Console.WriteLine (summaryByts.DisplayAscii ());
+
+
+// Example5
+Console.WriteLine ("Example5");
+byte[] dByte = new byte[1] { 0x50};
+summaryByts = dByte.AppendASCII ("hihi");
+
+Console.WriteLine (summaryByts.Display ());
+Console.WriteLine (summaryByts.DisplayAscii ());

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace BytePacketSupport
 {
@@ -7,7 +8,7 @@ namespace BytePacketSupport
         byte[] bytes;
         public PacketWriter()
         {
-            bytes = new byte[1];
+            bytes = new byte[0];
         }
 
         public PacketWriter(int length)
@@ -26,7 +27,13 @@ namespace BytePacketSupport
             this.bytes = bytes.AppendBytes (packet);
             return this;
         }
+        public PacketWriter Append(string ascii)
+        {
+            byte[] asciibyte = Encoding.ASCII.GetBytes (ascii);
+            this.bytes = bytes.AppendBytes (asciibyte);
 
+            return this;
+        }
         public PacketWriter Append(byte[] packet, int offset, int count)
         {
             this.bytes = bytes.AppendBytes (packet, offset, count);
