@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BytePacketSupport\BytePacketSupport.csproj" />
+    <PackageReference Include="PacketSupoort" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
