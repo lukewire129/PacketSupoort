@@ -129,24 +129,4 @@ Console.WriteLine (summaryByts.DisplayAscii ());
 // QRSTU
 ```
 
-## TimeTest 400,000 Byte Append Test
-``` csharp
-Console.WriteLine ("Example6 TimeTest");
-Stopwatch sw = Stopwatch.StartNew ();
-sw.Start ();
-var writerTest = new PacketWriter ();
-for (int i = 0; i < 100000; i++)
-{
-    writerTest.Append (BitConverter.GetBytes (i));
-}
-sw.Stop ();
-
-Console.WriteLine ("{0}byte append {1} ms", 100000 * 4, sw.ElapsedMilliseconds);
-
-/*output
-Example6 TimeTest
-400000byte append 2783 ms
-*/
-```
-
     
