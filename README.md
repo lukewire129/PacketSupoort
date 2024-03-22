@@ -4,10 +4,13 @@
 1. PacketWriter class
 2. Extentions
 3. bytearray - class (Serialization, Deserialization)
-   
+
+The current difference between **Extentions** and **PacketWriter** is that Extentions supports the Chain Method, while PacketWriter is intended to provide more functionality in the future.
+
 ## output print
 1. Display() => only byte
 2. DisplayAscii() => AsciiCode Byte
+
 
 ## 0. output print
 ```csharp
