@@ -3,7 +3,8 @@
 ## use
 1. PacketWriter class
 2. Extentions
-
+3. bytearray - class (Serialization, Deserialization)
+   
 ## output print
 1. Display() => only byte
 2. DisplayAscii() => AsciiCode Byte
@@ -129,4 +130,28 @@ Console.WriteLine (summaryByts.DisplayAscii ());
 // QRSTU
 ```
 
-    
+## 3. bytearray - class (Serialization, Deserialization)
+```
+public class Test2Packet
+{
+    public int Value;
+    [ByteSize (3)]
+    public string Value1;
+    [ByteSize (3)]
+    public string Value2;
+    [ByteSize(4)]
+    public byte[] abc;            
+    public byte[] efg = new byte[5];
+    public List<byte> qqq= new List<byte>(5);
+    public List<byte> qqq1= new List<byte>();
+}
+
+[Fact]
+public void TestDeserializeObject()
+{
+    var test = new byte[] { 0x01, 0x00, 0x00, 0x00, 0x61, 0x62,0x63,0x41,0x42,0x43, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43 };
+    var aaa = PacketParse.DeserializeObject<Test2Packet> (test);
+
+    var abc  = PacketParse.Serialization (aaa);
+}
+```
