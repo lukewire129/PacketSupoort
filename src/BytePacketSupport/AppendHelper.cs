@@ -1,88 +1,46 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BytePacketSupport
 {
     public static partial class AppendHelper
     {
-        public static byte[] Append<TSource>(this byte b, TSource AppenClass) where TSource : class
+        public static byte[] Append(this byte b, byte AppenByte) => new byte[] { b, AppenByte };
+        public static byte[] Append(this IEnumerable<byte> bs, byte AppenByte) => bs.Append<byte> (AppenByte).ToArray ();
+        public static byte[] Append(this byte b, byte[] AppenBytes)
         {
-            FieldInfo[] fields = typeof (TSource).GetFields (BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            byte[] result = new byte[] { b };
-            foreach (FieldInfo field in fields)
-            {
-                object value = field.GetValue (AppenClass);
+            byte[] ToTalBytes = new byte[1 + AppenBytes.Length];
+            ToTalBytes[0] = b;
+            Buffer.BlockCopy (AppenBytes, 0, ToTalBytes, 1, AppenBytes.Length);
 
-                // 필드의 타입으로 캐스팅
-                if (field.FieldType == typeof (int))
-                {
-                    result = result.Append (value.GetFieldType<int> ());
-                }
-                else if (field.FieldType == typeof (string))
-                {
-                    result = result.Append (value.GetFieldType<string> ());
-                }
-                else if (field.FieldType == typeof (long))
-                {
-                    result = result.Append (value.GetFieldType<long> ());
-                }
-                else if (field.FieldType == typeof (short))
-                {
-                    result = result.Append (value.GetFieldType<short> ());
-                }
-                else if (field.FieldType == typeof (byte))
-                {
-                    result = result.Append (value.GetFieldType<byte> ());
-                }
-                else if (field.FieldType == typeof (byte[]))
-                {
-                    result = result.Append (value.GetFieldType<byte[]> ());
-                }
-            }
-
-            return result;
+            return ToTalBytes;
         }
 
-        public static byte[] Append<TSource>(this byte[] b, TSource AppenClass) where TSource : class
+        public static byte[] Append(this byte[] bs, byte[] AppenBytes)
         {
-            FieldInfo[] fields = typeof (TSource).GetFields (BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            byte[] result = b;
-            foreach (FieldInfo field in fields)
-            {
-                object value = field.GetValue (AppenClass);
+            byte[] ToTalBytes = new byte[bs.Length + AppenBytes.Length];
 
-                // 필드의 타입으로 캐스팅
-                if (field.FieldType == typeof (int))
-                {
-                    result = result.Append (value.GetFieldType<int> ());
-                }
-                else if (field.FieldType == typeof (string))
-                {
-                    result = result.Append (value.GetFieldType<string> ());
-                }
-                else if (field.FieldType == typeof (long))
-                {
-                    result = result.Append (value.GetFieldType<long> ());
-                }
-                else if (field.FieldType == typeof (short))
-                {
-                    result = result.Append (value.GetFieldType<short> ());
-                }
-                else if (field.FieldType == typeof (byte))
-                {
-                    result = result.Append (value.GetFieldType<byte> ());
-                }
-                else if (field.FieldType == typeof (byte[]))
-                {
-                    result = result.Append (value.GetFieldType<byte[]> ());
-                }
-            }
+            Buffer.BlockCopy (bs, 0, ToTalBytes, 0, bs.Length);
+            Buffer.BlockCopy (AppenBytes, 0, ToTalBytes, bs.Length, AppenBytes.Length);
 
-            return result;
+            return ToTalBytes;
         }
 
-        private static T GetFieldType<T>(this object obj)
+        public static byte[] Append(this byte[] bs, byte[] AppenBytes, int offset, int count)
         {
-            return (T)obj;
+            byte[] ToTalBytes = new byte[bs.Length + AppenBytes.Length];
+
+            Buffer.BlockCopy (bs, 0, ToTalBytes, 0, bs.Length);
+            Buffer.BlockCopy (AppenBytes, offset, ToTalBytes, bs.Length, count);
+
+            return ToTalBytes;
         }
+
+        public static byte[] Append(this byte b, List<byte> AppenBytes) => b.Append (AppenBytes.ToArray ());
+
+        public static byte[] Append(this byte[] bs, List<byte> AppenBytes) => bs.Append (AppenBytes.ToArray ());
+
+        public static byte[] Append(this byte[] bs, List<byte> AppenBytes, int offset, int count) => bs.Append (AppenBytes.ToArray (), offset, count);
     }
 }

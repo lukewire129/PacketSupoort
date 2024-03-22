@@ -1,7 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using BytePacketSupport;
-using System.Diagnostics;
 
 
 // Example1
@@ -66,18 +65,3 @@ summaryByts = dByte.Append ("hihi");
 Console.WriteLine (summaryByts.Display ());
 Console.WriteLine (summaryByts.DisplayAscii ());
 Console.WriteLine ();
-
-// Example6 TimeTest
-Console.WriteLine ("Example6 TimeTest");
-Stopwatch sw = Stopwatch.StartNew ();
-sw.Start ();
-var writerTest = new PacketWriter ();
-for (int i = 0; i < 100000; i++)
-{
-    writerTest.Append (BitConverter.GetBytes (i));
-}
-sw.Stop ();
-//Console.WriteLine (writerTest.GetBytes().Display ());
-//Console.WriteLine (writerTest.GetBytes ().DisplayAscii ());
-Console.WriteLine ("{0}byte append {1} ms", 100000 * 4, sw.ElapsedMilliseconds);
-
