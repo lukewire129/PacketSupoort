@@ -1,4 +1,5 @@
 using BytePacketSupport;
+using BytePacketSupport.Attibutes;
 using System.Diagnostics;
 namespace AppendTest
 {
@@ -7,7 +8,9 @@ namespace AppendTest
         public class Test1Packet
         {
             public int Value;
+            [ByteSize (3)]
             public string Value1;
+            [ByteSize (3)]
             public string Value2;
         }
 
@@ -86,6 +89,28 @@ namespace AppendTest
             {
                 bytes = dest.Append<Byte> (bytes[j]).ToArray ();
             }
+        }
+        public class Test2Packet
+        {
+            public int Value;
+            [ByteSize (3)]
+            public string Value1;
+            [ByteSize (3)]
+            public string Value2;
+            [ByteSize(4)]
+            public byte[] abc;            
+            public byte[] efg = new byte[5];
+            public List<byte> qqq= new List<byte>(5);
+            public List<byte> qqq1= new List<byte>();
+        }
+
+        [Fact]
+        public void TestDeserializeObject()
+        {
+            var test = new byte[] { 0x01, 0x00, 0x00, 0x00, 0x61, 0x62,0x63,0x41,0x42,0x43, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43 };
+            var aaa = PacketParse.DeserializeObject<Test2Packet> (test);
+
+            var abc  = PacketParse.Serialization (aaa);
         }
     }
 }
