@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace BytePacketSupport
 {
@@ -39,7 +40,19 @@ namespace BytePacketSupport
             this.bytes = bytes.Append (packet.ToArray (), offset, count);
             return this;
         }
+        public PacketWriter Reverse()
+        {
+            this.bytes = this.bytes.Reverse ().ToArray ();
 
+            return this;
+        }
+
+        public long Length() => this.bytes.LongLength;
         public byte[] GetBytes() => this.bytes;
+
+        public void Clear()
+        {
+            this.bytes = new byte[0];
+        }
     }
 }
