@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BytePacketSupport", "BytePacketSupport\BytePacketSupport.csproj", "{9646D3DB-DAB7-41ED-8300-8B4AC0430232}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BytePacketSupport", "BytePacketSupport\BytePacketSupport.csproj", "{9646D3DB-DAB7-41ED-8300-8B4AC0430232}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacketWriterSample", "PacketWriterSample\PacketWriterSample.csproj", "{FDB9CFA9-BEB4-4120-B970-9A71D266894E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PacketWriterSample", "PacketWriterSample\PacketWriterSample.csproj", "{FDB9CFA9-BEB4-4120-B970-9A71D266894E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppendTest", "AppendTest\AppendTest.csproj", "{1E4A5E2A-04B2-42EC-A8EF-0B45D98A6B88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FDB9CFA9-BEB4-4120-B970-9A71D266894E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDB9CFA9-BEB4-4120-B970-9A71D266894E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDB9CFA9-BEB4-4120-B970-9A71D266894E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E4A5E2A-04B2-42EC-A8EF-0B45D98A6B88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E4A5E2A-04B2-42EC-A8EF-0B45D98A6B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E4A5E2A-04B2-42EC-A8EF-0B45D98A6B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E4A5E2A-04B2-42EC-A8EF-0B45D98A6B88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
