@@ -134,7 +134,7 @@ Console.WriteLine (summaryByts.DisplayAscii ());
 - For an array or string, you must size it.
 - The size should be set via attribute (ByteSize), and in the case of 'List' Type, it can be handled by adjusting the Capacity value.
   If there is no capacity or attribute value, an empty value is returned.
-```
+```csharp
 public class Test2Packet
 {
     public int Value;
