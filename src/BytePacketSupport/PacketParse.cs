@@ -72,6 +72,8 @@ namespace BytePacketSupport
                     position = reader.BaseStream.Position;
                     var value = Encoding.ASCII.GetString (bytes, Convert.ToInt32(position), (int)attribute.ConstructorArguments.First ().Value);
                     field.SetValue (instance, value);
+
+                    reader.BaseStream.Position +=  Convert.ToInt64((int)attribute.ConstructorArguments.First ().Value);
                 }
                 else if (field.FieldType == typeof (long))
                 {
