@@ -25,19 +25,19 @@ namespace BytePacketSupport
                 }
                 else if (field.FieldType == typeof (long))
                 {
-                    result = result.Append (value.GetFieldType<string> ());
+                    result = result.Append (value.GetFieldType<long> ());
                 }
                 else if (field.FieldType == typeof (short))
                 {
-                    result = result.Append (value.GetFieldType<string> ());
+                    result = result.Append (value.GetFieldType<short> ());
                 }
                 else if (field.FieldType == typeof (byte))
                 {
-                    result = result.Append (value.GetFieldType<string> ());
+                    result = result.Append (value.GetFieldType<byte> ());
                 }
                 else if (field.FieldType == typeof (byte[]))
                 {
-                    result = result.Append (value.GetFieldType<string> ());
+                    result = result.Append (value.GetFieldType<byte[]> ());
                 }
             }
 
@@ -63,19 +63,19 @@ namespace BytePacketSupport
                 }
                 else if (field.FieldType == typeof (long))
                 {
-                    result = result.Append (value.GetFieldType<string> ());
+                    result = result.Append (value.GetFieldType<long> ());
                 }
                 else if (field.FieldType == typeof (short))
                 {
-                    result = result.Append (value.GetFieldType<string> ());
+                    result = result.Append (value.GetFieldType<short> ());
                 }
                 else if (field.FieldType == typeof (byte))
                 {
-                    result = result.Append (value.GetFieldType<string> ());
+                    result = result.Append (value.GetFieldType<byte> ());
                 }
                 else if (field.FieldType == typeof (byte[]))
                 {
-                    result = result.Append (value.GetFieldType<string> ());
+                    result = result.Append (value.GetFieldType<byte[]> ());
                 }
             }
 
