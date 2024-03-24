@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BytePacketSupport.Converter;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace BytePacketSupport
         public static byte[] Serialization<TSource>(TSource AppendClass) where TSource : class
         {
             FieldInfo[] fields = typeof (TSource).GetFields (BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            byte[] result = new byte[0];
+            List<byte> result = new List<byte>();
             foreach (FieldInfo field in fields)
             {
                 object value = field.GetValue (AppendClass);
@@ -20,35 +21,35 @@ namespace BytePacketSupport
                 // 필드의 타입으로 캐스팅
                 if (field.FieldType == typeof (int))
                 {
-                    result = result.Append (value.GetFieldType<int> ());
+                    result.AddRange (ByteConverter.GetByte (value.GetFieldType<int> ()));
                 }
                 else if (field.FieldType == typeof (string))
                 {
-                    result = result.Append (value.GetFieldType<string> ());
+                    result.AddRange (ByteConverter.GetByte (value.GetFieldType<string> ()));
                 }
                 else if (field.FieldType == typeof (long))
                 {
-                    result = result.Append (value.GetFieldType<long> ());
+                    result.AddRange (ByteConverter.GetByte (value.GetFieldType<long> ()));
                 }
                 else if (field.FieldType == typeof (short))
                 {
-                    result = result.Append (value.GetFieldType<short> ());
+                    result.AddRange (ByteConverter.GetByte (value.GetFieldType<short> ()));
                 }
                 else if (field.FieldType == typeof (byte))
                 {
-                    result = result.Append (value.GetFieldType<byte> ());
+                    result.Add (value.GetFieldType<byte> ());
                 }
                 else if (field.FieldType == typeof (byte[]))
                 {
-                    result = result.Append (value.GetFieldType<byte[]> ());
+                    result.AddRange (value.GetFieldType<byte[]> ());
                 }
                 else if (field.FieldType == typeof (List<byte>))
                 {
-                    result = result.Append (value.GetFieldType<List<byte>> ());
+                    result.AddRange (value.GetFieldType<List<byte>> ());
                 }
             }
 
-            return result;
+            return result.ToArray();
         }
 
         public static T DeserializeObject<T>(byte[] bytes) where T : new()
