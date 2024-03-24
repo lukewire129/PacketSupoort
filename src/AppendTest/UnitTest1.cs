@@ -90,6 +90,7 @@ namespace AppendTest
                 bytes = dest.Append<Byte> (bytes[j]).ToArray ();
             }
         }
+
         public class Test2Packet
         {
             public int Value;
