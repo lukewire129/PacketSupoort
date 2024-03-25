@@ -12,7 +12,7 @@
 
 The current difference between **Extentions** and **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
 
-# 0. output print
+# 0.-output-print
 1. Display() => only byte
 2. DisplayAscii() => AsciiCode Byte
 ```csharp
