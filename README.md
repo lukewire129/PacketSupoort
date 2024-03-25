@@ -3,7 +3,8 @@
 ## use
 1. ~~PacketWriter class~~ -> PacketBuilder
 2. Append Extentions
-3. bytearray - class (Serialization, Deserialization)
+3. PacketCheckSum(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))
+4. bytearray - class (Serialization, Deserialization)
 
 The current difference between **Extentions** and ~~**PacketWriter**~~ **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
 
@@ -115,8 +116,41 @@ summaryByts = testByte.Append(new List<byte>
                                    0x55
                                  });
 ```
+## 3. PacketCheckSum(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))
+- There are two ways to do this
+The first ErrorDetection method
+``` csharp
+var packet = pb
+  .Append(0x01)  // CMD
+  .Append(0x02)
+  .Append(0x03)
+  .Append(0x04)
+  .Append(0x05)
+  .ErrorDetection(Checksum8Type.Xor) 
+  .Build();
+// or
+//   .ErrorDetection(Checksum8Type.Xor, start index);
+// or
+//   .ErrorDetection(Checksum8Type.Xor, start index, count); 
+```
+The second PointSave method
+SavePoint can be used to extend beyond checksums to areas that need to be temporarily stored.
+``` csharp
+var packet = pb
+  .Append(0x01)  // CMD
+  .PointSaveStart("ChecksumPacking")
+  .Append(0x02)
+  .Append(0x03)
+  .Append(0x04)
+  .Append(0x05)
+  .PointSaveEnd("ChecksumPacking");
+  .Checksum("ChecksumPacking", Checksum8Type.Xor) // 8비트 체크섬이 삽입되는 위치
+  .Build();
 
-## 3. bytearray - class (Serialization, Deserialization)
+// extentions ex)
+var savePacket = packet.GetSavePoint("ChecksumPacking");
+```
+## 4. bytearray - class (Serialization, Deserialization)
 - For an array or string, you must size it.
 - The size should be set via attribute (ByteSize), and in the case of 'List' Type, it can be handled by adjusting the Capacity value.
   If there is no capacity or attribute value, an empty value is returned.
