@@ -4,19 +4,17 @@
 "Icon made by Freepik from www.flaticon.com"
 ([Link](https://www.flaticon.com/free-icon/brick-wall_1887007?term=brick&related_id=1887007))
 ## use
-1. PacketBuilder
-2. Append Extentions
-3. PacketCheckSum(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))
-4. bytearray - class (Serialization, Deserialization)
+0. [OutputPrint](#0.output-print)
+1. [PacketBuilder](#1.Packet-Builder)
+2. [Append Extentions](#2.Extentions)
+3. [PacketCheckSum](#3.PacketCheckSum) **(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))**
+4. [bytearray - class (Serialization, Deserialization)](#4.bytearray-class(Serialization,Deserialization))
 
 The current difference between **Extentions** and **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
 
-## output print
+## 0. output print
 1. Display() => only byte
 2. DisplayAscii() => AsciiCode Byte
-
-
-## 0. output print
 ```csharp
 
 var builder = new PacketBuilder ()
@@ -119,7 +117,7 @@ summaryByts = testByte.Append(new List<byte>
                                    0x55
                                  });
 ```
-## 3. PacketCheckSum(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))
+## 3. PacketCheckSum
 - There are two ways to do this
 The first ErrorDetection method
 ``` csharp
