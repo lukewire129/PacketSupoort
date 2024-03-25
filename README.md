@@ -12,7 +12,7 @@
 
 The current difference between **Extentions** and **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
 
-## 0. output print
+# 0. output print
 1. Display() => only byte
 2. DisplayAscii() => AsciiCode Byte
 ```csharp
@@ -35,7 +35,7 @@ Console.WriteLine (builder.DisplayAscii ());
 // @ABCDE
 ```
 
-## 1. PacketBuilder
+# 1. PacketBuilder
 - Append Byte
 ```csharp
 var builder = new PacketBuilder ()
@@ -74,7 +74,7 @@ writer.Append(new byte[]
 */
 ```
 
-## 2. Extentions
+# 2. Extentions
 - byte + byte array
 ``` csharp
 byte[] summaryByts;
@@ -117,7 +117,7 @@ summaryByts = testByte.Append(new List<byte>
                                    0x55
                                  });
 ```
-## 3. PacketCheckSum
+# 3. PacketCheckSum
 - There are two ways to do this
 The first ErrorDetection method
 ``` csharp
@@ -151,7 +151,7 @@ var packet = pb
 // extentions ex)
 var savePacket = packet.GetSavePoint("ChecksumPacking");
 ```
-## 4. bytearray - class (Serialization, Deserialization)
+# 4. bytearray - class (Serialization, Deserialization)
 - For an array or string, you must size it.
 - The size should be set via attribute (ByteSize), and in the case of 'List' Type, it can be handled by adjusting the Capacity value.
   If there is no capacity or attribute value, an empty value is returned.
