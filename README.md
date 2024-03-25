@@ -1,11 +1,11 @@
 ### BytePacketSupport
 
 ## use
-1. PacketWriter class
-2. Extentions
+1. ~~PacketWriter class~~ -> PacketBuilder
+2. Append Extentions
 3. bytearray - class (Serialization, Deserialization)
 
-The current difference between **Extentions** and **PacketWriter** is that Extentions supports the Chain Method, while PacketWriter is intended to provide more functionality in the future.
+The current difference between **Extentions** and ~~**PacketWriter**~~ **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
 
 ## output print
 1. Display() => only byte
@@ -14,7 +14,8 @@ The current difference between **Extentions** and **PacketWriter** is that Exten
 
 ## 0. output print
 ```csharp
-var writer = new PacketWriter ()
+
+var writer = new PacketBuilder ()
                .Append (0x40)
                .Append (0x41)
                .Append (0x42)
@@ -33,20 +34,20 @@ Console.WriteLine (bytes.DisplayAscii ());
 // @ABCDE
 ```
 
-## 1. PacketWriter 
+## 1. ~~PacketWriter~~ PacketBuilder
 - Append Byte
 ```csharp
-var writer = new PacketWriter ()
-               .Append (0x40)
-               .Append (0x41)
-               .Append (0x42)
-               .Append (0x43)
-               .Append (0x44)
-               .Append (0x45);
+var writer = new PacketBuilder ()
+               .Add (0x40)
+               .Add (0x41)
+               .Add (0x42)
+               .Add (0x43)
+               .Add (0x44)
+               .Add (0x45);
 ```
 - Append Byte Array
 ```csharp
-var writer = new PacketWriter ();
+var writer = new PacketBuilder ();
 writer.Append(new List<byte>()
 {
 0x40,
