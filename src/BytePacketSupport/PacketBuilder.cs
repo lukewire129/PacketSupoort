@@ -22,6 +22,13 @@ namespace BytePacketSupport
             return this;
         }
 
+        public PacketBuilder Append(List<byte> data)
+        {
+            packetData.AddRange (data);
+
+            return this;
+        }
+
         public PacketBuilder Append(string ascii)
         {
             packetData.AddRange (ByteConverter.GetByte (ascii));
