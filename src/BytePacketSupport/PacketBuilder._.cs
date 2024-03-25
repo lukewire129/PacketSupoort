@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace BytePacketSupport
 {
     public partial class PacketBuilder
     {
         private readonly PacketBuilderConfiguration _configuration;
-        private List<byte> packetData = new List<byte> ();
+        private LinkedList<byte> packetData = new LinkedList<byte> ();
 
         public PacketBuilder()
         {
@@ -18,7 +19,7 @@ namespace BytePacketSupport
 
         public byte[] Build()
         {
-            return this.packetData.ToArray ();
+            return this.packetData.ToArray();
         }
     }
 }
