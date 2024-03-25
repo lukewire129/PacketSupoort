@@ -15,7 +15,7 @@ The current difference between **Extentions** and ~~**PacketWriter**~~ **PacketB
 ## 0. output print
 ```csharp
 
-var writer = new PacketBuilder ()
+var builder = new PacketBuilder ()
                .Append (0x40)
                .Append (0x41)
                .Append (0x42)
@@ -24,10 +24,8 @@ var writer = new PacketBuilder ()
                .Append (0x45)
                .Build();
 
-var bytes = writer.GetBytes();
-
-Console.WriteLine (bytes.Display ());
-Console.WriteLine (bytes.DisplayAscii ());
+Console.WriteLine (builder.Display ());
+Console.WriteLine (builder.DisplayAscii ());
 
 // output
 
@@ -38,7 +36,7 @@ Console.WriteLine (bytes.DisplayAscii ());
 ## 1. ~~PacketWriter~~ PacketBuilder
 - Append Byte
 ```csharp
-var writer = new PacketBuilder ()
+var builder = new PacketBuilder ()
                .Add (0x40)
                .Add (0x41)
                .Add (0x42)
