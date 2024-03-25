@@ -12,4 +12,3 @@ class abc
     public byte b;
     public byte c;
 }
-

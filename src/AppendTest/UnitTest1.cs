@@ -113,5 +113,31 @@ namespace AppendTest
 
             var abc  = PacketParse.Serialization (aaa);
         }
+
+        [Fact]
+        public void PacketBuilderConfig()
+        {
+
+            var test = new byte[] { 0x01, 0x02, };
+            var testAdd = new byte[] { 0x03, 0x04 };
+
+            var builder = new PacketBuilder ();
+
+            var builder2 = new PacketBuilder (new PacketBuilderConfiguration()
+            {
+                DefaultEndian = BytePacketSupport.Enums.Endian.LITTLE
+            });
+
+            var display1 = builder.Append (test)
+                                  .Append (testAdd)
+                                  .Build();
+
+            var display2 = builder2.Append (test)
+                                   .Append (testAdd)
+                                   .Build ();
+
+            Console.WriteLine ("display1 {0}", display1.Display ());
+            Console.WriteLine ("display2 {0}", display2.Display ());
+        }
     }
 }
