@@ -21,7 +21,8 @@ var writer = new PacketBuilder ()
                .Append (0x42)
                .Append (0x43)
                .Append (0x44)
-               .Append (0x45);
+               .Append (0x45)
+               .Build();
 
 var bytes = writer.GetBytes();
 
@@ -43,30 +44,33 @@ var writer = new PacketBuilder ()
                .Add (0x42)
                .Add (0x43)
                .Add (0x44)
-               .Add (0x45);
+               .Add (0x45)
+               .Build();
 ```
 - Append Byte Array
 ```csharp
 var writer = new PacketBuilder ();
 writer.Append(new List<byte>()
-{
-0x40,
-0x41,
-0x42,
-0x43,
-0x44,
-0x45,
-});
+            {
+            0x40,
+            0x41,
+            0x42,
+            0x43,
+            0x44,
+            0x45,
+            })
+      .Build();
 /* and
 writer.Append(new byte[]
-{
-0x40,
-0x41,
-0x42,
-0x43,
-0x44,
-0x45,
-});
+            {
+            0x40,
+            0x41,
+            0x42,
+            0x43,
+            0x44,
+            0x45,
+            })
+      .Build();
 */
 ```
 
