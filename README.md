@@ -4,15 +4,15 @@
 "Icon made by Freepik from www.flaticon.com"
 ([Link](https://www.flaticon.com/free-icon/brick-wall_1887007?term=brick&related_id=1887007))
 ## use
-0. [Print](#0.-print)
-1. [PacketBuilder](#1.Packet-Builder)
-2. [Append Extentions](#2.Extentions)
-3. [PacketCheckSum](#3.PacketCheckSum) **(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))**
+0. [Print](#Print)
+1. [PacketBuilder](#PacketBuilder)
+2. [Append Extentions](#AppendExtentions)
+3. [PacketCheckSum](#PacketCheckSum) **(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))**
 4. [bytearray - class (Serialization, Deserialization)](#4.bytearray-class(Serialization,Deserialization))
 
 The current difference between **Extentions** and **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
 
-##0. print
+## Print
 1. Display() => only byte
 2. DisplayAscii() => AsciiCode Byte
 ```csharp
@@ -35,7 +35,7 @@ Console.WriteLine (builder.DisplayAscii ());
 // @ABCDE
 ```
 
-# 1. PacketBuilder
+## PacketBuilder
 - Append Byte
 ```csharp
 var builder = new PacketBuilder ()
@@ -74,7 +74,7 @@ writer.Append(new byte[]
 */
 ```
 
-# 2. Extentions
+## AppendExtentions
 - byte + byte array
 ``` csharp
 byte[] summaryByts;
@@ -117,7 +117,7 @@ summaryByts = testByte.Append(new List<byte>
                                    0x55
                                  });
 ```
-# 3. PacketCheckSum
+## PacketCheckSum
 - There are two ways to do this
 The first ErrorDetection method
 ``` csharp
