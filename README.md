@@ -8,7 +8,7 @@
 1. [PacketBuilder](#PacketBuilder)
 2. [Append Extentions](#AppendExtentions)
 3. [PacketCheckSum](#PacketCheckSum) **(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))**
-4. [bytearray - class (Serialization, Deserialization)](#4.bytearray-class(Serialization,Deserialization))
+4. [bytearray-class(Serialization,Deserialization)](#bytearray-class(Serialization,Deserialization))
 
 The current difference between **Extentions** and **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
 
@@ -151,7 +151,7 @@ var packet = pb
 // extentions ex)
 var savePacket = packet.GetSavePoint("ChecksumPacking");
 ```
-# 4. bytearray - class (Serialization, Deserialization)
+## bytearray-class(Serialization,Deserialization)
 - For an array or string, you must size it.
 - The size should be set via attribute (ByteSize), and in the case of 'List' Type, it can be handled by adjusting the Capacity value.
   If there is no capacity or attribute value, an empty value is returned.
