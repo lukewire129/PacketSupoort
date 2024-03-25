@@ -37,12 +37,12 @@ Console.WriteLine (builder.DisplayAscii ());
 - Append Byte
 ```csharp
 var builder = new PacketBuilder ()
-               .Add (0x40)
-               .Add (0x41)
-               .Add (0x42)
-               .Add (0x43)
-               .Add (0x44)
-               .Add (0x45)
+               .Append (0x40)
+               .Append (0x41)
+               .Append (0x42)
+               .Append (0x43)
+               .Append (0x44)
+               .Append (0x45)
                .Build();
 ```
 - Append Byte Array
