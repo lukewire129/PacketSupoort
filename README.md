@@ -1,12 +1,12 @@
 ### BytePacketSupport
 
 ## use
-1. ~~PacketWriter class~~ -> PacketBuilder
+1. PacketBuilder
 2. Append Extentions
 3. PacketCheckSum(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))
 4. bytearray - class (Serialization, Deserialization)
 
-The current difference between **Extentions** and ~~**PacketWriter**~~ **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
+The current difference between **Extentions** and **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
 
 ## output print
 1. Display() => only byte
@@ -34,7 +34,7 @@ Console.WriteLine (builder.DisplayAscii ());
 // @ABCDE
 ```
 
-## 1. ~~PacketWriter~~ PacketBuilder
+## 1. PacketBuilder
 - Append Byte
 ```csharp
 var builder = new PacketBuilder ()
