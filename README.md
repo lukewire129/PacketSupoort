@@ -13,7 +13,8 @@
 1. [PacketBuilder](#PacketBuilder)
 2. [Append Extentions](#AppendExtentions)
 3. [PacketCheckSum](#PacketCheckSum) **(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))**
-4. [bytearray-class(Serialization,Deserialization)](#bytearray<->class(Serialization,Deserialization)))
+4. [EndianPacket](#EndianPacket)
+5. [bytearray-class(Serialization,Deserialization)](#bytearray<->class(Serialization,Deserialization)))
 
 The current difference between **Extentions** and **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
 
@@ -155,6 +156,33 @@ var packet = pb
 
 // extentions ex)
 var savePacket = packet.GetSavePoint("ChecksumPacking");
+```
+## EndianPacket
+You can create packets that match the endian type.
+```csharp
+short test = 0x0102;
+ short testAdd = 0x0304;
+
+ var littlEndianType = new PacketBuilder (); 
+
+ var bigEndianType = new PacketBuilder (new PacketBuilderConfiguration ()
+ {
+     DefaultEndian = BytePacketSupport.Enums.Endian.BIG
+ });
+
+ var display1 = littlEndianType.Append (test)
+                               .Append (testAdd)
+                               .Build ();
+
+ var display2 = bigEndianType.Append (test)
+                             .Append (testAdd)
+                             .Build ();
+
+ Console.WriteLine ("display1 {0}", display1.Display ());
+ Console.WriteLine ("display2 {0}", display2.Display ());
+// output
+// display1 02010403
+// display2 01020304
 ```
 ## bytearray<->class(Serialization,Deserialization)
 - For an array or string, you must size it.
