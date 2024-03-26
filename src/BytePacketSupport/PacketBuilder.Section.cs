@@ -9,7 +9,7 @@ namespace BytePacketSupport
     {
         private Dictionary<string, (int, int)> byteKeyPoint=new Dictionary<string, (int, int)> ();
 
-        public PacketBuilder PointSaveStart(string key)
+        public PacketBuilder BeginSection(string key)
         {
             if (this.packetData.Count () == 0)
             {
@@ -21,7 +21,7 @@ namespace BytePacketSupport
             return this;
         }
 
-        public PacketBuilder PointSaveEnd(string key)
+        public PacketBuilder EndSection(string key)
         {
             if (this.packetData.Count () == 0)
                 return this;
@@ -81,7 +81,7 @@ namespace BytePacketSupport
             return this;
         }
 
-        public byte[] GetSavePoint(string key) 
+        public byte[] GetSection(string key) 
         {
             if (this.packetData.Count () == 0)
                 return null;
