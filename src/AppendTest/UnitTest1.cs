@@ -181,8 +181,10 @@ namespace AppendTest
         public void paramsIndexerTest()
         {
             var pb = new PacketBuilder ();
+            List<byte> abcBig2 = new List<byte> () { 0x01, 0x02 };
             var result = pb.@bytes ([0x01, 0x02])
                            .@bytes (new byte[] { 0x02, 0x03 })
+                           .@bytes(abcBig2)
                            .Build ();
 
             Console.WriteLine ("result {0}", result.ToHexString ());
