@@ -6,9 +6,9 @@ namespace BytePacketSupport
 {
     public static partial class AppendHelper
     {
-        public static byte[] Append(this byte b, byte AppenByte) => new byte[] { b, AppenByte };
-        public static byte[] Append(this IEnumerable<byte> bs, byte AppenByte) => bs.Append<byte> (AppenByte).ToArray ();
-        public static byte[] Append(this byte b, byte[] AppenBytes)
+        public static byte[] @byte(this byte b, byte AppenByte) => new byte[] { b, AppenByte };
+        public static byte[] @byte(this IEnumerable<byte> bs, byte AppenByte) => bs.Append<byte> (AppenByte).ToArray ();
+        public static byte[] @bytes(this byte b, byte[] AppenBytes)
         {
             byte[] ToTalBytes = new byte[1 + AppenBytes.Length];
             ToTalBytes[0] = b;
@@ -17,7 +17,7 @@ namespace BytePacketSupport
             return ToTalBytes;
         }
 
-        public static byte[] Append(this byte[] bs, byte[] AppenBytes)
+        public static byte[] @bytes(this byte[] bs, byte[] AppenBytes)
         {
             byte[] ToTalBytes = new byte[bs.Length + AppenBytes.Length];
 
@@ -27,7 +27,7 @@ namespace BytePacketSupport
             return ToTalBytes;
         }
 
-        public static byte[] Append(this byte[] bs, byte[] AppenBytes, int offset, int count)
+        public static byte[] @bytes(this byte[] bs, byte[] AppenBytes, int offset, int count)
         {
             byte[] ToTalBytes = new byte[bs.Length + AppenBytes.Length];
 
@@ -37,10 +37,10 @@ namespace BytePacketSupport
             return ToTalBytes;
         }
 
-        public static byte[] Append(this byte b, List<byte> AppenBytes) => b.Append (AppenBytes.ToArray ());
+        public static byte[] @bytes(this byte b, List<byte> AppenBytes) => b.@bytes (AppenBytes.ToArray ());
 
-        public static byte[] Append(this byte[] bs, List<byte> AppenBytes) => bs.Append (AppenBytes.ToArray ());
+        public static byte[] @bytes(this byte[] bs, List<byte> AppenBytes) => bs.@bytes (AppenBytes.ToArray ());
 
-        public static byte[] Append(this byte[] bs, List<byte> AppenBytes, int offset, int count) => bs.Append (AppenBytes.ToArray (), offset, count);
+        public static byte[] @bytes(this byte[] bs, List<byte> AppenBytes, int offset, int count) => bs.@bytes (AppenBytes.ToArray (), offset, count);
     }
 }

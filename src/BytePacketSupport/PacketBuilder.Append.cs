@@ -5,55 +5,77 @@ namespace BytePacketSupport
 {
     public partial class PacketBuilder
     {
-        public PacketBuilder Append(byte data)
+        public PacketBuilder @byte(byte data)
         {
             packetData.Add (data);
 
             return this;
         }
 
-        public PacketBuilder Append(byte[] datas)
+        public PacketBuilder @bytes(byte[] datas)
         {
             packetData.AddRange (datas);
 
             return this;
         }
 
-        public PacketBuilder Append(List<byte> datas)
+        public PacketBuilder @bytes(List<byte> datas)
         {
             packetData.AddRange (datas);
             return this;
         }
 
-        public PacketBuilder Append(string ascii)
+        public PacketBuilder @string(string ascii)
         {
             byte[] datas = ByteConverter.GetBytes (ascii);
             packetData.AddRange (datas);
             return this;
         }
 
-        public PacketBuilder Append(int intByte)
+        public PacketBuilder @int(int intByte)
         {
             byte[] datas = ByteConverter.GetBytes (intByte, isLittleEnidan);
             packetData.AddRange (datas);
             return this;
         }
 
-        public PacketBuilder Append(long longByte)
+        public PacketBuilder @long(long longByte)
         {
             byte[] datas = ByteConverter.GetBytes (longByte, isLittleEnidan);
             packetData.AddRange (datas);
             return this;
         }
 
-        public PacketBuilder Append(short shortByte)
+        public PacketBuilder @short(short shortByte)
         {
             byte[] datas = ByteConverter.GetBytes (shortByte, isLittleEnidan);
             packetData.AddRange (datas);
             return this;
         }
 
-        public PacketBuilder Append<TSource>(TSource AppenClass) where TSource : class
+        public PacketBuilder @uint(uint uintByte)
+        {
+            byte[] datas = ByteConverter.GetBytes (uintByte, isLittleEnidan);
+            packetData.AddRange (datas);
+            return this;
+        }
+
+        public PacketBuilder @ulong (ulong ulongByte)
+        {
+            byte[] datas = ByteConverter.GetBytes (ulongByte, isLittleEnidan);
+            packetData.AddRange (datas);
+            return this;
+        }
+
+        public PacketBuilder @ushort (ushort ushortByte)
+        {
+            byte[] datas = ByteConverter.GetBytes (ushortByte, isLittleEnidan);
+            packetData.AddRange (datas);
+            return this;
+        }
+
+
+        public PacketBuilder @class<TSource>(TSource AppenClass) where TSource : class
         {
             byte[] datas = PacketParse.Serialize (AppenClass);
             packetData.AddRange (datas);
