@@ -161,5 +161,33 @@ namespace AppendTest
             Console.WriteLine ("display1 {0}", abclittle.ToHexString ());
             Console.WriteLine ("display2 {0}", abcBig.ToHexString ());
         }
+
+        [Fact]
+        public void bytearraybytelisttest()
+        {
+            short test = 0x0102;
+            byte[] abclittle = new byte[] { 0x01, 0x02 };
+            byte[] abcBig1 = new byte[] { 0x01, 0x02 };
+            List<byte> abcBig2 = new List<byte>() { 0x01, 0x02 };
+
+            abclittle = abclittle
+                            .@bytes (abcBig1)
+                            .@bytes (abcBig2);
+
+            Console.WriteLine ("display1 {0}", abclittle.ToHexString ());
+        }
+
+        [Fact]
+        public void paramsIndexerTest()
+        {
+            var pb = new PacketBuilder ();
+            List<byte> abcBig2 = new List<byte> () { 0x01, 0x02 };
+            var result = pb.@bytes ([0x01, 0x02])
+                           .@bytes (new byte[] { 0x02, 0x03 })
+                           .@bytes(abcBig2)
+                           .Build ();
+
+            Console.WriteLine ("result {0}", result.ToHexString ());
+        }
     }
 }
