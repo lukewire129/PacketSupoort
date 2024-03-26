@@ -20,14 +20,15 @@ namespace AppendTest
             byte[] test = { 0x01, 0x02 };
 
 
-            byte[] aaa = test.Append (new Test1Packet ()
-            {
-                Value = 1,
-                Value1 = "abc",
-                Value2 = "ABC"
-            });
+            byte[] aaa = test.
+                            @class(new Test1Packet ()
+                                    {
+                                        Value = 1,
+                                        Value1 = "abc",
+                                        Value2 = "ABC"
+                                    });
 
-            Trace.WriteLine (aaa.Display ());
+            Trace.WriteLine (aaa.ToHexString ());
         }
 
         int count = 50000;
@@ -71,7 +72,7 @@ namespace AppendTest
             }
 
 
-            dest.Append (bytes);
+            dest.@bytes (bytes);
         }
 
         [Fact]
@@ -91,29 +92,6 @@ namespace AppendTest
             }
         }
 
-        public class Test2Packet
-        {
-            public int Value;
-            [ByteSize (3)]
-            public string Value1;
-            [ByteSize (3)]
-            public string Value2;
-            [ByteSize(4)]
-            public byte[] abc;            
-            public byte[] efg = new byte[5];
-            public List<byte> qqq= new List<byte>(5);
-            public List<byte> qqq1= new List<byte>();
-        }
-
-        [Fact]
-        public void TestDeserializeObject()
-        {
-            var test = new byte[] { 0x01, 0x00, 0x00, 0x00, 0x61, 0x62,0x63,0x41,0x42,0x43, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43 };
-            var aaa = PacketParse.DeserializeObject<Test2Packet> (test);
-
-            var abc  = PacketParse.Serialization (aaa);
-        }
-
         [Fact]
         public void PacketBuilderConfig()
         {
@@ -127,16 +105,18 @@ namespace AppendTest
                 DefaultEndian = BytePacketSupport.Enums.Endian.BIG
             });
 
-            var display1 = littlEndianType.Append (test)
-                                          .Append (testAdd)
-                                          .Build ();
+            var display1 = littlEndianType
+                                .@short (test)
+                                .@short (testAdd)
+                                .Build ();
 
-            var display2 = bigEndianType.Append (test)
-                                        .Append (testAdd)
-                                        .Build ();
+            var display2 = bigEndianType
+                                .@short (test)
+                                .@short (testAdd)
+                                .Build ();
 
-            Console.WriteLine ("display1 {0}", display1.Display ());
-            Console.WriteLine ("display2 {0}", display2.Display ());
+            Console.WriteLine ("display1 {0}", display1.ToHexString ());
+            Console.WriteLine ("display2 {0}", display2.ToHexString ());
         }
 
         [Fact]
@@ -152,16 +132,18 @@ namespace AppendTest
                 DefaultEndian = BytePacketSupport.Enums.Endian.BIG
             });
 
-            var display1 = littlEndianType.Append (test)
-                                          .Append (testAdd)
-                                          .Build ();
+            var display1 = littlEndianType
+                                .@int (test)
+                                .@int (testAdd)
+                                .Build ();
 
-            var display2 = bigEndianType.Append (test)
-                                        .Append (testAdd)
-                                        .Build ();
+            var display2 = bigEndianType
+                                .@int (test)
+                                .@int (testAdd)
+                                .Build ();
 
-            Console.WriteLine ("display1 {0}", display1.Display ());
-            Console.WriteLine ("display2 {0}", display2.Display ());
+            Console.WriteLine ("display1 {0}", display1.ToHexString ());
+            Console.WriteLine ("display2 {0}", display2.ToHexString ());
         }
 
         [Fact]
@@ -171,11 +153,13 @@ namespace AppendTest
             byte[] abclittle = new byte[] { 0x01, 0x02 };
             byte[] abcBig = new byte[] { 0x01, 0x02 };
 
-            abclittle = abclittle.Append (test);
-            abcBig = abcBig.Append (test, false);
+            abclittle = abclittle
+                            .@short (test);
+            abcBig = abcBig
+                            .@short (test, false);
 
-            Console.WriteLine ("display1 {0}", abclittle.Display ());
-            Console.WriteLine ("display2 {0}", abcBig.Display ());
+            Console.WriteLine ("display1 {0}", abclittle.ToHexString ());
+            Console.WriteLine ("display2 {0}", abcBig.ToHexString ());
         }
     }
 }
