@@ -8,20 +8,18 @@ namespace BytePacketSupport
         private readonly PacketBuilderConfiguration _configuration;
         private List<byte> packetData = new List<byte> ();
 
-        private readonly bool isMustReverseUnit;
+        private readonly bool _isLittleEndian;
         public PacketBuilder()
         {
             this._configuration = new PacketBuilderConfiguration ();
 
-            isMustReverseUnit = (BitConverter.IsLittleEndian == true && this._configuration.DefaultEndian == Enums.Endian.BIG) ||
-                                (BitConverter.IsLittleEndian == false && this._configuration.DefaultEndian == Enums.Endian.LITTLE);
+            _isLittleEndian = BitConverter.IsLittleEndian;
         }
         public PacketBuilder(PacketBuilderConfiguration configuration)
         {
             this._configuration = configuration;
 
-            isMustReverseUnit = (BitConverter.IsLittleEndian == true && this._configuration.DefaultEndian == Enums.Endian.BIG) ||
-                                (BitConverter.IsLittleEndian == false && this._configuration.DefaultEndian == Enums.Endian.LITTLE);
+            _isLittleEndian = configuration.DefaultEndian == Enums.Endian.LITTLE;
         }
 
         public byte[] Build()
