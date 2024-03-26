@@ -163,7 +163,7 @@ namespace AppendTest
         }
 
         [Fact]
-        public void Update()
+        public void bytearraybytelisttest()
         {
             short test = 0x0102;
             byte[] abclittle = new byte[] { 0x01, 0x02 };
@@ -175,6 +175,17 @@ namespace AppendTest
                             .@bytes (abcBig2);
 
             Console.WriteLine ("display1 {0}", abclittle.ToHexString ());
+        }
+
+        [Fact]
+        public void paramsIndexerTest()
+        {
+            var pb = new PacketBuilder ();
+            var result = pb.@bytes ([0x01, 0x02])
+                           .@bytes (new byte[] { 0x02, 0x03 })
+                           .Build ();
+
+            Console.WriteLine ("result {0}", result.ToHexString ());
         }
     }
 }

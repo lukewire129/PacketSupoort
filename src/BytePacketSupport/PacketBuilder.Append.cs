@@ -12,14 +12,7 @@ namespace BytePacketSupport
             return this;
         }
 
-        public PacketBuilder @bytes(byte[] datas)
-        {
-            packetData.AddRange (datas);
-
-            return this;
-        }
-
-        public PacketBuilder @bytes(List<byte> datas)
+        public PacketBuilder @bytes(IEnumerable<byte> datas)
         {
             packetData.AddRange (datas);
             return this;
