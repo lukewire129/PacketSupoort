@@ -42,7 +42,7 @@ namespace BytePacketSupport
             if (byteKeyPoint.ContainsKey (key))
                 return this;
 
-            this.ErrorDetection (checksum8Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
+            this.Compute (checksum8Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
             return this;
         }
 
@@ -54,7 +54,7 @@ namespace BytePacketSupport
             if (byteKeyPoint.ContainsKey (key))
                 return this;
 
-            this.ErrorDetection (crc8Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
+            this.Compute (crc8Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
             return this;
         }
         public PacketBuilder Checksum(string key, CRC16Type crc16Type)
@@ -65,7 +65,7 @@ namespace BytePacketSupport
             if (byteKeyPoint.ContainsKey (key))
                 return this;
 
-            this.ErrorDetection (crc16Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
+            this.Compute (crc16Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
             return this;
         }
 
@@ -77,7 +77,7 @@ namespace BytePacketSupport
             if (byteKeyPoint.ContainsKey (key))
                 return this;
 
-            this.ErrorDetection (crc32Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
+            this.Compute (crc32Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
             return this;
         }
 

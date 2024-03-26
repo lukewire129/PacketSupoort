@@ -7,9 +7,9 @@ namespace BytePacketSupport.Converter
 {
     public static class ByteConverter
     {
-        public static byte[] GetByte(string asciiByte)=> Encoding.ASCII.GetBytes (asciiByte);
+        public static byte[] GetBytes(string asciiByte)=> Encoding.ASCII.GetBytes (asciiByte);
 
-        public static byte[] GetByte(int intByte, bool isLittleEndian = true)
+        public static byte[] GetBytes(int intByte, bool isLittleEndian = true)
         {
             byte[] bytes = BitConverter.GetBytes (intByte);
 
@@ -19,7 +19,7 @@ namespace BytePacketSupport.Converter
             return bytes.Reverse ().ToArray ();
         }
 
-        public static byte[] GetByte(long longBytes, bool isLittleEndian = true)
+        public static byte[] GetBytes(long longBytes, bool isLittleEndian = true)
         {
             byte[] bytes = BitConverter.GetBytes (longBytes);
 
@@ -28,7 +28,7 @@ namespace BytePacketSupport.Converter
 
             return bytes.Reverse ().ToArray ();
         }
-        public static byte[] GetByte(short shortByte, bool isLittleEndian = true)
+        public static byte[] GetBytes(short shortByte, bool isLittleEndian = true)
         {
             byte[] bytes = BitConverter.GetBytes (shortByte);
 
@@ -38,7 +38,7 @@ namespace BytePacketSupport.Converter
             return bytes.Reverse ().ToArray ();
         }
 
-        public static byte[] GetByte(uint uintByte, bool isLittleEndian = true)
+        public static byte[] GetBytes(uint uintByte, bool isLittleEndian = true)
         {
             byte[] bytes = BitConverter.GetBytes (uintByte);
 
@@ -48,7 +48,7 @@ namespace BytePacketSupport.Converter
             return bytes.Reverse ().ToArray ();
         }
 
-        public static byte[] GetByte(ulong ulongBytes, bool isLittleEndian = true)
+        public static byte[] GetBytes(ulong ulongBytes, bool isLittleEndian = true)
         {
             byte[] bytes = BitConverter.GetBytes (ulongBytes);
 
@@ -57,7 +57,7 @@ namespace BytePacketSupport.Converter
 
             return bytes.Reverse ().ToArray ();
         }
-        public static byte[] GetByte(ushort ushortByte, bool isLittleEndian = true)
+        public static byte[] GetBytes(ushort ushortByte, bool isLittleEndian = true)
         {
             byte[] bytes = BitConverter.GetBytes (ushortByte);
 

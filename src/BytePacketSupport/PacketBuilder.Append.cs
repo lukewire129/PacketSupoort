@@ -27,35 +27,35 @@ namespace BytePacketSupport
 
         public PacketBuilder Append(string ascii)
         {
-            byte[] datas = ByteConverter.GetByte (ascii);
+            byte[] datas = ByteConverter.GetBytes (ascii);
             packetData.AddRange (datas);
             return this;
         }
 
         public PacketBuilder Append(int intByte)
         {
-            byte[] datas = ByteConverter.GetByte (intByte, isLittleEnidan);
+            byte[] datas = ByteConverter.GetBytes (intByte, isLittleEnidan);
             packetData.AddRange (datas);
             return this;
         }
 
         public PacketBuilder Append(long longByte)
         {
-            byte[] datas = ByteConverter.GetByte (longByte, isLittleEnidan);
+            byte[] datas = ByteConverter.GetBytes (longByte, isLittleEnidan);
             packetData.AddRange (datas);
             return this;
         }
 
         public PacketBuilder Append(short shortByte)
         {
-            byte[] datas = ByteConverter.GetByte (shortByte, isLittleEnidan);
+            byte[] datas = ByteConverter.GetBytes (shortByte, isLittleEnidan);
             packetData.AddRange (datas);
             return this;
         }
 
         public PacketBuilder Append<TSource>(TSource AppenClass) where TSource : class
         {
-            byte[] datas = PacketParse.Serialization (AppenClass);
+            byte[] datas = PacketParse.Serialize (AppenClass);
             packetData.AddRange (datas);
             return this;
         }
