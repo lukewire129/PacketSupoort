@@ -10,7 +10,7 @@ namespace BytePacketSupport
     {
         public PacketBuilder Append(byte data)
         {
-            packetData.AddLast (data);
+            packetData.Add (data);
 
             return this;
         }
@@ -19,10 +19,10 @@ namespace BytePacketSupport
         {
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                packetData.AddRangeExceptNull (datas.Reverse().ToArray());
+                packetData.AddRange (datas.Reverse ().ToArray ());
                 return this;
             }
-            packetData.AddRangeExceptNull (datas);
+            packetData.AddRange (datas);
 
             return this;
         }
@@ -32,10 +32,10 @@ namespace BytePacketSupport
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
                 datas.Reverse ();
-                packetData.AddRangeExceptNull (datas);
+                packetData.AddRange (datas);
                 return this;
             }
-            packetData.AddRangeExceptNull (datas);
+            packetData.AddRange (datas);
 
             return this;
         }
@@ -45,10 +45,10 @@ namespace BytePacketSupport
             byte[] datas = ByteConverter.GetByte (ascii);
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                packetData.AddRangeExceptNull (datas.Reverse ());
+                packetData.AddRange (datas.Reverse ());
                 return this;
             }
-            packetData.AddRangeExceptNull (datas);
+            packetData.AddRange (datas);
             return this;
         }
 
@@ -57,10 +57,10 @@ namespace BytePacketSupport
             byte[] datas = ByteConverter.GetByte (intByte, endian);
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                packetData.AddRangeExceptNull (datas.Reverse ());
+                packetData.AddRange (datas.Reverse ());
                 return this;
             }
-            packetData.AddRangeExceptNull (datas);
+            packetData.AddRange (datas);
             return this;
         }
 
@@ -69,10 +69,10 @@ namespace BytePacketSupport
             byte[] datas = ByteConverter.GetByte (longByte, endian);
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                packetData.AddRangeExceptNull (datas.Reverse ());
+                packetData.AddRange (datas.Reverse ());
                 return this;
             }
-            packetData.AddRangeExceptNull (datas);
+            packetData.AddRange (datas);
             return this;
         }
 
@@ -81,10 +81,10 @@ namespace BytePacketSupport
             byte[] datas = ByteConverter.GetByte (shortByte, endian);
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                packetData.AddRangeExceptNull (datas.Reverse ());
+                packetData.AddRange (datas.Reverse ());
                 return this;
             }
-            packetData.AddRangeExceptNull (datas);
+            packetData.AddRange (datas);
             return this;
         }
 
@@ -93,10 +93,10 @@ namespace BytePacketSupport
             byte[] datas = PacketParse.Serialization (AppenClass);
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                packetData.AddRangeExceptNull (datas.Reverse ().ToArray ());
+                packetData.AddRange (datas.Reverse ().ToArray ());
                 return this;
             }
-            packetData.AddRangeExceptNull (datas);
+            packetData.AddRange (datas);
             return this;
         }
     }

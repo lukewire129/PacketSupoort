@@ -13,10 +13,10 @@ namespace BytePacketSupport
             byte[] errorcheck = new Checksum8 (checkSum8).Compute (this.packetData.ToArray ()).ToArray();
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                this.packetData.AddRangeExceptNull (errorcheck.Reverse());
+                this.packetData.AddRange (errorcheck.Reverse());
                 return this;
             }
-            this.packetData.AddRangeExceptNull (errorcheck);
+            this.packetData.AddRange (errorcheck);
 
             return this;
         }
@@ -26,10 +26,10 @@ namespace BytePacketSupport
             byte[] errorcheck = new Checksum8 (checkSum8).Compute (GetBytes (start)).ToArray ();
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                this.packetData.AddRangeExceptNull (errorcheck.Reverse ());
+                this.packetData.AddRange (errorcheck.Reverse ());
                 return this;
             }
-            this.packetData.AddRangeExceptNull (errorcheck);
+            this.packetData.AddRange (errorcheck);
             return this;
         }
 
@@ -38,10 +38,10 @@ namespace BytePacketSupport
             byte[] errorcheck = new Checksum8 (checkSum8).Compute (GetBytes (start, count)).ToArray ();
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                this.packetData.AddRangeExceptNull (errorcheck.Reverse ());
+                this.packetData.AddRange (errorcheck.Reverse ());
                 return this;
             }
-            this.packetData.AddRangeExceptNull (errorcheck);
+            this.packetData.AddRange (errorcheck);
 
             return this;
         }
@@ -51,10 +51,10 @@ namespace BytePacketSupport
             byte[] errorcheck = new CRC8 (Crc8Type).Compute (this.packetData.ToArray ()).ToArray ();
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                this.packetData.AddRangeExceptNull (errorcheck.Reverse ());
+                this.packetData.AddRange (errorcheck.Reverse ());
                 return this;
             }
-            this.packetData.AddRangeExceptNull (errorcheck);
+            this.packetData.AddRange (errorcheck);
 
             return this;
         }
@@ -64,10 +64,10 @@ namespace BytePacketSupport
             byte[] errorcheck = new CRC8 (Crc8Type).Compute (GetBytes (start)).ToArray ();
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                this.packetData.AddRangeExceptNull (errorcheck.Reverse ());
+                this.packetData.AddRange (errorcheck.Reverse ());
                 return this;
             }
-            this.packetData.AddRangeExceptNull (errorcheck);
+            this.packetData.AddRange (errorcheck);
 
             return this;
         }
@@ -76,10 +76,10 @@ namespace BytePacketSupport
             byte[] errorcheck = new CRC8 (Crc8Type).Compute (GetBytes (start, count)).ToArray ();
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                this.packetData.AddRangeExceptNull (errorcheck.Reverse ());
+                this.packetData.AddRange (errorcheck.Reverse ());
                 return this;
             }
-            this.packetData.AddRangeExceptNull (errorcheck);
+            this.packetData.AddRange (errorcheck);
 
             return this;
         }
@@ -89,10 +89,10 @@ namespace BytePacketSupport
             byte[] errorcheck = new CRC16 (Crc16Type).Compute (this.packetData.ToArray ()).ToArray ();
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                this.packetData.AddRangeExceptNull (errorcheck.Reverse ());
+                this.packetData.AddRange (errorcheck.Reverse ());
                 return this;
             }
-            this.packetData.AddRangeExceptNull (errorcheck);
+            this.packetData.AddRange (errorcheck);
 
             return this;
         }
@@ -102,10 +102,10 @@ namespace BytePacketSupport
             byte[] errorcheck = new CRC16 (Crc16Type).Compute (GetBytes (start)).ToArray ();
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                this.packetData.AddRangeExceptNull (errorcheck.Reverse ());
+                this.packetData.AddRange (errorcheck.Reverse ());
                 return this;
             }
-            this.packetData.AddRangeExceptNull (errorcheck);
+            this.packetData.AddRange (errorcheck);
 
             return this;
         }
@@ -115,10 +115,10 @@ namespace BytePacketSupport
             byte[] errorcheck = new CRC16 (Crc16Type).Compute (GetBytes(start, count)).ToArray ();
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                this.packetData.AddRangeExceptNull (errorcheck.Reverse ());
+                this.packetData.AddRange (errorcheck.Reverse ());
                 return this;
             }
-            this.packetData.AddRangeExceptNull (errorcheck);
+            this.packetData.AddRange (errorcheck);
 
             return this;
         }
@@ -128,10 +128,10 @@ namespace BytePacketSupport
             byte[] errorcheck = new CRC32 (Crc32Type).Compute (this.packetData.ToArray ()).ToArray ();
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                this.packetData.AddRangeExceptNull (errorcheck.Reverse ());
+                this.packetData.AddRange (errorcheck.Reverse ());
                 return this;
             }
-            this.packetData.AddRangeExceptNull (errorcheck);
+            this.packetData.AddRange (errorcheck);
 
             return this;
         }
@@ -141,10 +141,10 @@ namespace BytePacketSupport
             byte[] errorcheck = new CRC32 (Crc32Type).Compute (GetBytes(start)).ToArray ();
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                this.packetData.AddRangeExceptNull (errorcheck.Reverse ());
+                this.packetData.AddRange (errorcheck.Reverse ());
                 return this;
             }
-            this.packetData.AddRangeExceptNull (errorcheck);
+            this.packetData.AddRange (errorcheck);
 
             return this;
         }
@@ -154,10 +154,10 @@ namespace BytePacketSupport
             byte[] errorcheck = new CRC32 (Crc32Type).Compute (GetBytes (start, count)).ToArray ();
             if (_configuration.DefaultEndian == Endian.LITTLE)
             {
-                this.packetData.AddRangeExceptNull (errorcheck.Reverse ());
+                this.packetData.AddRange (errorcheck.Reverse ());
                 return this;
             }
-            this.packetData.AddRangeExceptNull (errorcheck);
+            this.packetData.AddRange (errorcheck);
             return this;
         }
     }
