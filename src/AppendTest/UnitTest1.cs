@@ -161,5 +161,20 @@ namespace AppendTest
             Console.WriteLine ("display1 {0}", abclittle.ToHexString ());
             Console.WriteLine ("display2 {0}", abcBig.ToHexString ());
         }
+
+        [Fact]
+        public void Update()
+        {
+            short test = 0x0102;
+            byte[] abclittle = new byte[] { 0x01, 0x02 };
+            byte[] abcBig1 = new byte[] { 0x01, 0x02 };
+            List<byte> abcBig2 = new List<byte>() { 0x01, 0x02 };
+
+            abclittle = abclittle
+                            .@bytes (abcBig1)
+                            .@bytes (abcBig2);
+
+            Console.WriteLine ("display1 {0}", abclittle.ToHexString ());
+        }
     }
 }
