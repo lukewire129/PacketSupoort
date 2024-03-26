@@ -27,42 +27,42 @@ namespace BytePacketSupport
 
         public PacketBuilder @int(int intByte)
         {
-            byte[] datas = ByteConverter.GetBytes (intByte, isLittleEnidan);
+            byte[] datas = ByteConverter.GetBytes (intByte, isMustReverseUnit);
             packetData.AddRange (datas);
             return this;
         }
 
         public PacketBuilder @long(long longByte)
         {
-            byte[] datas = ByteConverter.GetBytes (longByte, isLittleEnidan);
+            byte[] datas = ByteConverter.GetBytes (longByte, isMustReverseUnit);
             packetData.AddRange (datas);
             return this;
         }
 
         public PacketBuilder @short(short shortByte)
         {
-            byte[] datas = ByteConverter.GetBytes (shortByte, isLittleEnidan);
+            byte[] datas = ByteConverter.GetBytes (shortByte, isMustReverseUnit);
             packetData.AddRange (datas);
             return this;
         }
 
         public PacketBuilder @uint(uint uintByte)
         {
-            byte[] datas = ByteConverter.GetBytes (uintByte, isLittleEnidan);
+            byte[] datas = ByteConverter.GetBytes (uintByte, isMustReverseUnit);
             packetData.AddRange (datas);
             return this;
         }
 
         public PacketBuilder @ulong (ulong ulongByte)
         {
-            byte[] datas = ByteConverter.GetBytes (ulongByte, isLittleEnidan);
+            byte[] datas = ByteConverter.GetBytes (ulongByte, isMustReverseUnit);
             packetData.AddRange (datas);
             return this;
         }
 
         public PacketBuilder @ushort (ushort ushortByte)
         {
-            byte[] datas = ByteConverter.GetBytes (ushortByte, isLittleEnidan);
+            byte[] datas = ByteConverter.GetBytes (ushortByte, isMustReverseUnit);
             packetData.AddRange (datas);
             return this;
         }
