@@ -3,20 +3,23 @@
 
 "Icon made by Freepik from www.flaticon.com"
 ([Link](https://www.flaticon.com/free-icon/brick-wall_1887007?term=brick&related_id=1887007))
-## use
-1. PacketBuilder
-2. Append Extentions
-3. PacketCheckSum(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))
-4. bytearray - class (Serialization, Deserialization)
+
+#### PacketSupoort
+[![latest version](https://img.shields.io/nuget/v/PacketSupoort)](https://www.nuget.org/packages/PacketSupoort)
+[![downloads](https://img.shields.io/nuget/dt/PacketSupoort)](https://www.nuget.org/packages/PacketSupoort)
+
+# OVERVIEW
+0. [Print](#Print)
+1. [PacketBuilder](#PacketBuilder)
+2. [Append Extentions](#AppendExtentions)
+3. [PacketCheckSum](#PacketCheckSum) **(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))**
+4. [bytearray-class(Serialization,Deserialization)](#bytearray<->class(Serialization,Deserialization)))
 
 The current difference between **Extentions** and **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
 
-## output print
+## Print
 1. Display() => only byte
 2. DisplayAscii() => AsciiCode Byte
-
-
-## 0. output print
 ```csharp
 
 var builder = new PacketBuilder ()
@@ -37,7 +40,7 @@ Console.WriteLine (builder.DisplayAscii ());
 // @ABCDE
 ```
 
-## 1. PacketBuilder
+## PacketBuilder
 - Append Byte
 ```csharp
 var builder = new PacketBuilder ()
@@ -76,7 +79,7 @@ writer.Append(new byte[]
 */
 ```
 
-## 2. Extentions
+## AppendExtentions
 - byte + byte array
 ``` csharp
 byte[] summaryByts;
@@ -119,7 +122,7 @@ summaryByts = testByte.Append(new List<byte>
                                    0x55
                                  });
 ```
-## 3. PacketCheckSum(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))
+## PacketCheckSum
 - There are two ways to do this
 The first ErrorDetection method
 ``` csharp
@@ -153,7 +156,7 @@ var packet = pb
 // extentions ex)
 var savePacket = packet.GetSavePoint("ChecksumPacking");
 ```
-## 4. bytearray - class (Serialization, Deserialization)
+## bytearray<->class(Serialization,Deserialization)
 - For an array or string, you must size it.
 - The size should be set via attribute (ByteSize), and in the case of 'List' Type, it can be handled by adjusting the Capacity value.
   If there is no capacity or attribute value, an empty value is returned.
