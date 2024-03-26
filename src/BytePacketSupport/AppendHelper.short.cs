@@ -1,5 +1,4 @@
 ﻿using BytePacketSupport.Converter;
-using BytePacketSupport.Enums;
 
 namespace BytePacketSupport
 {
