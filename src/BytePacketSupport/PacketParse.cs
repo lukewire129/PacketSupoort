@@ -23,7 +23,7 @@ namespace BytePacketSupport
                 // 필드의 타입으로 캐스팅
                 if (field.FieldType == typeof (string))
                 {
-                    result.AddRange (ByteConverter.GetByte (value.Cast<string> ()));
+                    result.AddRange (ByteConverter.GetBytes (value.Cast<string> ()));
                 }
                 else if (field.FieldType == typeof (short))
                 {
@@ -31,11 +31,11 @@ namespace BytePacketSupport
                     
                     if (attribute == null)
                     {
-                        result.AddRange(ByteConverter.GetByte ((short)value));
+                        result.AddRange(ByteConverter.GetBytes ((short)value));
                         continue;
                     }
                     bool ret = isSameEndian ((attribute._endian));
-                    result.AddRange (ByteConverter.GetByte ((short)value, ret));
+                    result.AddRange (ByteConverter.GetBytes ((short)value, ret));
                 }
                 else if (field.FieldType == typeof (int))
                 {
@@ -43,11 +43,11 @@ namespace BytePacketSupport
 
                     if (attribute == null)
                     {
-                        result.AddRange (ByteConverter.GetByte ((int)value));
+                        result.AddRange (ByteConverter.GetBytes ((int)value));
                         continue;
                     }
                     bool ret = isSameEndian ((attribute._endian));
-                    result.AddRange (ByteConverter.GetByte ((int)value, ret));
+                    result.AddRange (ByteConverter.GetBytes ((int)value, ret));
                 }
                 else if (field.FieldType == typeof (long))
                 {
@@ -55,11 +55,11 @@ namespace BytePacketSupport
 
                     if (attribute == null)
                     {
-                        result.AddRange (ByteConverter.GetByte ((long)value));
+                        result.AddRange (ByteConverter.GetBytes ((long)value));
                         continue;
                     }
                     bool ret = isSameEndian ((attribute._endian));
-                    result.AddRange (ByteConverter.GetByte ((long)value, ret));
+                    result.AddRange (ByteConverter.GetBytes ((long)value, ret));
                 }
                 else if (field.FieldType == typeof (ushort))
                 {
@@ -67,11 +67,11 @@ namespace BytePacketSupport
 
                     if (attribute == null)
                     {
-                        result.AddRange (ByteConverter.GetByte ((ushort)value));
+                        result.AddRange (ByteConverter.GetBytes ((ushort)value));
                         continue;
                     }
                     bool ret = isSameEndian ((attribute._endian));
-                    result.AddRange (ByteConverter.GetByte ((ushort)value, ret));
+                    result.AddRange (ByteConverter.GetBytes ((ushort)value, ret));
                 }
                 else if (field.FieldType == typeof (uint))
                 {
@@ -79,11 +79,11 @@ namespace BytePacketSupport
 
                     if (attribute == null)
                     {
-                        result.AddRange (ByteConverter.GetByte ((uint)value));
+                        result.AddRange (ByteConverter.GetBytes ((uint)value));
                         continue;
                     }
                     bool ret = isSameEndian ((attribute._endian));
-                    result.AddRange (ByteConverter.GetByte ((uint)value, ret));
+                    result.AddRange (ByteConverter.GetBytes ((uint)value, ret));
                 }
                 else if (field.FieldType == typeof (ulong))
                 {
@@ -91,11 +91,11 @@ namespace BytePacketSupport
 
                     if (attribute == null)
                     {
-                        result.AddRange (ByteConverter.GetByte ((ulong)value));
+                        result.AddRange (ByteConverter.GetBytes ((ulong)value));
                         continue;
                     }
                     bool ret = isSameEndian ((attribute._endian));
-                    result.AddRange (ByteConverter.GetByte ((ulong)value, ret));
+                    result.AddRange (ByteConverter.GetBytes ((ulong)value, ret));
                 }
                 else if (field.FieldType == typeof (byte))
                 {
