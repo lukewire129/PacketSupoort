@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace BytePacketSupport
 {
     public partial class PacketBuilder
     {
         private readonly PacketBuilderConfiguration _configuration;
-        private LinkedList<byte> packetData = new LinkedList<byte> ();
+        private List<byte> packetData = new List<byte> ();
 
         public PacketBuilder()
         {
