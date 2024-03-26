@@ -163,5 +163,19 @@ namespace AppendTest
             Console.WriteLine ("display1 {0}", display1.Display ());
             Console.WriteLine ("display2 {0}", display2.Display ());
         }
+
+        [Fact]
+        public void EndianTest()
+        {
+            short test = 0x0102;
+            byte[] abclittle = new byte[] { 0x01, 0x02 };
+            byte[] abcBig = new byte[] { 0x01, 0x02 };
+
+            abclittle = abclittle.Append (test);
+            abcBig = abcBig.Append (test, false);
+
+            Console.WriteLine ("display1 {0}", abclittle.Display ());
+            Console.WriteLine ("display2 {0}", abcBig.Display ());
+        }
     }
 }
