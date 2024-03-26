@@ -117,24 +117,48 @@ namespace AppendTest
         [Fact]
         public void PacketBuilderConfig()
         {
+            short test = 0x0102;
+            short testAdd = 0x0304;
 
-            var test = new byte[] { 0x01, 0x02, };
-            var testAdd = new byte[] { 0x03, 0x04 };
+            var littlEndianType = new PacketBuilder (); 
 
-            var builder = new PacketBuilder ();
-
-            var builder2 = new PacketBuilder (new PacketBuilderConfiguration()
+            var bigEndianType = new PacketBuilder (new PacketBuilderConfiguration ()
             {
-                DefaultEndian = BytePacketSupport.Enums.Endian.LITTLE
+                DefaultEndian = BytePacketSupport.Enums.Endian.BIG
             });
 
-            var display1 = builder.Append (test)
-                                  .Append (testAdd)
-                                  .Build();
+            var display1 = littlEndianType.Append (test)
+                                          .Append (testAdd)
+                                          .Build ();
 
-            var display2 = builder2.Append (test)
-                                   .Append (testAdd)
-                                   .Build ();
+            var display2 = bigEndianType.Append (test)
+                                        .Append (testAdd)
+                                        .Build ();
+
+            Console.WriteLine ("display1 {0}", display1.Display ());
+            Console.WriteLine ("display2 {0}", display2.Display ());
+        }
+
+        [Fact]
+        public void PacketBuilderConfig2()
+        {
+            int test = 1;
+            int testAdd = 2;
+
+            var littlEndianType = new PacketBuilder ();
+
+            var bigEndianType = new PacketBuilder (new PacketBuilderConfiguration ()
+            {
+                DefaultEndian = BytePacketSupport.Enums.Endian.BIG
+            });
+
+            var display1 = littlEndianType.Append (test)
+                                          .Append (testAdd)
+                                          .Build ();
+
+            var display2 = bigEndianType.Append (test)
+                                        .Append (testAdd)
+                                        .Build ();
 
             Console.WriteLine ("display1 {0}", display1.Display ());
             Console.WriteLine ("display2 {0}", display2.Display ());

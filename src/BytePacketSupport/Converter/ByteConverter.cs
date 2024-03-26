@@ -8,20 +8,34 @@ namespace BytePacketSupport.Converter
     public static class ByteConverter
     {
         public static byte[] GetByte(string asciiByte)=> Encoding.ASCII.GetBytes (asciiByte);
-        public static byte[] GetByte(int intByte, Endian endian = Endian.BIG)
+
+        public static byte[] GetBytes(int intByte, bool isLittleEndian = true)
         {
-            byte[] _intByte = BitConverter.GetBytes (intByte);
-            return endian == Endian.LITTLE ? _intByte.Reverse ().ToArray () : _intByte;
+            byte[] bytes = BitConverter.GetBytes (intByte);
+
+            if (BitConverter.IsLittleEndian == isLittleEndian)
+                return bytes;
+
+            return bytes.Reverse ().ToArray ();
         }
-        public static byte[] GetByte(long intByte, Endian endian = Endian.BIG)
+
+        public static byte[] GetByte(long longBytes, bool isLittleEndian = true)
         {
-            byte[] _intByte = BitConverter.GetBytes (intByte);
-            return endian == Endian.LITTLE ? _intByte.Reverse ().ToArray () : _intByte;
+            byte[] bytes = BitConverter.GetBytes (longBytes);
+
+            if (BitConverter.IsLittleEndian == isLittleEndian)
+                return bytes;
+
+            return bytes.Reverse ().ToArray ();
         }
-        public static byte[] GetByte(short intByte, Endian endian = Endian.BIG)
+        public static byte[] GetByte(short shortByte, bool isLittleEndian = true)
         {
-            byte[] _intByte = BitConverter.GetBytes (intByte);
-            return endian == Endian.LITTLE ? _intByte.Reverse ().ToArray () : _intByte;
+            byte[] bytes = BitConverter.GetBytes (shortByte);
+
+            if (BitConverter.IsLittleEndian == isLittleEndian)
+                return bytes;
+
+            return bytes.Reverse ().ToArray ();
         }
     }
 }

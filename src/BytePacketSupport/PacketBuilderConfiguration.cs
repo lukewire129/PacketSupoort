@@ -4,6 +4,6 @@ namespace BytePacketSupport
 {
     public class PacketBuilderConfiguration
     {
-        public Endian DefaultEndian { get; set; } = Endian.BIG;
+        public Endian DefaultEndian { get; set; } = Endian.LITTLE;
     }
 }
