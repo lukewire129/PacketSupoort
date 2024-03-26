@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BytePacketSupport.Enums
+﻿namespace BytePacketSupport.Enums
 {
     public enum Endian
     {

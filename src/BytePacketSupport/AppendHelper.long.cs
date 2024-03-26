@@ -5,12 +5,11 @@ namespace BytePacketSupport
 {
     public static partial class AppendHelper
     {
-        public static byte[] Append(this byte b, long longByte, Endian endian = Endian.BIG) => b.Append (ByteConverter.GetByte (longByte, endian));
-
-        public static byte[] Append(this byte[] bs, long longByte, Endian endian = Endian.BIG) => bs.Append (ByteConverter.GetByte (longByte, endian));
-        public static byte[] Append(this byte[] bs, long longByte, int offset, int count, Endian endian = Endian.BIG)
+        public static byte[] Append(this byte b, long longByte, bool isLittleEndian = false) => b.Append (ByteConverter.GetByte (longByte, isLittleEndian));
+        public static byte[] Append(this byte[] bs, long longByte, bool isLittleEndian = false) => bs.Append (ByteConverter.GetByte (longByte, isLittleEndian));
+        public static byte[] Append(this byte[] bs, long longByte, int offset, int count, bool isLittleEndian = false)
         {
-            byte[] bytes = ByteConverter.GetByte (longByte, endian);
+            byte[] bytes = ByteConverter.GetByte (longByte, isLittleEndian);
             return bs.Append (bytes, offset, count);
         }
     }
