@@ -1,6 +1,4 @@
-﻿using BytePacketSupport.Enums;
-using Mythosia;
-using Mythosia.Integrity.Checksum;
+﻿using Mythosia.Integrity.Checksum;
 using Mythosia.Integrity.CRC;
 using System.Linq;
 
@@ -98,6 +96,54 @@ namespace BytePacketSupport
         {
             byte[] errorcheck = new CRC32 (Crc32Type).Compute (GetBytes (start, count)).ToArray ();
             this.packetData.AddRange (errorcheck);
+            return this;
+        }
+
+
+        public PacketBuilder Compute(string key, Checksum8Type checksum8Type)
+        {
+            if (this.packetData.Count () == 0)
+                return this;
+
+            if (byteKeyPoint.ContainsKey (key))
+                return this;
+
+            this.Compute (checksum8Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
+            return this;
+        }
+
+        public PacketBuilder Compute(string key, CRC8Type crc8Type)
+        {
+            if (this.packetData.Count () == 0)
+                return this;
+
+            if (byteKeyPoint.ContainsKey (key))
+                return this;
+
+            this.Compute (crc8Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
+            return this;
+        }
+        public PacketBuilder Compute(string key, CRC16Type crc16Type)
+        {
+            if (this.packetData.Count () == 0)
+                return this;
+
+            if (byteKeyPoint.ContainsKey (key))
+                return this;
+
+            this.Compute (crc16Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
+            return this;
+        }
+
+        public PacketBuilder Compute(string key, CRC32Type crc32Type)
+        {
+            if (this.packetData.Count () == 0)
+                return this;
+
+            if (byteKeyPoint.ContainsKey (key))
+                return this;
+
+            this.Compute (crc32Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
             return this;
         }
     }

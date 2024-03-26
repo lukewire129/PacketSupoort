@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Text;
 
 namespace BytePacketSupport.Converter
 {
     public static class ByteConverter
     {
+        public static byte[] GetBytes(string str) => Encoding.ASCII.GetBytes (str);
         public static byte[] GetBytes(int intByte, bool isLittleEndian = true)
         {
             byte[] bytes = BitConverter.GetBytes (intByte);

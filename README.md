@@ -121,9 +121,9 @@ var packet = pb
   .Compute(Checksum8Type.Xor) 
   .Build();
 // or
-//   .ErrorDetection(Checksum8Type.Xor, start index);
+//   .Compute(Checksum8Type.Xor, start index);
 // or
-//   .ErrorDetection(Checksum8Type.Xor, start index, count); 
+//   .Compute(Checksum8Type.Xor, start index, count); 
 ```
 The second PointSave method
 SavePoint can be used to extend beyond checksums to areas that need to be temporarily stored.
@@ -136,7 +136,7 @@ var packet = pb
   .@byte(0x04)
   .@byte(0x05)
   .EndSection("ChecksumPacking");
-  .Checksum("ChecksumPacking", Checksum8Type.Xor) // 8비트 체크섬이 삽입되는 위치
+  .Compute("ChecksumPacking", Checksum8Type.Xor) // 8비트 체크섬이 삽입되는 위치
   .Build();
 
 // extentions ex)
