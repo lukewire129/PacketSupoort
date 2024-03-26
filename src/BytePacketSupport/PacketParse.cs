@@ -1,4 +1,6 @@
-﻿using BytePacketSupport.Converter;
+﻿using BytePacketSupport.Attibutes;
+using BytePacketSupport.Converter;
+using BytePacketSupport.Enums;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +12,7 @@ namespace BytePacketSupport
 {
     public static class PacketParse
     {
-        public static byte[] Serialization<TSource>(TSource AppendClass) where TSource : class
+        public static byte[] Serialize<TSource>(TSource AppendClass) where TSource : class
         {
             FieldInfo[] fields = typeof (TSource).GetFields (BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             List<byte> result = new List<byte>();
@@ -19,111 +21,222 @@ namespace BytePacketSupport
                 object value = field.GetValue (AppendClass);
 
                 // 필드의 타입으로 캐스팅
-                if (field.FieldType == typeof (int))
+                if (field.FieldType == typeof (string))
                 {
-                    result.AddRange (ByteConverter.GetByte (value.GetFieldType<int> ()));
-                }
-                else if (field.FieldType == typeof (string))
-                {
-                    result.AddRange (ByteConverter.GetByte (value.GetFieldType<string> ()));
-                }
-                else if (field.FieldType == typeof (long))
-                {
-                    result.AddRange (ByteConverter.GetByte (value.GetFieldType<long> ()));
+                    result.AddRange (ByteConverter.GetByte (value.Cast<string> ()));
                 }
                 else if (field.FieldType == typeof (short))
                 {
-                    result.AddRange (ByteConverter.GetByte (value.GetFieldType<short> ()));
+                    var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
+                    
+                    if (attribute == null)
+                    {
+                        result.AddRange(ByteConverter.GetByte ((short)value));
+                        continue;
+                    }
+                    bool ret = isSameEndian ((attribute._endian));
+                    result.AddRange (ByteConverter.GetByte ((short)value, ret));
+                }
+                else if (field.FieldType == typeof (int))
+                {
+                    var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
+
+                    if (attribute == null)
+                    {
+                        result.AddRange (ByteConverter.GetByte ((int)value));
+                        continue;
+                    }
+                    bool ret = isSameEndian ((attribute._endian));
+                    result.AddRange (ByteConverter.GetByte ((int)value, ret));
+                }
+                else if (field.FieldType == typeof (long))
+                {
+                    var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
+
+                    if (attribute == null)
+                    {
+                        result.AddRange (ByteConverter.GetByte ((long)value));
+                        continue;
+                    }
+                    bool ret = isSameEndian ((attribute._endian));
+                    result.AddRange (ByteConverter.GetByte ((long)value, ret));
+                }
+                else if (field.FieldType == typeof (ushort))
+                {
+                    var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
+
+                    if (attribute == null)
+                    {
+                        result.AddRange (ByteConverter.GetByte ((ushort)value));
+                        continue;
+                    }
+                    bool ret = isSameEndian ((attribute._endian));
+                    result.AddRange (ByteConverter.GetByte ((ushort)value, ret));
+                }
+                else if (field.FieldType == typeof (uint))
+                {
+                    var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
+
+                    if (attribute == null)
+                    {
+                        result.AddRange (ByteConverter.GetByte ((uint)value));
+                        continue;
+                    }
+                    bool ret = isSameEndian ((attribute._endian));
+                    result.AddRange (ByteConverter.GetByte ((uint)value, ret));
+                }
+                else if (field.FieldType == typeof (ulong))
+                {
+                    var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
+
+                    if (attribute == null)
+                    {
+                        result.AddRange (ByteConverter.GetByte ((ulong)value));
+                        continue;
+                    }
+                    bool ret = isSameEndian ((attribute._endian));
+                    result.AddRange (ByteConverter.GetByte ((ulong)value, ret));
                 }
                 else if (field.FieldType == typeof (byte))
                 {
-                    result.Add (value.GetFieldType<byte> ());
+                    result.Add (value.Cast<byte> ());
                 }
                 else if (field.FieldType == typeof (byte[]))
                 {
-                    result.AddRange (value.GetFieldType<byte[]> ());
+                    result.AddRange (value.Cast<byte[]> ());
                 }
                 else if (field.FieldType == typeof (List<byte>))
                 {
-                    result.AddRange (value.GetFieldType<List<byte>> ());
+                    result.AddRange (value.Cast<List<byte>> ());
                 }
             }
 
             return result.ToArray();
         }
 
-        public static T DeserializeObject<T>(byte[] bytes) where T : new()
+        public static T Deserialize<T>(byte[] bytes) where T : new()
         {
             FieldInfo[] fields = typeof (T).GetFields (BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             var instance = Activator.CreateInstance<T> ();
             BinaryReader reader = new BinaryReader (new MemoryStream (bytes, writable: false));
-            long position = 0;
             foreach (FieldInfo field in fields)
             {
-                if (field.FieldType == typeof (int))
+                if (field.FieldType == typeof (string))
                 {
-                    field.SetValue (instance, reader.ReadInt32 ());
-                }
-                else if (field.FieldType == typeof (string))
-                {
-                    var attribute = field.CustomAttributes.FirstOrDefault ();
+                    var attribute = ((ByteSizeAttribute)Attribute.GetCustomAttribute (field, typeof (ByteSizeAttribute)));
+
                     if (attribute == null)
                         continue;
-                    
-                    position = reader.BaseStream.Position;
-                    var value = Encoding.ASCII.GetString (bytes, Convert.ToInt32(position), (int)attribute.ConstructorArguments.First ().Value);
-                    field.SetValue (instance, value);
-
-                    reader.BaseStream.Position +=  Convert.ToInt64((int)attribute.ConstructorArguments.First ().Value);
-                }
-                else if (field.FieldType == typeof (long))
-                {
-                    field.SetValue (instance, reader.ReadInt64 ());
+                    byte[] value = reader.ReadBytes (attribute.Size);
+                    field.SetValue (instance, Encoding.ASCII.GetString (value, 0, value.Length));
                 }
                 else if (field.FieldType == typeof (short))
                 {
-                    field.SetValue (instance, reader.ReadInt16 ());
+                    byte[] value = GetBytes (field, reader, 2);
+                    field.SetValue (instance, BitConverter.ToInt16(value));
+                }
+                else if (field.FieldType == typeof (int))
+                {
+                    byte[] value = GetBytes (field, reader, 4);
+                    field.SetValue (instance, BitConverter.ToInt32 (value));
+                }
+                else if (field.FieldType == typeof (long))
+                {
+                    byte[] value = GetBytes (field, reader, 8);
+                    field.SetValue (instance, BitConverter.ToInt64 (value));
                 }
                 else if (field.FieldType == typeof (byte))
                 {
                     field.SetValue (instance, reader.ReadByte ());
                 }
+                else if (field.FieldType == typeof (ushort))
+                {
+                    byte[] value = GetBytes (field, reader, 2);
+                    field.SetValue (instance, BitConverter.ToUInt16 (value));
+                }
+                else if (field.FieldType == typeof (uint))
+                {
+                    byte[] value = GetBytes (field, reader, 2);
+                    field.SetValue (instance, BitConverter.ToUInt32 (value));
+                }
+                else if (field.FieldType == typeof (ulong))
+                {
+                    byte[] value = GetBytes (field, reader, 2);
+                    field.SetValue (instance, BitConverter.ToUInt64 (value));
+                }
                 else if (field.FieldType == typeof (byte[]))
                 {
-                    var attribute = field.CustomAttributes.FirstOrDefault ();
+                    var attribute = ((ByteSizeAttribute)Attribute.GetCustomAttribute (field, typeof (ByteSizeAttribute)));
+
                     int length = 0;
                     if (attribute != null)
                     {
-                        length = (int)attribute.ConstructorArguments.First ().Value;
+                        length = attribute.Size;
                     }
                     else
                     {
-                        length = ((byte[])field.GetValue (instance)).Count ();
+                        byte[] temp = (byte[])field.GetValue (instance);
+                        if (temp == null)
+                            continue;
+                        if (temp.Count () == 0)
+                            continue;
+
+                        length = temp.Count ();
                     }
                     field.SetValue (instance, reader.ReadBytes(length));
                 }
                 else if (field.FieldType == typeof(System.Collections.Generic.List<Byte>))
                 {
-                    var attribute = field.CustomAttributes.FirstOrDefault ();
+                    var attribute = ((ByteSizeAttribute)Attribute.GetCustomAttribute (field, typeof (ByteSizeAttribute)));
                     int length = 0;
                     if (attribute != null)
                     {
-                        length = (int)attribute.ConstructorArguments.First ().Value;
+                        length = attribute.Size;
                     }
                     else
                     {
-                        length = ((List<Byte>)field.GetValue (instance)).Capacity;
-                        if (length == 0)
+                        var temp = ((List<Byte>)field.GetValue (instance));
+                        if (temp == null)
                             continue;
+                        if (temp.Count () == 0)
+                            continue;
+
+                        length = temp.Count ();
                     }
-                    field.SetValue (instance, reader.ReadBytes (length).ToList());
+
+                    field.SetValue (instance, reader.ReadBytes (length));
                 }
             }
             return instance;
         }
-        private static T GetFieldType<T>(this object obj)
+        private static T Cast<T>(this object obj)
         {
             return (T)obj;
+        }
+
+        private static bool isSameEndian (Endian endian)
+        {
+            bool isSetEnidan = endian == Endian.LITTLE;
+
+            if (BitConverter.IsLittleEndian == isSetEnidan)
+                return true;
+
+            return false;
+        }
+
+        private static byte[] GetBytes(FieldInfo field, BinaryReader br, int length)
+        {
+            byte[] bytes = br.ReadBytes (length);
+            var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
+
+            if (attribute == null)
+                return bytes;
+
+            bool ret = isSameEndian (attribute._endian);
+            if (ret == true)
+                return bytes;
+
+            return bytes.Reverse ().ToArray();
         }
     }
 }
