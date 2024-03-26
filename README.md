@@ -184,6 +184,28 @@ short test = 0x0102;
 // display1 02010403
 // display2 01020304
 ```
+For Append Extensions, the 
+out of respect for developers' freedom to customize, you can set your own
+```csharp
+// Extentions 활용 시
+short test = 0x0102;
+byte[] abclittle = new byte[] { 0x01, 0x02 };
+byte[] abcBig = new byte[] { 0x01, 0x02 };
+
+// 정수형 Append 메서드 기본적으로 LittleEnidianType으로 동작합니다.
+// Append (int intByte, bool isLittleEndian = true)
+
+abclittle = abclittle.Append (test);
+abcBig = abcBig.Append (test, false);
+
+
+Console.WriteLine ("display1 {0}", abclittle.Display ());
+Console.WriteLine ("display2 {0}", abcBig.Display ());
+
+// output
+// display1 01020201
+// display2 01020102
+```
 ## bytearray<->class(Serialization,Deserialization)
 - For an array or string, you must size it.
 - The size should be set via attribute (ByteSize), and in the case of 'List' Type, it can be handled by adjusting the Capacity value.
