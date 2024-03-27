@@ -1,5 +1,6 @@
 ﻿using BytePacketSupport.Enums;
 using System;
+using System.Buffers;
 using System.Linq;
 using System.Text;
 
@@ -9,6 +10,12 @@ namespace BytePacketSupport.Converter
     {
         public static byte[] GetBytes(string str) => Encoding.ASCII.GetBytes (str);
 
+        /// <summary>
+        /// TODO: 무조건 2Byte만 들어옴......무조건.....이거 어떻게 제약걸지 음음음음 
+        /// </summary>
+        /// <param name="byteArray"></param>
+        /// <param name="endian"></param>
+        /// <returns></returns>
         private static byte[] EndianChange(byte[] byteArray, Endian endian)
         {
             if (endian == Endian.BIG || endian == Endian.LITTLE)
