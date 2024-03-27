@@ -1,6 +1,4 @@
-﻿using Mythosia.Integrity.Checksum;
-using Mythosia.Integrity.CRC;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace BytePacketSupport
