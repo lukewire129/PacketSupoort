@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BytePacketSupport.Enums;
+using System;
+using System.Linq;
 using System.Text;
 
 namespace BytePacketSupport.Converter
@@ -6,62 +8,77 @@ namespace BytePacketSupport.Converter
     public static class ByteConverter
     {
         public static byte[] GetBytes(string str) => Encoding.ASCII.GetBytes (str);
-        public static byte[] GetBytes(int intByte, bool isLittleEndian = true)
+
+        private static byte[] EndianChange(byte[] byteArray, Endian endian)
         {
-            byte[] bytes = BitConverter.GetBytes (intByte);
+            if (endian == Endian.BIG || endian == Endian.LITTLE)
+            {
+                bool isLittleEndian = endian == Endian.LITTLE;
+                if (BitConverter.IsLittleEndian != isLittleEndian)
+                    Array.Reverse (byteArray);
+            }
+            else
+            {
+                Array.Reverse (byteArray);
+            }
 
-            if (BitConverter.IsLittleEndian != isLittleEndian)
-                Array.Reverse(bytes);
-
-            return bytes;
+            return byteArray;
         }
 
-        public static byte[] GetBytes(long longBytes, bool isLittleEndian = true)
+        private static byte[] GetBytes(byte[] byteArray, Endian endian)
         {
-            byte[] bytes = BitConverter.GetBytes (longBytes);
+            bool isByteArray = endian == Endian.LITTLE || endian == Endian.LITTLEBYTESWAP;
+            if (BitConverter.IsLittleEndian != isByteArray)
+                Array.Reverse (byteArray);
 
-            if (BitConverter.IsLittleEndian != isLittleEndian)
-                Array.Reverse(bytes);
+            if (endian == Endian.LITTLEBYTESWAP || endian == Endian.BIGBYTESWAP)
+            {
+                byte[] temp = new byte[0];
+                for (int i = 0; i < byteArray.Length; i += 2)
+                {
+                    temp = temp.AppendBytes (EndianChange (byteArray.Skip (0 + i).Take (2).ToArray (), endian));
+                }
 
-            return bytes;
+                byteArray = temp;
+            }
+
+            return byteArray;
         }
-        public static byte[] GetBytes(short shortByte, bool isLittleEndian = true)
+
+        public static byte[] GetBytes(short shortByte, Endian endian = Endian.LITTLE)
         {
             byte[] bytes = BitConverter.GetBytes (shortByte);
 
-            if (BitConverter.IsLittleEndian != isLittleEndian)
-                Array.Reverse(bytes);
-
-            return bytes;
+            return GetBytes (bytes, endian);
         }
 
-        public static byte[] GetBytes(uint uintByte, bool isLittleEndian = true)
+        public static byte[] GetBytes(int intByte, Endian endian = Endian.LITTLE)
         {
-            byte[] bytes = BitConverter.GetBytes (uintByte);
-
-            if (BitConverter.IsLittleEndian != isLittleEndian)
-                Array.Reverse(bytes);
-
-            return bytes;
+            byte[] bytes = BitConverter.GetBytes (intByte);
+            return GetBytes (bytes, endian);
         }
 
-        public static byte[] GetBytes(ulong ulongBytes, bool isLittleEndian = true)
+        public static byte[] GetBytes(long longBytes, Endian endian = Endian.LITTLE)
         {
-            byte[] bytes = BitConverter.GetBytes (ulongBytes);
-
-            if (BitConverter.IsLittleEndian != isLittleEndian)
-                Array.Reverse(bytes);
-
-            return bytes;
+            byte[] bytes = BitConverter.GetBytes (longBytes);
+            return GetBytes (bytes, endian);
         }
-        public static byte[] GetBytes(ushort ushortByte, bool isLittleEndian = true)
+        public static byte[] GetBytes(ushort ushortByte, Endian endian = Endian.LITTLE)
         {
             byte[] bytes = BitConverter.GetBytes (ushortByte);
+            return EndianChange (bytes, endian);
+        }
 
-            if (BitConverter.IsLittleEndian != isLittleEndian)
-                Array.Reverse(bytes);
+        public static byte[] GetBytes(uint uintByte, Endian endian = Endian.LITTLE)
+        {
+            byte[] bytes = BitConverter.GetBytes (uintByte);
+            return GetBytes (bytes, endian);
+        }
 
-            return bytes;
+        public static byte[] GetBytes(ulong ulongBytes, Endian endian = Endian.LITTLE)
+        {
+            byte[] bytes = BitConverter.GetBytes (ulongBytes);
+            return GetBytes (bytes, endian);
         }
     }
 }

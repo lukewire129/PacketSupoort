@@ -3,6 +3,8 @@
     public enum Endian
     {
         BIG,
-        LITTLE
+        LITTLE,
+        BIGBYTESWAP,
+        LITTLEBYTESWAP,
     }
 }
