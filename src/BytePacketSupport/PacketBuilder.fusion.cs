@@ -67,7 +67,6 @@ namespace BytePacketSupport
             return this;
         }
 
-
         public PacketBuilder @class<TSource>(TSource AppenClass) where TSource : class
         {
             byte[] datas = PacketParse.Serialize (AppenClass);
