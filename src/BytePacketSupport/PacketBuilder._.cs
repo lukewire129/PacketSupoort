@@ -1,4 +1,5 @@
 ﻿using BytePacketSupport.Converter;
+using BytePacketSupport.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -9,18 +10,16 @@ namespace BytePacketSupport
         private readonly PacketBuilderConfiguration _configuration;
         private List<byte> packetData = new List<byte> ();
 
-        private readonly bool _isLittleEndian;
+        private readonly Endian endanType;
         public PacketBuilder()
         {
             this._configuration = new PacketBuilderConfiguration ();
-
-            _isLittleEndian = BitConverter.IsLittleEndian;
         }
         public PacketBuilder(PacketBuilderConfiguration configuration)
         {
             this._configuration = configuration;
 
-            _isLittleEndian = configuration.DefaultEndian == Enums.Endian.LITTLE;
+            endanType = configuration.DefaultEndian;
         }
         private PacketBuilder Append(byte data)
         {
@@ -44,42 +43,42 @@ namespace BytePacketSupport
 
         private PacketBuilder Append(int intByte)
         {
-            byte[] datas = ByteConverter.GetBytes (intByte, _isLittleEndian);
+            byte[] datas = ByteConverter.GetBytes (intByte, endanType);
             packetData.AddRange (datas);
             return this;
         }
 
         private PacketBuilder Append(long longByte)
         {
-            byte[] datas = ByteConverter.GetBytes (longByte, _isLittleEndian);
+            byte[] datas = ByteConverter.GetBytes (longByte, endanType);
             packetData.AddRange (datas);
             return this;
         }
 
         private PacketBuilder Append(short shortByte)
         {
-            byte[] datas = ByteConverter.GetBytes (shortByte, _isLittleEndian);
+            byte[] datas = ByteConverter.GetBytes (shortByte, endanType);
             packetData.AddRange (datas);
             return this;
         }
 
         private PacketBuilder Append(uint uintByte)
         {
-            byte[] datas = ByteConverter.GetBytes (uintByte, _isLittleEndian);
+            byte[] datas = ByteConverter.GetBytes (uintByte, endanType);
             packetData.AddRange (datas);
             return this;
         }
 
         private PacketBuilder Append(ulong ulongByte)
         {
-            byte[] datas = ByteConverter.GetBytes (ulongByte, _isLittleEndian);
+            byte[] datas = ByteConverter.GetBytes (ulongByte, endanType);
             packetData.AddRange (datas);
             return this;
         }
 
         private PacketBuilder Append(ushort ushortByte)
         {
-            byte[] datas = ByteConverter.GetBytes (ushortByte, _isLittleEndian);
+            byte[] datas = ByteConverter.GetBytes (ushortByte, endanType);
             packetData.AddRange (datas);
             return this;
         }

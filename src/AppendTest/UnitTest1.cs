@@ -1,5 +1,6 @@
 using BytePacketSupport;
 using BytePacketSupport.Attibutes;
+using BytePacketSupport.Enums;
 using System.Diagnostics;
 namespace AppendTest
 {
@@ -143,22 +144,6 @@ namespace AppendTest
 
             Console.WriteLine ("display1 {0}", display1.ToHexString ());
             Console.WriteLine ("display2 {0}", display2.ToHexString ());
-        }
-
-        [Fact]
-        public void EndianTest()
-        {
-            short test = 0x0102;
-            byte[] abclittle = new byte[] { 0x01, 0x02 };
-            byte[] abcBig = new byte[] { 0x01, 0x02 };
-
-            abclittle = abclittle
-                            .@short (test);
-            abcBig = abcBig
-                            .@short (test, false);
-
-            Console.WriteLine ("display1 {0}", abclittle.ToHexString ());
-            Console.WriteLine ("display2 {0}", abcBig.ToHexString ());
         }
 
         [Fact]
