@@ -31,6 +31,9 @@ namespace AppendTest
 
             _testOutputHelper.WriteLine ("display1 {0}", abclittle.ToHexString ());
             _testOutputHelper.WriteLine ("display2 {0}", abcBig.ToHexString ());
+
+            Assert.True (abclittle.ToHexString () == "01020201");
+            Assert.True (abcBig.ToHexString () == "01020102");
         }
 
         [Fact]
@@ -61,6 +64,12 @@ namespace AppendTest
             _testOutputHelper.WriteLine (test2.ToHexString ());
             _testOutputHelper.WriteLine (test3.ToHexString ());
             _testOutputHelper.WriteLine (test4.ToHexString ());
+
+
+            Assert.True (test1.ToHexString () == "1234");
+            Assert.True (test2.ToHexString () == "3412");
+            Assert.True (test3.ToHexString () == "3412");
+            Assert.True (test4.ToHexString () == "1234");
         }
 
         [Fact]
@@ -91,6 +100,11 @@ namespace AppendTest
             _testOutputHelper.WriteLine (test2.ToHexString ());
             _testOutputHelper.WriteLine (test3.ToHexString ());
             _testOutputHelper.WriteLine (test4.ToHexString ());
+
+            Assert.True (test1.ToHexString () == "12345678");
+            Assert.True (test2.ToHexString () == "78563412");
+            Assert.True (test3.ToHexString () == "34127856");
+            Assert.True (test4.ToHexString () == "56781234");
         }
 
         [Fact]
@@ -121,6 +135,11 @@ namespace AppendTest
             _testOutputHelper.WriteLine (test2.ToHexString ());
             _testOutputHelper.WriteLine (test3.ToHexString ());
             _testOutputHelper.WriteLine (test4.ToHexString ());
+
+            Assert.True (test1.ToHexString () == "123456789ABCDEF0");
+            Assert.True (test2.ToHexString () == "F0DEBC9A78563412");
+            Assert.True (test3.ToHexString () == "34127856BC9AF0DE");
+            Assert.True (test4.ToHexString () == "DEF09ABC56781234");
         }
     }
 }

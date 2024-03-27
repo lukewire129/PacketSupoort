@@ -83,9 +83,9 @@ namespace BytePacketSupport
             return this;
         }
 
-        private PacketBuilder Append<TSource>(TSource AppenClass) where TSource : class
+        private PacketBuilder Append<TSource>(TSource AppendClass) where TSource : class
         {
-            byte[] datas = PacketParse.Serialize (AppenClass);
+            byte[] datas = PacketParse.Serialize (AppendClass);
             packetData.AddRange (datas);
             return this;
         }
@@ -102,6 +102,16 @@ namespace BytePacketSupport
         public PacketBuilder AppendString(string ascii)
         {
             return Append (ascii);
+        }
+
+        public PacketBuilder AppendPacketBuilder(PacketBuilder builder)
+        {
+            return AppendBytes (builder.Build ());
+        }
+
+        public PacketBuilder AppendClass<TSource>(TSource AppendClass) where TSource : class
+        {
+            return Append (AppendClass);
         }
 
         public byte[] Build()

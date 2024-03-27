@@ -63,5 +63,15 @@ namespace BytePacketSupport
             var result = b;
             return result.@bytes (PacketParse.Serialize (AppenClass));
         }
+
+        public static byte[] AppendPacketBuilder(this byte b, PacketBuilder packetBuilder)
+        {
+            return b.@bytes (packetBuilder.Build ());
+        }
+
+        public static byte[] AppendPacketBuilder(this IEnumerable<byte> bs, PacketBuilder packetBuilder)
+        {
+            return bs.@bytes (packetBuilder.Build ());
+        }
     }
 }
