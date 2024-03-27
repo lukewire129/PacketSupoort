@@ -117,7 +117,6 @@ Console.WriteLine (builder.GetString ());
                  .Build();
   ```
 ## AppendExtentions 
-- byte + byte array
 
   **CRL Type**
   ``` csharp
