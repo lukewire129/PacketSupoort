@@ -1,4 +1,5 @@
 ﻿using BytePacketSupport.Converter;
+using System.Data;
 
 namespace BytePacketSupport
 {
@@ -6,43 +7,31 @@ namespace BytePacketSupport
     {
         public PacketBuilder Appendshort(short shortByte)
         {
-            byte[] datas = ByteConverter.GetBytes (shortByte, _isLittleEndian);
-            packetData.AddRange (datas);
-            return this;
+            return Append (shortByte);
         }
         public PacketBuilder Appendint(int intByte)
         {
-            byte[] datas = ByteConverter.GetBytes (intByte, _isLittleEndian);
-            packetData.AddRange (datas);
-            return this;
+            return Append (intByte);
         }
 
         public PacketBuilder Appendlong(long longByte)
         {
-            byte[] datas = ByteConverter.GetBytes (longByte, _isLittleEndian);
-            packetData.AddRange (datas);
-            return this;
+            return Append (longByte);
+        }
+
+        public PacketBuilder Appendushort(ushort ushortByte)
+        {
+            return Append (ushortByte);
         }
 
         public PacketBuilder Appenduint(uint uintByte)
         {
-            byte[] datas = ByteConverter.GetBytes (uintByte, _isLittleEndian);
-            packetData.AddRange (datas);
-            return this;
+            return Append (uintByte);
         }
 
         public PacketBuilder Appendulong (ulong ulongByte)
         {
-            byte[] datas = ByteConverter.GetBytes (ulongByte, _isLittleEndian);
-            packetData.AddRange (datas);
-            return this;
-        }
-
-        public PacketBuilder Appendushort (ushort ushortByte)
-        {
-            byte[] datas = ByteConverter.GetBytes (ushortByte, _isLittleEndian);
-            packetData.AddRange (datas);
-            return this;
+            return Append (ulongByte);
         }
     }
 }
