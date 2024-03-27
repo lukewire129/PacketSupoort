@@ -21,13 +21,12 @@ namespace AppendTest
 
 
             byte[] aaa = test.
-                            @class(new Test1Packet ()
+                            @Class(new Test1Packet ()
                                     {
                                         Value = 1,
                                         Value1 = "abc",
                                         Value2 = "ABC"
                                     });
-
             Trace.WriteLine (aaa.ToHexString ());
         }
 

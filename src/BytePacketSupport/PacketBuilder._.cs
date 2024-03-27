@@ -22,6 +22,13 @@ namespace BytePacketSupport
             _isLittleEndian = configuration.DefaultEndian == Enums.Endian.LITTLE;
         }
 
+        public PacketBuilder AppendClass<TSource>(TSource AppenClass) where TSource : class
+        {
+            byte[] datas = PacketParse.Serialize (AppenClass);
+            packetData.AddRange (datas);
+            return this;
+        }
+
         public byte[] Build()
         {
             return this.packetData.ToArray();

@@ -1,0 +1,66 @@
+﻿using BytePacketSupport.Converter;
+using System.Collections.Generic;
+
+namespace BytePacketSupport
+{
+    public static partial class AppendHelper
+    {
+        public static byte[] AppendString(this byte b, string asciiByte) => b.@bytes (ByteConverter.GetBytes (asciiByte));
+        public static byte[] AppendString(this IEnumerable<byte> bs, string asciiByte) => bs.@bytes (ByteConverter.GetBytes (asciiByte));
+        public static byte[] AppendString(this IEnumerable<byte> bs, string asciiByte, int offset, int count) => bs.@bytes (ByteConverter.GetBytes (asciiByte), offset, count);
+        public static byte[] AppendInt16(this byte b, short shortByte, bool isLittleEndian = true) => b.@bytes (ByteConverter.GetBytes (shortByte, isLittleEndian));
+        public static byte[] AppendInt16(this IEnumerable<byte> bs, short shortByte, bool isLittleEndian = true) => bs.@bytes (ByteConverter.GetBytes (shortByte, isLittleEndian));
+        public static byte[] AppendInt16(this IEnumerable<byte> bs, short shortByte, int offset, int count, bool isLittleEndian = true)
+        {
+            byte[] bytes = ByteConverter.GetBytes (shortByte, isLittleEndian);
+            return bs.@bytes (bytes, offset, count);
+        }
+        public static byte[] AppendInt32(this byte b, int intByte, bool isLittleEndian = true) => b.@bytes (ByteConverter.GetBytes (intByte, isLittleEndian));
+        public static byte[] AppendInt32(this IEnumerable<byte> bs, int intByte, bool isLittleEndian = true) => bs.@bytes (ByteConverter.GetBytes (intByte, isLittleEndian));
+        public static byte[] AppendInt32(this IEnumerable<byte> bs, int intByte, int offset, int count, bool isLittleEndian = true)
+        {
+            byte[] bytes = ByteConverter.GetBytes (intByte, isLittleEndian);
+            return bs.@bytes (bytes, offset, count);
+        }
+        public static byte[] AppendInt64(this byte b, long longByte, bool isLittleEndian = true) => b.@bytes (ByteConverter.GetBytes (longByte, isLittleEndian));
+        public static byte[] AppendInt64(this IEnumerable<byte> bs, long longByte, bool isLittleEndian = true) => bs.@bytes (ByteConverter.GetBytes (longByte, isLittleEndian));
+        public static byte[] AppendInt64(this IEnumerable<byte> bs, long longByte, int offset, int count, bool isLittleEndian = true)
+        {
+            byte[] bytes = ByteConverter.GetBytes (longByte, isLittleEndian);
+            return bs.@bytes (bytes, offset, count);
+        }
+
+        public static byte[] AppendUInt16(this byte b, ushort ushortByte, bool isLittleEndian = true) => b.@bytes (ByteConverter.GetBytes (ushortByte, isLittleEndian));
+        public static byte[] AppendUInt16(this IEnumerable<byte> bs, ushort ushortByte, bool isLittleEndian = true) => bs.@bytes (ByteConverter.GetBytes (ushortByte, isLittleEndian));
+        public static byte[] AppendUInt16(this IEnumerable<byte> bs, ushort ushortByte, int offset, int count, bool isLittleEndian = true)
+        {
+            byte[] bytes = ByteConverter.GetBytes (ushortByte, isLittleEndian);
+            return bs.@bytes (bytes, offset, count);
+        }
+        public static byte[] AppendUInt32(this byte b, uint uintByte, bool isLittleEndian = true) => b.@bytes (ByteConverter.GetBytes (uintByte, isLittleEndian));
+        public static byte[] AppendUInt32(this IEnumerable<byte> bs, uint uintByte, bool isLittleEndian = true) => bs.@bytes (ByteConverter.GetBytes (uintByte, isLittleEndian));
+        public static byte[] AppendUInt32(this IEnumerable<byte> bs, uint uintByte, int offset, int count, bool isLittleEndian = true)
+        {
+            byte[] bytes = ByteConverter.GetBytes (uintByte, isLittleEndian);
+            return bs.@bytes (bytes, offset, count);
+        }
+        public static byte[] AppendUInt64(this byte b, ulong ulongByte, bool isLittleEndian = true) => b.@bytes (ByteConverter.GetBytes (ulongByte, isLittleEndian));
+        public static byte[] AppendUInt64(this IEnumerable<byte> bs, ulong ulongByte, bool isLittleEndian = true) => bs.@bytes (ByteConverter.GetBytes (ulongByte, isLittleEndian));
+        public static byte[] AppendUInt64(this IEnumerable<byte> bs, ulong ulongByte, int offset, int count, bool isLittleEndian = true)
+        {
+            byte[] bytes = ByteConverter.GetBytes (ulongByte, isLittleEndian);
+            return bs.@bytes (bytes, offset, count);
+        }
+        public static byte[] AppendClass<TSource>(this byte b, TSource AppenClass) where TSource : class
+        {
+            byte[] result = new byte[] { b };
+            return result.@bytes (PacketParse.Serialize (AppenClass));
+        }
+
+        public static byte[] AppendClass<TSource>(this IEnumerable<byte> b, TSource AppenClass) where TSource : class
+        {
+            var result = b;
+            return result.@bytes (PacketParse.Serialize (AppenClass));
+        }
+    }
+}

@@ -57,7 +57,7 @@ namespace BytePacketSupport
             return result.@bytes (PacketParse.Serialize (AppenClass));
         }
 
-        public static byte[] @class<TSource>(this IEnumerable<byte> b, TSource AppenClass) where TSource : class
+        public static byte[] @Class<TSource>(this IEnumerable<byte> b, TSource AppenClass) where TSource : class
         {
             var result = b;
             return result.@bytes (PacketParse.Serialize (AppenClass));
