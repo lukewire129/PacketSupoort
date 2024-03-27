@@ -118,16 +118,28 @@ Console.WriteLine (builder.GetString ());
   ```
 ## AppendExtentions 
 - byte + byte array
-``` csharp
-byte[] summaryByts;
-byte testByte = 0x51;
-byte[] addBytes = new byte[]{0x52, 0x53};
-summaryByts = testByte.@bytes(addBytes);
-/* and
-List<byte> addBytes = new List<byte>(){0x52, 0x53};
-summaryByts = testByte.@bytes(addBytes);
-*/
-```
+
+  **CRL Type**
+  ``` csharp
+  byte[] summaryByts;
+  byte testByte = 0x51;
+  byte[] addBytes = new byte[]{0x52, 0x53}; // or  List<byte> addBytes = new List<byte>(){0x52, 0x53};
+  summaryByts = testByte.AppendBytes(addBytes); 
+  ```
+  **csharp Type**
+  ``` csharp
+  byte[] summaryByts;
+  byte testByte = 0x51;
+  byte[] addBytes = new byte[]{0x52, 0x53}; // or  List<byte> addBytes = new List<byte>(){0x52, 0x53};
+  summaryByts = testByte.AppendBytes(addBytes);
+  ```
+  **CusotmType (feat. @Dimohy)**
+  ``` csharp
+  byte[] summaryByts;
+  byte testByte = 0x51;
+  byte[] addBytes = new byte[]{0x52, 0x53}; // or  List<byte> addBytes = new List<byte>(){0x52, 0x53};
+  summaryByts = testByte.@bytes(addBytes);
+  ```
 
 - byte array + byte array
 ``` csharp
