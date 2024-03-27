@@ -140,18 +140,6 @@ Console.WriteLine (builder.GetString ());
   byte[] addBytes = new byte[]{0x52, 0x53}; // or  List<byte> addBytes = new List<byte>(){0x52, 0x53};
   summaryByts = testByte.@bytes(addBytes);
   ```
-
-- byte array + byte array
-``` csharp
-byte[] summaryByts;
-List<byte> testByte = new List<byte>(){0x51, 0x52, 0x53};
-
-summaryByts = testByte.@bytes(new List<byte>
-                                 {
-                                   0x54,
-                                   0x55
-                                 });
-```
 ## PacketCheckSum
 - There are two ways to do this
 The first ErrorDetection method
