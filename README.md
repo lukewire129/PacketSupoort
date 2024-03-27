@@ -3,25 +3,29 @@
 [![latest version](https://img.shields.io/nuget/v/PacketSupoort)](https://www.nuget.org/packages/PacketSupoort)
 [![downloads](https://img.shields.io/nuget/dt/PacketSupoort)](https://www.nuget.org/packages/PacketSupoort)
 
-# OVERVIEW
-0. Version 2.0.0 Higher   
-### `Append` (x) -> `@reservedword` (o)
-- @short,
-- @int,
-- @long,
-- @ushort,
-- @uint,
-- @ulong
-- @byte,
-- @bytes,
-- @class,
-- @string
 
-### Serialize&Deserialize of class attribute Type Add
+### Version 2.0.0 Update
+#### Append Type 3(CLR, CSharp, Custom by @Dimohy)
+
+|CLR|CSharp|Custom by @Dimohy|
+|:---|:---|:---|
+|AppendInt16|Appendshort|@short|
+|AppendInt32|Appendint|@int|
+|AppendInt64|Appendlong|@long|
+|AppendUInt16|Appendushort|@ushort|
+|AppendUInt32|Appenduint|@uint|
+|AppendUInt64|Appendulong|@ulong|
+|AppendByte|AppendByte|@byte|
+|AppendBytes|AppendBytes|@bytes|
+|AppendClass|AppendClass|@Class|
+|AppendString|AppendString|@string|
+
+#### Serialize&Deserialize of class attribute Type Add
 - [Endian(Endian.Big)] or [Endian(Endian.Endian)]
   
   ![image](https://github.com/lukewire129/BytePacketSupport/assets/54387261/b8b8483b-dcc1-454f-8e64-b8e00a28e350)
-
+  
+# OVERVIEW
 1. [Print](#Print)
 2. [PacketBuilder](#PacketBuilder)
 3. [Append Extentions](#AppendExtentions)
@@ -35,14 +39,13 @@ The current difference between **Extentions** and **PacketBuilder** is that Exte
 1. ToHexString() => only byte
 2. GetString() => AsciiCode Byte // or GetString(Encoding)
 ```csharp
-
 var builder = new PacketBuilder ()
-               .@byte (0x40)
-               .@byte (0x41)
-               .@byte (0x42)
-               .@byte (0x43)
-               .@byte (0x44)
-               .@byte (0x45)
+               .AppendByte (0x40)
+               .AppendByte (0x41)
+               .AppendByte (0x42)
+               .AppendByte (0x43)
+               .AppendByte (0x44)
+               .AppendByte (0x45)
                .Build();
 
 Console.WriteLine (builder.ToHexString ());
@@ -56,29 +59,63 @@ Console.WriteLine (builder.GetString ());
 
 ## PacketBuilder
 - Append Byte
-```csharp
-var builder = new PacketBuilder ()
-               .@byte (0x40)
-               .@byte (0x41)
-               .@byte (0x42)
-               .@byte (0x43)
-               .@byte (0x44)
-               .@byte (0x45)
+  
+  **CRL Type**
+  ```csharp
+  var builder = new PacketBuilder ()
+               .AppendByte (0x40)
+               .AppendByte (0x41)
+               .AppendByte (0x42)
+               .AppendByte (0x43)
+               .AppendByte (0x44)
+               .AppendByte (0x45)
                .Build();
-```
-- Append Byte Array
-```csharp
-var writer = new PacketBuilder ();
-var bytesList = new List<byte>(){0x40,0x41,0x42,0x43,0x44,0x45};
-writer.@bytes(bytes)
-      .Build();
-/* and
-var bytesarry = new byte[]{0x40,0x41,0x42,0x43,0x44,0x45};
-writer.@bytes(bytesarry)
-      .Build();
-*/
-```
-
+  ```
+  **csharp Type**
+  ```csharp
+  var builder = new PacketBuilder ()
+               .AppendByte (0x40)
+               .AppendByte (0x41)
+               .AppendByte (0x42)
+               .AppendByte (0x43)
+               .AppendByte (0x44)
+               .AppendByte (0x45)
+               .Build();
+  ```
+  **CusotmType (feat. @Dimohy)**
+  ```csharp
+  var builder = new PacketBuilder ()
+                 .@byte (0x40)
+                 .@byte (0x41)
+                 .@byte (0x42)
+                 .@byte (0x43)
+                 .@byte (0x44)
+                 .@byte (0x45)
+                 .Build();
+  ```
+- Append ByteArray
+  
+  **CRL Type**
+  ```csharp
+  byte[] AddData = new byte[]{0x40, 0x41, 0x42, 0x43, 0x44, 0x45};
+  var builder = new PacketBuilder ()
+               .AppendBytes (AddData)
+               .Build();
+  ```
+  **csharp Type**
+  ```csharp
+  byte[] AddData = new byte[]{0x40, 0x41, 0x42, 0x43, 0x44, 0x45};
+  var builder = new PacketBuilder ()
+               .AppendBytes (AddData)
+               .Build();
+  ```
+  **CusotmType (feat. @Dimohy)**
+  ```csharp
+  byte[] AddData = new byte[]{0x40, 0x41, 0x42, 0x43, 0x44, 0x45};
+  var builder = new PacketBuilder ()
+                 .@bytes (AddData)
+                 .Build();
+  ```
 ## AppendExtentions 
 - byte + byte array
 ``` csharp
