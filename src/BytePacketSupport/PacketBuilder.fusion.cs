@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace BytePacketSupport
 {
@@ -52,6 +53,11 @@ namespace BytePacketSupport
         public PacketBuilder @class<TSource>(TSource AppenClass) where TSource : class
         {
             return Append (AppenClass);
+        }
+
+        public PacketBuilder @packetbuilder(PacketBuilder packetbuilder)
+        {
+            return AppendBytes (packetbuilder.Build ());
         }
     }
 }

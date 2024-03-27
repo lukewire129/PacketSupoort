@@ -58,10 +58,19 @@ namespace BytePacketSupport
             return result.@bytes (PacketParse.Serialize (AppenClass));
         }
 
-        public static byte[] @Class<TSource>(this IEnumerable<byte> b, TSource AppenClass) where TSource : class
+        public static byte[] @Class<TSource>(this IEnumerable<byte> bs, TSource AppenClass) where TSource : class
         {
-            var result = b;
+            var result = bs;
             return result.@bytes (PacketParse.Serialize (AppenClass));
+        }
+        public static byte[] @packetbuilder(this byte b, PacketBuilder packetBuilder)
+        {
+            return b.@bytes (packetBuilder.Build ());
+        }
+
+        public static byte[] @packetbuilder(this IEnumerable<byte> bs, PacketBuilder packetBuilder)
+        {
+            return bs.@bytes (packetBuilder.Build());
         }
     }
 }
