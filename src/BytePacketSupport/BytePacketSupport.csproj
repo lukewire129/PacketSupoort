@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <PackageId>PacketSupoort</PackageId>
-    <PackageVersion>2.0.0</PackageVersion>
+    <PackageVersion>2.0.1</PackageVersion>
     <Description>PacketByte Support</Description>
     <PackageProjectUrl>https://github.com/lukewire129/BytePacketSupport</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lukewire129/BytePacketSupport</RepositoryUrl>

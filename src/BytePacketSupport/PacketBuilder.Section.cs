@@ -24,7 +24,7 @@ namespace BytePacketSupport
             if (this.packetData.Count () == 0)
                 return this;
 
-            if (byteKeyPoint.ContainsKey (key))
+            if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
             byteKeyPoint[key] = (byteKeyPoint[key].Item1, this.packetData.Count () - 1);
@@ -37,7 +37,7 @@ namespace BytePacketSupport
             if (this.packetData.Count () == 0)
                 return null;
 
-            if (byteKeyPoint.ContainsKey (key))
+            if (byteKeyPoint.ContainsKey (key) == false)
                 return null;
 
             if (byteKeyPoint[key].Item2 == 0)
