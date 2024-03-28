@@ -71,7 +71,7 @@ namespace AppendTest_preview
             {
                 DefaultEndian = BytePacketSupport.Enums.Endian.BIG
             })
-               .BeginSection ("packet")
+              .BeginSection ("packet")
                .AppendInt16 (1)
                .AppendInt32 (2)
                .AppendInt64 (3)
