@@ -1,4 +1,5 @@
 ﻿using BytePacketSupport.Enums;
+using BytePacketSupport.Extentions;
 using System;
 using System.Buffers;
 using System.Buffers.Binary;
