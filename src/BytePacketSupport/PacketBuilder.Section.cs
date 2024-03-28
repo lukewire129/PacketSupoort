@@ -43,12 +43,12 @@ namespace BytePacketSupport
 
         private byte[] GetBytes(int start)
         {
-            return this.packetData.ToArray().Skip(start).ToArray ();
+            return this.packetData.WrittenSpan.Slice (start).ToArray ();
         }
 
         private byte[] GetBytes(int start, int count)
         {
-            return this.packetData.ToArray().Skip (start).Take (count).ToArray ();
+            return this.packetData.WrittenSpan.Slice (start,count).ToArray ();
         }
     }
 }
