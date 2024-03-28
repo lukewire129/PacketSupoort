@@ -73,7 +73,7 @@ namespace BytePacketSupport.Converter
         public static byte[] GetBytes(ushort ushortByte, Endian endian = Endian.LITTLE)
         {
             byte[] bytes = BitConverter.GetBytes (ushortByte);
-            return EndianChange (bytes, endian);
+            return GetBytes (bytes, endian);
         }
 
         public static byte[] GetBytes(uint uintByte, Endian endian = Endian.LITTLE)

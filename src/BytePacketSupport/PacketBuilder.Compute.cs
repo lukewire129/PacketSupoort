@@ -1,149 +1,135 @@
-﻿using Mythosia.Integrity.Checksum;
+﻿using BytePacketSupport.Extentions;
+using Mythosia.Integrity;
+using Mythosia.Integrity.Checksum;
 using Mythosia.Integrity.CRC;
+using System.Drawing;
 using System.Linq;
 
 namespace BytePacketSupport
 {
     public partial class PacketBuilder
     {
-        public PacketBuilder Compute(Checksum8Type checkSum8)
+        private void Compute(ErrorDetection detection, byte[] data)
         {
-            byte[] errorcheck = new Checksum8 (checkSum8).Compute (this.packetData.ToArray ()).ToArray();
-            this.packetData.AddRange (errorcheck);
+            byte[] errorcheck = detection.Compute (data).ToArray();
+            this.AppendBytes (errorcheck);
+
+        }
+        public PacketBuilder Compute(Checksum8Type type)
+        {
+            Compute (new Checksum8 (type), this.packetData.ToArray ());
+            return this;
+        }
+
+        public PacketBuilder Compute(Checksum8Type type, int start)
+        {
+            Compute (new Checksum8 (type), GetBytes (start));
+            return this;
+        }
+
+        public PacketBuilder Compute(Checksum8Type type, int start, int count)
+        {
+            Compute (new Checksum8 (type), GetBytes (start,count));
+            return this;
+        }
+
+        public PacketBuilder Compute(CRC8Type type)
+        {
+            Compute (new CRC8 (type), this.packetData.ToArray ());
+            return this;
+        }
+
+        public PacketBuilder Compute(CRC8Type type, int start)
+        {
+            Compute (new CRC8 (type), GetBytes (start));
+            return this;
+        }
+        public PacketBuilder Compute(CRC8Type type, int start, int count)
+        {
+            Compute (new CRC8 (type), GetBytes (start, count));
+            return this;
+        }
+
+        public PacketBuilder Compute(CRC16Type type)
+        {
+            Compute (new CRC16 (type), this.packetData.ToArray ());
+            return this;
+        }
+
+        public PacketBuilder Compute(CRC16Type type, int start)
+        {
+            Compute(new CRC16 (type), GetBytes (start));
+            return this;
+        }
+
+        public PacketBuilder Compute(CRC16Type type, int start, int count)
+        {
+            Compute (new CRC16 (type), GetBytes (start, count));
 
             return this;
         }
 
-        public PacketBuilder Compute(Checksum8Type checkSum8, int start)
+        public PacketBuilder Compute(CRC32Type type)
         {
-            byte[] errorcheck = new Checksum8 (checkSum8).Compute (GetBytes (start)).ToArray ();
-            this.packetData.AddRange (errorcheck);
+            Compute (new CRC32 (type), this.packetData.ToArray ());
             return this;
         }
 
-        public PacketBuilder Compute(Checksum8Type checkSum8, int start, int count)
+        public PacketBuilder Compute(CRC32Type type, int start)
         {
-            byte[] errorcheck = new Checksum8 (checkSum8).Compute (GetBytes (start, count)).ToArray ();
-            this.packetData.AddRange (errorcheck);
-
+            Compute (new CRC32 (type), GetBytes (start));
             return this;
         }
 
-        public PacketBuilder Compute(CRC8Type Crc8Type)
+        public PacketBuilder Compute(CRC32Type type, int start, int count)
         {
-            byte[] errorcheck = new CRC8 (Crc8Type).Compute (this.packetData.ToArray ()).ToArray ();
-            this.packetData.AddRange (errorcheck);
-
-            return this;
-        }
-
-        public PacketBuilder Compute(CRC8Type Crc8Type, int start)
-        {
-            byte[] errorcheck = new CRC8 (Crc8Type).Compute (GetBytes (start)).ToArray ();
-            this.packetData.AddRange (errorcheck);
-
-            return this;
-        }
-        public PacketBuilder Compute(CRC8Type Crc8Type, int start, int count)
-        {
-            byte[] errorcheck = new CRC8 (Crc8Type).Compute (GetBytes (start, count)).ToArray ();
-            this.packetData.AddRange (errorcheck);
-
-            return this;
-        }
-
-        public PacketBuilder Compute(CRC16Type Crc16Type)
-        {
-            byte[] errorcheck = new CRC16 (Crc16Type).Compute (this.packetData.ToArray ()).ToArray ();
-            this.packetData.AddRange (errorcheck);
-
-            return this;
-        }
-
-        public PacketBuilder Compute(CRC16Type Crc16Type, int start)
-        {
-            byte[] errorcheck = new CRC16 (Crc16Type).Compute (GetBytes (start)).ToArray ();
-            this.packetData.AddRange (errorcheck);
-
-            return this;
-        }
-
-        public PacketBuilder Compute(CRC16Type Crc16Type, int start, int count)
-        {
-            byte[] errorcheck = new CRC16 (Crc16Type).Compute (GetBytes(start, count)).ToArray ();
-            this.packetData.AddRange (errorcheck);
-
-            return this;
-        }
-
-        public PacketBuilder Compute(CRC32Type Crc32Type)
-        {
-            byte[] errorcheck = new CRC32 (Crc32Type).Compute (this.packetData.ToArray ()).ToArray ();
-            this.packetData.AddRange (errorcheck);
-
-            return this;
-        }
-
-        public PacketBuilder Compute(CRC32Type Crc32Type, int start)
-        {
-            byte[] errorcheck = new CRC32 (Crc32Type).Compute (GetBytes(start)).ToArray ();
-            this.packetData.AddRange (errorcheck);
-
-            return this;
-        }
-
-        public PacketBuilder Compute(CRC32Type Crc32Type, int start, int count)
-        {
-            byte[] errorcheck = new CRC32 (Crc32Type).Compute (GetBytes (start, count)).ToArray ();
-            this.packetData.AddRange (errorcheck);
+            Compute (new CRC32 (type), GetBytes (start, count));
             return this;
         }
 
 
-        public PacketBuilder Compute(string key, Checksum8Type checksum8Type)
+        public PacketBuilder Compute(string key, Checksum8Type type)
         {
-            if (this.packetData.Count () == 0)
+            if (this.packetData.WrittenCount == 0)
                 return this;
 
             if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
-            this.Compute (checksum8Type, byteKeyPoint[key].start, byteKeyPoint[key].count);
+            this.Compute (type, byteKeyPoint[key].Item1, byteKeyPoint[key].count);
             return this;
         }
 
-        public PacketBuilder Compute(string key, CRC8Type crc8Type)
+        public PacketBuilder Compute(string key, CRC8Type type)
         {
-            if (this.packetData.Count () == 0)
+            if (this.packetData.WrittenCount == 0)
                 return this;
 
             if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
-            this.Compute (crc8Type, byteKeyPoint[key].start, byteKeyPoint[key].count);
+            this.Compute (type, byteKeyPoint[key].start, byteKeyPoint[key].count);
             return this;
         }
-        public PacketBuilder Compute(string key, CRC16Type crc16Type)
+        public PacketBuilder Compute(string key, CRC16Type type)
         {
-            if (this.packetData.Count () == 0)
+            if (this.packetData.WrittenCount == 0)
                 return this;
-
             if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
-            this.Compute (crc16Type, byteKeyPoint[key].start, byteKeyPoint[key].count);
+            this.Compute (type, byteKeyPoint[key].start, byteKeyPoint[key].count);
             return this;
         }
 
-        public PacketBuilder Compute(string key, CRC32Type crc32Type)
+        public PacketBuilder Compute(string key, CRC32Type type)
         {
-            if (this.packetData.Count () == 0)
+            if (this.packetData.WrittenCount == 0)
                 return this;
-
             if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
-            this.Compute (crc32Type, byteKeyPoint[key].start, byteKeyPoint[key].count);
+            this.Compute (type, byteKeyPoint[key].Item1, byteKeyPoint[key].count);
             return this;
         }
     }
