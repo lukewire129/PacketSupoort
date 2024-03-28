@@ -1,6 +1,5 @@
 ﻿using BytePacketSupport.Converter;
 using BytePacketSupport.Enums;
-using System;
 using System.Collections.Generic;
 
 namespace BytePacketSupport
@@ -14,12 +13,13 @@ namespace BytePacketSupport
         public PacketBuilder()
         {
             this._configuration = new PacketBuilderConfiguration ();
+            endanType = this._configuration.DefaultEndian;
         }
         public PacketBuilder(PacketBuilderConfiguration configuration)
         {
             this._configuration = configuration;
 
-            endanType = configuration.DefaultEndian;
+            endanType = this._configuration.DefaultEndian;
         }
         private PacketBuilder Append(byte data)
         {
