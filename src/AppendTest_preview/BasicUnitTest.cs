@@ -49,7 +49,6 @@ namespace AppendTest_preview
         [Fact]
         public void Test2()
         {
-            // 28 개
             var builder1 = new PacketBuilder ()
                 .BeginSection ("packet")
                .AppendInt16 (1)
