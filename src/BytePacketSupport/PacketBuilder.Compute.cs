@@ -93,7 +93,7 @@ namespace BytePacketSupport
             if (this.packetData.WrittenCount == 0)
                 return this;
 
-            if (byteKeyPoint.ContainsKey (key))
+            if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
             this.Compute (type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
@@ -105,7 +105,7 @@ namespace BytePacketSupport
             if (this.packetData.WrittenCount == 0)
                 return this;
 
-            if (byteKeyPoint.ContainsKey (key))
+            if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
             this.Compute (type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
@@ -115,7 +115,7 @@ namespace BytePacketSupport
         {
             if (this.packetData.WrittenCount == 0)
                 return this;
-            if (byteKeyPoint.ContainsKey (key))
+            if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
             this.Compute (type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
@@ -126,7 +126,7 @@ namespace BytePacketSupport
         {
             if (this.packetData.WrittenCount == 0)
                 return this;
-            if (byteKeyPoint.ContainsKey (key))
+            if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
             this.Compute (type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);

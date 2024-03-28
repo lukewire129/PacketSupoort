@@ -21,7 +21,17 @@ namespace PB_Benchmark_preview
         [Benchmark]
         public void Scenario2()
         {
-            // Implement your benchmark here
+            var builder1 = new PacketBuilder ()
+               .BeginSection ("packet")
+              .AppendInt16 (1)
+              .AppendInt32 (2)
+              .AppendInt64 (3)
+              .AppendUInt16 (4)
+              .AppendUInt32 (5)
+              .AppendUInt64 (6)
+              .EndSection ("packet")
+              .Compute ("packet", Mythosia.Integrity.CRC.CRC16Type.Classic)
+              .Build ();
         }
     }
 }
