@@ -19,6 +19,8 @@ namespace BytePacketSupport
         public PacketBuilder()
         {
             this._configuration = new PacketBuilderConfiguration ();
+
+            endanType = _configuration.DefaultEndian;
         }
         public PacketBuilder(PacketBuilderConfiguration configuration)
         {
@@ -66,7 +68,7 @@ namespace BytePacketSupport
             }
             else
             {
-                BinaryPrimitives.WriteInt16LittleEndian (span, value);
+                BinaryPrimitives.WriteInt16BigEndian (span, value);
             }
             return this;
         }

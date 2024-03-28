@@ -2,10 +2,16 @@ using BytePacketSupport;
 using BytePacketSupport.Attibutes;
 using BytePacketSupport.Enums;
 using System.Diagnostics;
+using Xunit.Abstractions;
 namespace AppendTest
 {
     public class UnitTest1
     {
+        private readonly ITestOutputHelper _testOutputHelper;
+        public UnitTest1(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
         public class Test1Packet
         {
             public int Value;
@@ -28,7 +34,7 @@ namespace AppendTest
                                         Value1 = "abc",
                                         Value2 = "ABC"
                                     });
-            Trace.WriteLine (aaa.ToHexString ());
+            _testOutputHelper.WriteLine (aaa.ToHexString ());
         }
 
         int count = 50000;
@@ -115,8 +121,8 @@ namespace AppendTest
                                 .@short (testAdd)
                                 .Build ();
 
-            Console.WriteLine ("display1 {0}", display1.ToHexString ());
-            Console.WriteLine ("display2 {0}", display2.ToHexString ());
+            _testOutputHelper.WriteLine ("display1 {0}", display1.ToHexString ());
+            _testOutputHelper.WriteLine ("display2 {0}", display2.ToHexString ());
         }
 
         [Fact]
@@ -142,8 +148,8 @@ namespace AppendTest
                                 .@int (testAdd)
                                 .Build ();
 
-            Console.WriteLine ("display1 {0}", display1.ToHexString ());
-            Console.WriteLine ("display2 {0}", display2.ToHexString ());
+            _testOutputHelper.WriteLine ("display1 {0}", display1.ToHexString ());
+            _testOutputHelper.WriteLine ("display2 {0}", display2.ToHexString ());
         }
 
         [Fact]
@@ -158,7 +164,7 @@ namespace AppendTest
                             .@bytes (abcBig1)
                             .@bytes (abcBig2);
 
-            Console.WriteLine ("display1 {0}", abclittle.ToHexString ());
+            _testOutputHelper.WriteLine ("display1 {0}", abclittle.ToHexString ());
         }
 
         [Fact]
@@ -171,22 +177,25 @@ namespace AppendTest
                            .@bytes(abcBig2)
                            .Build ();
 
-            Console.WriteLine ("result {0}", result.ToHexString ());
+            _testOutputHelper.WriteLine ("result {0}", result.ToHexString ());
         }
 
         [Fact]
         public void Test()
         {
-            var builder1 = new PacketBuilder ()
-               .AppendInt32 (1)
-               .AppendUInt32 (2)
-               .AppendInt16 (3)
+            var builder1 = new PacketBuilder (new PacketBuilderConfiguration ()
+            {
+                DefaultEndian = BytePacketSupport.Enums.Endian.BIG
+            })
+               .AppendInt16 (1)
+               .AppendInt32 (2)
+               .AppendInt64 (3)
                .AppendUInt16 (4)
-               .AppendInt64 (5)
+               .AppendUInt32 (5)
                .AppendUInt64 (6)
                .Build ();
 
-            Console.WriteLine (builder1.ToHexString ());
+            _testOutputHelper.WriteLine (builder1.ToHexString ());
         }
     }
 }
