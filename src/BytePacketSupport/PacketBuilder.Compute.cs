@@ -108,7 +108,7 @@ namespace BytePacketSupport
             if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
-            this.Compute (checksum8Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
+            this.Compute (checksum8Type, byteKeyPoint[key].start, byteKeyPoint[key].count);
             return this;
         }
 
@@ -120,7 +120,7 @@ namespace BytePacketSupport
             if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
-            this.Compute (crc8Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
+            this.Compute (crc8Type, byteKeyPoint[key].start, byteKeyPoint[key].count);
             return this;
         }
         public PacketBuilder Compute(string key, CRC16Type crc16Type)
@@ -131,7 +131,7 @@ namespace BytePacketSupport
             if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
-            this.Compute (crc16Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
+            this.Compute (crc16Type, byteKeyPoint[key].start, byteKeyPoint[key].count);
             return this;
         }
 
@@ -143,7 +143,7 @@ namespace BytePacketSupport
             if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
-            this.Compute (crc32Type, byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
+            this.Compute (crc32Type, byteKeyPoint[key].start, byteKeyPoint[key].count);
             return this;
         }
     }

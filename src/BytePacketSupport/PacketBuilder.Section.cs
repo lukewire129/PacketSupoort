@@ -5,17 +5,11 @@ namespace BytePacketSupport
 {
     public partial class PacketBuilder
     {
-        private Dictionary<string, (int, int)> byteKeyPoint=new Dictionary<string, (int, int)> ();
+        private Dictionary<string, (int start, int count)> byteKeyPoint=new Dictionary<string, (int, int)> ();
 
         public PacketBuilder BeginSection(string key)
         {
-            if (this.packetData.Count () == 0)
-            {
-                byteKeyPoint.Add (key, (0, 0));
-                return this;
-            }
-
-            byteKeyPoint.Add (key, (this.packetData.Count () - 1, 0));
+            byteKeyPoint.Add (key, (this.packetData.Count (), 0));
             return this;
         }
 
@@ -27,7 +21,7 @@ namespace BytePacketSupport
             if (byteKeyPoint.ContainsKey (key) == false)
                 return this;
 
-            byteKeyPoint[key] = (byteKeyPoint[key].Item1, this.packetData.Count () - 1);
+            byteKeyPoint[key] = (byteKeyPoint[key].start, this.packetData.Count () - byteKeyPoint[key].start);
 
             return this;
         }
@@ -41,19 +35,19 @@ namespace BytePacketSupport
                 return null;
 
             if (byteKeyPoint[key].Item2 == 0)
-                return GetBytes (byteKeyPoint[key].Item1);
+                return GetBytes (byteKeyPoint[key].start);
 
-            return GetBytes (byteKeyPoint[key].Item1, byteKeyPoint[key].Item2 - byteKeyPoint[key].Item1);
+            return GetBytes (byteKeyPoint[key].start, byteKeyPoint[key].count);
         }
 
         private byte[] GetBytes(int start)
         {
-            return this.packetData.Skip (start - 1).ToArray ();
+            return this.packetData.Skip (start).ToArray ();
         }
 
         private byte[] GetBytes(int start, int count)
         {
-            return this.packetData.Skip (start - 1).Take (count).ToArray ();
+            return this.packetData.Skip (start).Take (count).ToArray ();
         }
     }
 }
