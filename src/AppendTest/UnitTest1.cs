@@ -162,16 +162,21 @@ namespace AppendTest
         }
 
         [Fact]
-        public void paramsIndexerTest()
+        public void aafas()
         {
-            var pb = new PacketBuilder ();
-            List<byte> abcBig2 = new List<byte> () { 0x01, 0x02 };
-            var result = pb.@bytes ([0x01, 0x02])
-                           .@bytes (new byte[] { 0x02, 0x03 })
-                           .@bytes(abcBig2)
-                           .Build ();
+            var builder1 = new PacketBuilder ()
+                .BeginSection ("packet")
+               .AppendInt16 (1)
+               .AppendInt32 (2)
+               .AppendInt64 (3)
+               .AppendUInt16 (4)
+               .AppendUInt32 (5)
+               .AppendUInt64 (6)
+               .EndSection ("packet")
+               .Compute ("packet", Mythosia.Integrity.CRC.CRC16Type.Classic)
+               .Build ();
 
-            Console.WriteLine ("result {0}", result.ToHexString ());
+            Console.WriteLine (builder1.ToHexString ());
         }
     }
 }
