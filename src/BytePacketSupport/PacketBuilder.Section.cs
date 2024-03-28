@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BytePacketSupport.Extentions;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BytePacketSupport
@@ -9,32 +10,32 @@ namespace BytePacketSupport
 
         public PacketBuilder BeginSection(string key)
         {
-            if (this.packetData.Count () == 0)
+            if (this.packetData.WrittenCount  == 0)
             {
                 byteKeyPoint.Add (key, (0, 0));
                 return this;
             }
 
-            byteKeyPoint.Add (key, (this.packetData.Count () - 1, 0));
+            byteKeyPoint.Add (key, (this.packetData.WrittenCount - 1, 0));
             return this;
         }
 
         public PacketBuilder EndSection(string key)
         {
-            if (this.packetData.Count () == 0)
+            if (this.packetData.WrittenCount == 0)
                 return this;
 
             if (byteKeyPoint.ContainsKey (key))
                 return this;
 
-            byteKeyPoint[key] = (byteKeyPoint[key].Item1, this.packetData.Count () - 1);
+            byteKeyPoint[key] = (byteKeyPoint[key].Item1, this.packetData.WrittenCount - 1);
 
             return this;
         }
 
         public byte[] GetSection(string key) 
         {
-            if (this.packetData.Count () == 0)
+            if (this.packetData.WrittenCount == 0)
                 return null;
 
             if (byteKeyPoint.ContainsKey (key))
@@ -48,12 +49,12 @@ namespace BytePacketSupport
 
         private byte[] GetBytes(int start)
         {
-            return this.packetData.Skip (start - 1).ToArray ();
+            return this.packetData.ToArray().Skip(start - 1).ToArray ();
         }
 
         private byte[] GetBytes(int start, int count)
         {
-            return this.packetData.Skip (start - 1).Take (count).ToArray ();
+            return this.packetData.ToArray().Skip (start - 1).Take (count).ToArray ();
         }
     }
 }
