@@ -4,7 +4,7 @@
 [![downloads](https://img.shields.io/nuget/dt/PacketSupoort)](https://www.nuget.org/packages/PacketSupoort)
 
 
-### Version 2.0.0 Update
+### Version 2.0.* Update
 #### Append Type 3(CLR, CSharp, Custom by @Dimohy)
 
 |CLR|CSharp|Custom by @Dimohy|
