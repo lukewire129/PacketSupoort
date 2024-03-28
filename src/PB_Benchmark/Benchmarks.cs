@@ -5,35 +5,34 @@ using System;
 
 namespace PB_Benchmark
 {
+    [MemoryDiagnoser]
     public class Benchmarks
     {
-        [Benchmark (Baseline = true)]
         public void Scenario1()
         {
-            var builder1 = new PacketBuilder ()
-               .AppendInt16 (1)
-               .AppendInt32 (2)
-               .AppendInt64 (3)
-               .AppendUInt16 (4)
-               .AppendUInt32 (5)
-               .AppendUInt64 (6)
-               .Build ();
+            var caseBinary = new PacketBuilder ()
+                         .@byte (1)
+                         .@short (1)
+                         .@ushort (1)
+                         .@int (1)
+                         .@uint (1)
+                         .@long (1)
+                         .@ulong (1)
+                         .@byte (1)
+                         .@short (1)
+                         .@ushort (1)
+                         .@int (1)
+                         .@uint (1)
+                         .@long (1)
+                         .@ulong (1);
+
         }
 
         [Benchmark]
         public void Scenario2()
         {
-            var builder1 = new PacketBuilder ()
-               .BeginSection("packet")
-              .AppendInt16 (1)
-              .AppendInt32 (2)
-              .AppendInt64 (3)
-              .AppendUInt16 (4)
-              .AppendUInt32 (5)
-              .AppendUInt64 (6)
-              .EndSection("packet")
-              .Compute("packet", Mythosia.Integrity.CRC.CRC16Type.Classic)
-              .Build ();
+            var caseString = new PacketBuilder ()
+                .@string (new string ('A', 65));
         }
     }
 }
