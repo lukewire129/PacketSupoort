@@ -179,23 +179,5 @@ namespace AppendTest
 
             _testOutputHelper.WriteLine ("result {0}", result.ToHexString ());
         }
-
-        [Fact]
-        public void Test()
-        {
-            var builder1 = new PacketBuilder (new PacketBuilderConfiguration ()
-            {
-                DefaultEndian = BytePacketSupport.Enums.Endian.BIG
-            })
-               .AppendInt16 (1)
-               .AppendInt32 (2)
-               .AppendInt64 (3)
-               .AppendUInt16 (4)
-               .AppendUInt32 (5)
-               .AppendUInt64 (6)
-               .Build ();
-
-            _testOutputHelper.WriteLine (builder1.ToHexString ());
-        }
     }
 }
