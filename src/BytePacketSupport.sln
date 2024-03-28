@@ -5,9 +5,11 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BytePacketSupport", "BytePacketSupport\BytePacketSupport.csproj", "{9646D3DB-DAB7-41ED-8300-8B4AC0430232}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PacketWriterSample", "PacketWriterSample\PacketWriterSample.csproj", "{FDB9CFA9-BEB4-4120-B970-9A71D266894E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PacketBuilder_Benchmark", "PacketWriterSample\PacketBuilder_Benchmark.csproj", "{FDB9CFA9-BEB4-4120-B970-9A71D266894E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppendTest", "AppendTest\AppendTest.csproj", "{1E4A5E2A-04B2-42EC-A8EF-0B45D98A6B88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppendTest", "AppendTest\AppendTest.csproj", "{1E4A5E2A-04B2-42EC-A8EF-0B45D98A6B88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacketBuilder_Benchmark_preview", "PacketBuilder_Banchmark_preview\PacketBuilder_Benchmark_preview.csproj", "{2515ED9F-9DD9-4786-9FB2-A99D752B76C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{1E4A5E2A-04B2-42EC-A8EF-0B45D98A6B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E4A5E2A-04B2-42EC-A8EF-0B45D98A6B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E4A5E2A-04B2-42EC-A8EF-0B45D98A6B88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2515ED9F-9DD9-4786-9FB2-A99D752B76C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2515ED9F-9DD9-4786-9FB2-A99D752B76C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2515ED9F-9DD9-4786-9FB2-A99D752B76C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2515ED9F-9DD9-4786-9FB2-A99D752B76C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
