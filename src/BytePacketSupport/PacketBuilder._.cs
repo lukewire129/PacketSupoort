@@ -1,5 +1,6 @@
 ﻿using BytePacketSupport.Enums;
 using BytePacketSupport.Extentions;
+using System;
 using System.Buffers;
 using System.Buffers.Binary;
 using System.Collections.Generic;
@@ -14,18 +15,86 @@ namespace BytePacketSupport
         private ArrayBufferWriter<byte> packetData = new ArrayBufferWriter<byte> ();
 
         private readonly Endian endanType;
+        private readonly IPacketWriter writer;
         public PacketBuilder()
         {
             this._configuration = new PacketBuilderConfiguration ();
 
             endanType = _configuration.DefaultEndian;
+
+            if (endanType == Endian.BIG && BitConverter.IsLittleEndian == true)
+            {
+                writer = new ReversePacketWriter ();
+            }
+            else if (endanType == Endian.BIG && BitConverter.IsLittleEndian == false)
+            {
+                writer = new PacketWriter ();
+            }
+            if (endanType == Endian.LITTLE && BitConverter.IsLittleEndian == true)
+            {
+                writer = new PacketWriter ();
+            }
+            else if (endanType == Endian.LITTLE && BitConverter.IsLittleEndian == false)
+            {
+                writer = new ReversePacketWriter ();
+            }
+            else if (endanType == Endian.BIGBYTESWAP && BitConverter.IsLittleEndian == true)
+            {
+                writer = new ReverseSwapPacketWriter ();
+            }
+            else if (endanType == Endian.BIGBYTESWAP && BitConverter.IsLittleEndian == false)
+            {
+                writer = new SwapPacketWriter ();
+            }
+            if (endanType == Endian.LITTLEBYTESWAP && BitConverter.IsLittleEndian == true)
+            {
+                writer = new SwapPacketWriter ();
+            }
+            else if (endanType == Endian.LITTLEBYTESWAP && BitConverter.IsLittleEndian == false)
+            {
+                writer = new ReverseSwapPacketWriter ();
+            }
         }
         public PacketBuilder(PacketBuilderConfiguration configuration)
         {
             this._configuration = configuration;
 
             endanType = configuration.DefaultEndian;
+
+            if (endanType == Endian.BIG && BitConverter.IsLittleEndian == true)
+            {
+                writer = new ReversePacketWriter ();
+            }
+            else if (endanType == Endian.BIG && BitConverter.IsLittleEndian == false)
+            {
+                writer = new PacketWriter ();
+            }
+            if (endanType == Endian.LITTLE && BitConverter.IsLittleEndian == true)
+            {
+                writer = new PacketWriter ();
+            }
+            else if (endanType == Endian.LITTLE && BitConverter.IsLittleEndian == false)
+            {
+                writer = new ReversePacketWriter ();
+            }
+            else if (endanType == Endian.BIGBYTESWAP && BitConverter.IsLittleEndian == true)
+            {
+                writer = new ReverseSwapPacketWriter ();
+            }
+            else if (endanType == Endian.BIGBYTESWAP && BitConverter.IsLittleEndian == false)
+            {
+                writer = new SwapPacketWriter ();
+            }
+            if (endanType == Endian.LITTLEBYTESWAP && BitConverter.IsLittleEndian == true)
+            {
+                writer = new SwapPacketWriter ();
+            }
+            else if (endanType == Endian.LITTLEBYTESWAP && BitConverter.IsLittleEndian == false)
+            {
+                writer = new ReverseSwapPacketWriter ();
+            }
         }
+
         private PacketBuilder Append(byte data)
         {
             using (var span = packetData.Reserve (sizeof (byte)))
@@ -60,14 +129,7 @@ namespace BytePacketSupport
         {
             using var span = packetData.Reserve (sizeof (short));
 
-            if (endanType == Endian.LITTLE)
-            {
-                BinaryPrimitives.WriteInt16LittleEndian (span, value);
-            }
-            else
-            {
-                BinaryPrimitives.WriteInt16BigEndian (span, value);
-            }
+            writer.@short (span, value);
             return this;
         }
 
@@ -75,14 +137,7 @@ namespace BytePacketSupport
         {
             using var span = packetData.Reserve (sizeof (int));
 
-            if (endanType == Endian.LITTLE)
-            {
-                BinaryPrimitives.WriteInt32LittleEndian (span, value);
-            }
-            else
-            {
-                BinaryPrimitives.WriteInt32BigEndian (span, value);
-            }
+            writer.@int (span, value);
 
             return this;
         }
@@ -90,60 +145,29 @@ namespace BytePacketSupport
         private PacketBuilder Append(long value)
         {
             using var span = packetData.Reserve (sizeof (long));
+            writer.@long (span, value);
 
-            if (endanType == Endian.LITTLE)
-            {
-                BinaryPrimitives.WriteInt64LittleEndian (span, value);
-            }
-            else
-            {
-                BinaryPrimitives.WriteInt64BigEndian (span, value);
-            }
             return this;
         }
 
         private PacketBuilder Append(ushort value)
         {
             using var span = packetData.Reserve (sizeof (ushort));
-
-            if (endanType == Endian.LITTLE)
-            {
-                BinaryPrimitives.WriteUInt16LittleEndian (span, value);
-            }
-            else
-            {
-                BinaryPrimitives.WriteUInt16BigEndian (span, value);
-            }
+            writer.@ushort (span, value);
             return this;
         }
 
         private PacketBuilder Append(uint value)
         {
             using var span = packetData.Reserve (sizeof (uint));
-
-            if (endanType == Endian.LITTLE)
-            {
-                BinaryPrimitives.WriteUInt32LittleEndian (span, value);
-            }
-            else
-            {
-                BinaryPrimitives.WriteUInt32BigEndian (span, value);
-            }
+            writer.@uint (span, value);
             return this;
         }
 
         private PacketBuilder Append(ulong value)
         {
             using var span = packetData.Reserve (sizeof (ulong));
-
-            if (endanType == Endian.LITTLE)
-            {
-                BinaryPrimitives.WriteUInt64LittleEndian (span, value);
-            }
-            else
-            {
-                BinaryPrimitives.WriteUInt64BigEndian (span, value);
-            }
+            writer.@ulong (span, value);
             return this;
         }
 
