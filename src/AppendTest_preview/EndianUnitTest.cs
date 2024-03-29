@@ -2,7 +2,7 @@
 using BytePacketSupport.Enums;
 using Xunit.Abstractions;
 
-namespace AppendTest
+namespace AppendTest_preview
 {
     public class EndianUnitTest
     {

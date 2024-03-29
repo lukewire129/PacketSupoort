@@ -3,7 +3,7 @@ using BytePacketSupport.Attibutes;
 using BytePacketSupport.Enums;
 using System.Diagnostics;
 using Xunit.Abstractions;
-namespace AppendTest
+namespace AppendTest_preview
 {
     public class UnitTest1
     {
