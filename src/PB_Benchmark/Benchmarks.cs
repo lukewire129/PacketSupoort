@@ -34,5 +34,30 @@ namespace PB_Benchmark
             var caseString = new PacketBuilder ()
                 .@string (new string ('A', 65));
         }
+
+        [Benchmark]
+        public void Scenario3()
+        {
+            var test1 = new PacketBuilder (new PacketBuilderConfiguration ()
+            {
+                DefaultEndian = BytePacketSupport.Enums.Endian.BIG
+            }).@long (0x123456789ABCDEF0)
+                            .Build ();
+            var test2 = new PacketBuilder (new PacketBuilderConfiguration ()
+            {
+                DefaultEndian = BytePacketSupport.Enums.Endian.LITTLE
+            }).@long (0x123456789ABCDEF0)
+                          .Build ();
+            var test3 = new PacketBuilder (new PacketBuilderConfiguration ()
+            {
+                DefaultEndian = BytePacketSupport.Enums.Endian.BIGBYTESWAP
+            }).@long (0x123456789ABCDEF0)
+                          .Build ();
+            var test4 = new PacketBuilder (new PacketBuilderConfiguration ()
+            {
+                DefaultEndian = BytePacketSupport.Enums.Endian.LITTLEBYTESWAP
+            }).@long (0x123456789ABCDEF0)
+                          .Build ();
+        }
     }
 }
