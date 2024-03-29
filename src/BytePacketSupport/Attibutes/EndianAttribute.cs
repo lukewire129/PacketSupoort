@@ -3,7 +3,7 @@ using System;
 
 namespace BytePacketSupport.Attibutes
 {
-    [AttributeUsage (AttributeTargets.Field, AllowMultiple = false)]
+    [AttributeUsage (AttributeTargets.Class, AllowMultiple = false)]
     public class EndianAttribute : Attribute
     {
         public Endian _endian { get; set; } = Endian.LITTLE;
