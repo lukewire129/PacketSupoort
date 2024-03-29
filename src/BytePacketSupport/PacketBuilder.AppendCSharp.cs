@@ -1,7 +1,4 @@
-﻿using BytePacketSupport.Converter;
-using System.Data;
-
-namespace BytePacketSupport
+﻿namespace BytePacketSupport
 {
     public partial class PacketBuilder
     {
