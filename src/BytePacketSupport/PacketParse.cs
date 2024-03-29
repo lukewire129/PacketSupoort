@@ -1,7 +1,7 @@
 ﻿using BytePacketSupport.Attibutes;
-using BytePacketSupport.Converter;
 using BytePacketSupport.Enums;
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,7 +15,11 @@ namespace BytePacketSupport
         public static byte[] Serialize<TSource>(TSource AppendClass) where TSource : class
         {
             FieldInfo[] fields = typeof (TSource).GetFields (BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            List<byte> result = new List<byte>();
+            var attribute = (EndianAttribute)Attribute.GetCustomAttribute (typeof (TSource), typeof (EndianAttribute));
+            PacketBuilder packetBuilder = new PacketBuilder (new PacketBuilderConfiguration ()
+            {
+                DefaultEndian = attribute._endian
+            });
             foreach (FieldInfo field in fields)
             {
                 object value = field.GetValue (AppendClass);
@@ -23,89 +27,43 @@ namespace BytePacketSupport
                 // 필드의 타입으로 캐스팅
                 if (field.FieldType == typeof (string))
                 {
-                    result.AddRange (ByteConverter.GetBytes (value.Cast<string> ()));
+                    packetBuilder.AppendString (value.Cast<string> ());
                 }
                 else if (field.FieldType == typeof (short))
                 {
-                    var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
-                    
-                    if (attribute == null)
-                    {
-                        result.AddRange(ByteConverter.GetBytes ((short)value));
-                        continue;
-                    }
-                    result.AddRange (ByteConverter.GetBytes ((short)value, attribute._endian));
+                    packetBuilder.AppendInt16((short)value);
                 }
                 else if (field.FieldType == typeof (int))
                 {
-                    var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
-
-                    if (attribute == null)
-                    {
-                        result.AddRange (ByteConverter.GetBytes ((int)value));
-                        continue;
-                    }
-                    result.AddRange (ByteConverter.GetBytes ((int)value, attribute._endian));
+                    packetBuilder.AppendInt32 ((int)value);
                 }
                 else if (field.FieldType == typeof (long))
                 {
-                    var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
-
-                    if (attribute == null)
-                    {
-                        result.AddRange (ByteConverter.GetBytes ((long)value));
-                        continue;
-                    }
-                    result.AddRange (ByteConverter.GetBytes ((long)value, attribute._endian));
+                    packetBuilder.AppendInt64 ((long)value);
                 }
                 else if (field.FieldType == typeof (ushort))
                 {
-                    var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
-
-                    if (attribute == null)
-                    {
-                        result.AddRange (ByteConverter.GetBytes ((ushort)value));
-                        continue;
-                    }
-                    result.AddRange (ByteConverter.GetBytes ((ushort)value, attribute._endian));
+                    packetBuilder.AppendUInt16((ushort)value);
                 }
                 else if (field.FieldType == typeof (uint))
                 {
-                    var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
-
-                    if (attribute == null)
-                    {
-                        result.AddRange (ByteConverter.GetBytes ((uint)value));
-                        continue;
-                    }
-                    result.AddRange (ByteConverter.GetBytes ((uint)value, attribute._endian));
+                    packetBuilder.AppendUInt32 ((uint)value);
                 }
                 else if (field.FieldType == typeof (ulong))
                 {
-                    var attribute = ((EndianAttribute)Attribute.GetCustomAttribute (field, typeof (EndianAttribute)));
-
-                    if (attribute == null)
-                    {
-                        result.AddRange (ByteConverter.GetBytes ((ulong)value));
-                        continue;
-                    }
-                    result.AddRange (ByteConverter.GetBytes ((ulong)value, attribute._endian));
+                    packetBuilder.AppendUInt64 ((ulong)value);
                 }
                 else if (field.FieldType == typeof (byte))
                 {
-                    result.Add (value.Cast<byte> ());
+                    packetBuilder.AppendByte (value.Cast<byte> ());
                 }
-                else if (field.FieldType == typeof (byte[]))
+                else if (field.FieldType == typeof (byte[]) || field.FieldType == typeof (List<byte>))
                 {
-                    result.AddRange (value.Cast<byte[]> ());
-                }
-                else if (field.FieldType == typeof (List<byte>))
-                {
-                    result.AddRange (value.Cast<List<byte>> ());
+                    packetBuilder.AppendBytes(value.Cast<byte[]> ());
                 }
             }
 
-            return result.ToArray();
+            return packetBuilder.Build ();
         }
 
         public static T Deserialize<T>(byte[] bytes) where T : new()
