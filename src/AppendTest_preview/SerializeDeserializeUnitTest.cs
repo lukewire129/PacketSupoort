@@ -36,7 +36,7 @@ namespace AppendTest_preview
             var abc = PacketParse.Serialize (aaa);
         }
 
-
+        [Endian (Endian.LITTLE)]
         public class Test2Packet
         {
             public int Value;
