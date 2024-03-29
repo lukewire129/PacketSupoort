@@ -2,7 +2,7 @@
 using BytePacketSupport.Attibutes;
 using BytePacketSupport.Enums;
 
-namespace AppendTest
+namespace AppendTest_preview
 {
     public class SerializeDeserializeUnitTest
     {
