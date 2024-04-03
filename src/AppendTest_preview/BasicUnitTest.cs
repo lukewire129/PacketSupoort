@@ -1,4 +1,5 @@
 ﻿using BytePacketSupport;
+using BytePacketSupport.Integrity.CRC;
 using Xunit.Abstractions;
 
 namespace AppendTest_preview
@@ -58,7 +59,7 @@ namespace AppendTest_preview
                .AppendUInt32 (5)
                .AppendUInt64 (6)
                .EndSection ("packet")
-               .Compute ("packet", Mythosia.Integrity.CRC.CRC16Type.Classic)
+               .Compute ("packet", CRC16Type.Classic)
                .Build ();
 
             _testOutputHelper.WriteLine (builder1.ToHexString ());
@@ -79,7 +80,7 @@ namespace AppendTest_preview
                .AppendUInt32 (5)
                .AppendUInt64 (6)
                .EndSection ("packet")
-               .Compute ("packet", Mythosia.Integrity.CRC.CRC16Type.Classic)
+               .Compute ("packet", CRC16Type.Classic)
                 .Build ();
 
             _testOutputHelper.WriteLine (builder1.ToHexString ());

@@ -36,28 +36,24 @@ namespace PB_Benchmark
         }
 
         [Benchmark]
-        public void Scenario3()
+        public void Compute()
         {
-            var test1 = new PacketBuilder (new PacketBuilderConfiguration ()
-            {
-                DefaultEndian = BytePacketSupport.Enums.Endian.BIG
-            }).@long (0x123456789ABCDEF0)
-                            .Build ();
-            var test2 = new PacketBuilder (new PacketBuilderConfiguration ()
-            {
-                DefaultEndian = BytePacketSupport.Enums.Endian.LITTLE
-            }).@long (0x123456789ABCDEF0)
-                          .Build ();
-            var test3 = new PacketBuilder (new PacketBuilderConfiguration ()
-            {
-                DefaultEndian = BytePacketSupport.Enums.Endian.BIGBYTESWAP
-            }).@long (0x123456789ABCDEF0)
-                          .Build ();
-            var test4 = new PacketBuilder (new PacketBuilderConfiguration ()
-            {
-                DefaultEndian = BytePacketSupport.Enums.Endian.LITTLEBYTESWAP
-            }).@long (0x123456789ABCDEF0)
-                          .Build ();
+            var caseBinary = new PacketBuilder ()
+                         .@byte (1)
+                         .@short (1)
+                         .@ushort (1)
+                         .@int (1)
+                         .@uint (1)
+                         .@long (1)
+                         .@ulong (1)
+                         .@byte (1)
+                         .@short (1)
+                         .@ushort (1)
+                         .@int (1)
+                         .@uint (1)
+                         .@long (1)
+                         .@ulong (1)
+                         .Compute(Mythosia.Integrity.Checksum.Checksum8Type.Xor);
         }
     }
 }

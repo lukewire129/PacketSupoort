@@ -14,10 +14,6 @@
     <PackageIcon>brick-wall.png</PackageIcon>
     <Authors>lukewire129</Authors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Mythosia.Integrity" Version="1.2.0" />
-  </ItemGroup>
   <ItemGroup>
     <None Include="brick-wall.png" Pack="true" PackagePath="" />
   </ItemGroup>
