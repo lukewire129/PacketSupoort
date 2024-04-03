@@ -1,8 +1,9 @@
 ﻿using BytePacketSupport.Extentions;
-using Mythosia.Integrity;
-using Mythosia.Integrity.Checksum;
-using Mythosia.Integrity.CRC;
-using System.Drawing;
+using BytePacketSupport.Integrity;
+using BytePacketSupport.Integrity.Checksum;
+using BytePacketSupport.Integrity.CRC;
+using System;
+using System.Buffers;
 using System.Linq;
 
 namespace BytePacketSupport
@@ -13,7 +14,6 @@ namespace BytePacketSupport
         {
             byte[] errorcheck = detection.Compute (data).ToArray();
             this.AppendBytes (errorcheck);
-
         }
         public PacketBuilder Compute(Checksum8Type type)
         {
@@ -49,41 +49,66 @@ namespace BytePacketSupport
             Compute (new CRC8 (type), GetBytes (start, count));
             return this;
         }
+        private bool GetendianType()
+        {
+            if(BitConverter.IsLittleEndian == true)
+            {
+                if (endianType == Enums.Endian.BIG || endianType == Enums.Endian.LITTLEBYTESWAP)
+                    return true;
+            }
+            else
+            {
+                if (endianType == Enums.Endian.LITTLE || endianType == Enums.Endian.BIGBYTESWAP)
+                    return true;
+            }
+            return false;
+        }
 
         public PacketBuilder Compute(CRC16Type type)
         {
-            Compute (new CRC16 (type), this.packetData.ToArray ());
+            bool isLittleEndia = GetendianType();
+            Compute (new CRC16 (type, isLittleEndia), this.packetData.ToArray ());
             return this;
         }
 
         public PacketBuilder Compute(CRC16Type type, int start)
         {
-            Compute(new CRC16 (type), GetBytes (start));
+            bool isLittleEndia = GetendianType ();
+
+            Compute (new CRC16 (type, isLittleEndia), GetBytes (start));
             return this;
         }
 
         public PacketBuilder Compute(CRC16Type type, int start, int count)
         {
-            Compute (new CRC16 (type), GetBytes (start, count));
+            bool isLittleEndia = GetendianType ();
+
+            Compute (new CRC16 (type, isLittleEndia), GetBytes (start, count));
 
             return this;
         }
 
         public PacketBuilder Compute(CRC32Type type)
         {
-            Compute (new CRC32 (type), this.packetData.ToArray ());
+            bool isLittleEndia = GetendianType ();
+
+            Compute (new CRC32 (type, isLittleEndia), this.packetData.ToArray ());
             return this;
         }
 
         public PacketBuilder Compute(CRC32Type type, int start)
         {
-            Compute (new CRC32 (type), GetBytes (start));
+            bool isLittleEndia = GetendianType ();
+
+            Compute (new CRC32 (type, isLittleEndia), GetBytes (start));
             return this;
         }
 
         public PacketBuilder Compute(CRC32Type type, int start, int count)
         {
-            Compute (new CRC32 (type), GetBytes (start, count));
+            bool isLittleEndia = GetendianType ();
+
+            Compute (new CRC32 (type, isLittleEndia), GetBytes (start, count));
             return this;
         }
 

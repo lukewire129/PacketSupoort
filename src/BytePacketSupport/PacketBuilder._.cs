@@ -14,84 +14,91 @@ namespace BytePacketSupport
         private readonly PacketBuilderConfiguration _configuration;
         private ArrayBufferWriter<byte> packetData = new ArrayBufferWriter<byte> ();
 
-        private readonly Endian endanType;
+        private readonly Endian endianType;
         private readonly IPacketWriter writer;
         public PacketBuilder()
         {
             this._configuration = new PacketBuilderConfiguration ();
 
-            endanType = _configuration.DefaultEndian;
-
-            if (endanType == Endian.BIG && BitConverter.IsLittleEndian == true)
+            endianType = _configuration.DefaultEndian;
+            if (BitConverter.IsLittleEndian == true)
             {
-                writer = new ReversePacketWriter ();
+                switch (endianType)
+                {
+                    case Endian.BIG:
+                        writer = new ReversePacketWriter ();
+                        break;
+                    case Endian.LITTLE:
+                        writer = new PacketWriter ();
+                        break;
+                    case Endian.BIGBYTESWAP:
+                        writer = new ReverseSwapPacketWriter ();
+                        break;
+                    case Endian.LITTLEBYTESWAP:
+                        writer = new SwapPacketWriter ();
+                        break;
+                }
             }
-            else if (endanType == Endian.BIG && BitConverter.IsLittleEndian == false)
+            else
             {
-                writer = new PacketWriter ();
-            }
-            if (endanType == Endian.LITTLE && BitConverter.IsLittleEndian == true)
-            {
-                writer = new PacketWriter ();
-            }
-            else if (endanType == Endian.LITTLE && BitConverter.IsLittleEndian == false)
-            {
-                writer = new ReversePacketWriter ();
-            }
-            else if (endanType == Endian.BIGBYTESWAP && BitConverter.IsLittleEndian == true)
-            {
-                writer = new ReverseSwapPacketWriter ();
-            }
-            else if (endanType == Endian.BIGBYTESWAP && BitConverter.IsLittleEndian == false)
-            {
-                writer = new SwapPacketWriter ();
-            }
-            if (endanType == Endian.LITTLEBYTESWAP && BitConverter.IsLittleEndian == true)
-            {
-                writer = new SwapPacketWriter ();
-            }
-            else if (endanType == Endian.LITTLEBYTESWAP && BitConverter.IsLittleEndian == false)
-            {
-                writer = new ReverseSwapPacketWriter ();
+                switch (endianType)
+                {
+                    case Endian.BIG:
+                        writer = new PacketWriter ();
+                        break;
+                    case Endian.LITTLE:
+                        writer = new ReversePacketWriter ();
+                        break;
+                    case Endian.BIGBYTESWAP:
+                        writer = new SwapPacketWriter ();
+                        break;
+                    case Endian.LITTLEBYTESWAP:
+                        writer = new ReverseSwapPacketWriter ();
+                        break;
+                }
             }
         }
         public PacketBuilder(PacketBuilderConfiguration configuration)
         {
             this._configuration = configuration;
 
-            endanType = configuration.DefaultEndian;
+            endianType = configuration.DefaultEndian;
 
-            if (endanType == Endian.BIG && BitConverter.IsLittleEndian == true)
+            if(BitConverter.IsLittleEndian == true)
             {
-                writer = new ReversePacketWriter ();
+                switch (endianType)
+                {
+                    case Endian.BIG:
+                        writer = new ReversePacketWriter ();
+                        break;
+                    case Endian.LITTLE:
+                        writer = new PacketWriter ();
+                        break;
+                    case Endian.BIGBYTESWAP:
+                        writer = new ReverseSwapPacketWriter ();
+                        break;
+                    case Endian.LITTLEBYTESWAP:
+                        writer = new SwapPacketWriter ();
+                        break;
+                }
             }
-            else if (endanType == Endian.BIG && BitConverter.IsLittleEndian == false)
+            else
             {
-                writer = new PacketWriter ();
-            }
-            if (endanType == Endian.LITTLE && BitConverter.IsLittleEndian == true)
-            {
-                writer = new PacketWriter ();
-            }
-            else if (endanType == Endian.LITTLE && BitConverter.IsLittleEndian == false)
-            {
-                writer = new ReversePacketWriter ();
-            }
-            else if (endanType == Endian.BIGBYTESWAP && BitConverter.IsLittleEndian == true)
-            {
-                writer = new ReverseSwapPacketWriter ();
-            }
-            else if (endanType == Endian.BIGBYTESWAP && BitConverter.IsLittleEndian == false)
-            {
-                writer = new SwapPacketWriter ();
-            }
-            if (endanType == Endian.LITTLEBYTESWAP && BitConverter.IsLittleEndian == true)
-            {
-                writer = new SwapPacketWriter ();
-            }
-            else if (endanType == Endian.LITTLEBYTESWAP && BitConverter.IsLittleEndian == false)
-            {
-                writer = new ReverseSwapPacketWriter ();
+                switch (endianType)
+                {
+                    case Endian.BIG:
+                        writer = new PacketWriter ();
+                        break;
+                    case Endian.LITTLE:
+                        writer = new ReversePacketWriter ();
+                        break;
+                    case Endian.BIGBYTESWAP:
+                        writer = new SwapPacketWriter ();
+                        break;
+                    case Endian.LITTLEBYTESWAP:
+                        writer = new ReverseSwapPacketWriter ();
+                        break;
+                }
             }
         }
 
@@ -122,7 +129,6 @@ namespace BytePacketSupport
 
             using var span = packetData.Reserve (length);
             Encoding.ASCII.GetBytes (ascii, span);
-
             return this;
         }
         private PacketBuilder Append(short value)
@@ -138,7 +144,6 @@ namespace BytePacketSupport
             using var span = packetData.Reserve (sizeof (int));
 
             writer.@int (span, value);
-
             return this;
         }
 
@@ -146,7 +151,6 @@ namespace BytePacketSupport
         {
             using var span = packetData.Reserve (sizeof (long));
             writer.@long (span, value);
-
             return this;
         }
 
