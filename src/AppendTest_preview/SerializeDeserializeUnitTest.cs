@@ -6,11 +6,10 @@ namespace AppendTest_preview
 {
     public class SerializeDeserializeUnitTest
     {
+        [Endian (Endian.BIG)]
         public class Test3Packet
         {
-            [Endian (Endian.BIG)]
             public int Value;
-            [Endian (Endian.LITTLE)]
             public int Value1;
             [ByteSize (3)]
             public string Value3;
