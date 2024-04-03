@@ -2,7 +2,7 @@
 using BytePacketSupport.Attibutes;
 using BytePacketSupport.Enums;
 
-namespace AppendTest
+namespace AppendTest_preview
 {
     public class SerializeDeserializeUnitTest
     {
@@ -36,7 +36,7 @@ namespace AppendTest
             var abc = PacketParse.Serialize (aaa);
         }
 
-
+        [Endian (Endian.LITTLE)]
         public class Test2Packet
         {
             public int Value;
