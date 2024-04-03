@@ -28,6 +28,7 @@ namespace BytePacketSupport
 
     public class PacketWriter : IPacketWriter
     {
+        public static PacketWriter Instance { get; } = new PacketWriter ();
         public void @short(ReservedSpan span, short value)
         {
             MemoryMarshal.Write (span, ref value);
@@ -61,6 +62,7 @@ namespace BytePacketSupport
 
     public class ReversePacketWriter : IPacketWriter
     {
+        public static ReversePacketWriter Instance { get; } = new ReversePacketWriter ();
         public void @short(ReservedSpan span, short value)
         {
             value = BinaryPrimitives.ReverseEndianness (value);
@@ -99,6 +101,7 @@ namespace BytePacketSupport
     }
     public class SwapPacketWriter : IPacketWriter
     {
+        public static SwapPacketWriter Instance { get; } = new SwapPacketWriter ();
         public void @short(ReservedSpan span, short value)
         {
             value = Swap (value);
@@ -165,6 +168,7 @@ namespace BytePacketSupport
 
     public class ReverseSwapPacketWriter : IPacketWriter
     {
+        public static ReverseSwapPacketWriter Instance { get; } = new ReverseSwapPacketWriter ();
         public void @short(ReservedSpan span, short value)
         {
             value = ReverseSwap (value);

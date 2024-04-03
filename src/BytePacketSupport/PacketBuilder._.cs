@@ -19,41 +19,20 @@ namespace BytePacketSupport
             this._configuration = new PacketBuilderConfiguration ();
 
             endianType = _configuration.DefaultEndian;
-            if (BitConverter.IsLittleEndian == true)
+            switch (endianType)
             {
-                switch (endianType)
-                {
-                    case Endian.BIG:
-                        writer = new ReversePacketWriter ();
-                        break;
-                    case Endian.LITTLE:
-                        writer = new PacketWriter ();
-                        break;
-                    case Endian.BIGBYTESWAP:
-                        writer = new ReverseSwapPacketWriter ();
-                        break;
-                    case Endian.LITTLEBYTESWAP:
-                        writer = new SwapPacketWriter ();
-                        break;
-                }
-            }
-            else
-            {
-                switch (endianType)
-                {
-                    case Endian.BIG:
-                        writer = new PacketWriter ();
-                        break;
-                    case Endian.LITTLE:
-                        writer = new ReversePacketWriter ();
-                        break;
-                    case Endian.BIGBYTESWAP:
-                        writer = new SwapPacketWriter ();
-                        break;
-                    case Endian.LITTLEBYTESWAP:
-                        writer = new ReverseSwapPacketWriter ();
-                        break;
-                }
+                case Endian.BIG:
+                    writer = IPacketWriter.BigEndian;
+                    break;
+                case Endian.LITTLE:
+                    writer = IPacketWriter.LittleEndian;
+                    break;
+                case Endian.BIGBYTESWAP:
+                    writer = IPacketWriter.BigEndianSwap;
+                    break;
+                case Endian.LITTLEBYTESWAP:
+                    writer = IPacketWriter.LittleEndianSwap;
+                    break;
             }
         }
         public PacketBuilder(PacketBuilderConfiguration configuration)
@@ -62,41 +41,20 @@ namespace BytePacketSupport
 
             endianType = configuration.DefaultEndian;
 
-            if(BitConverter.IsLittleEndian == true)
+            switch (endianType)
             {
-                switch (endianType)
-                {
-                    case Endian.BIG:
-                        writer = new ReversePacketWriter ();
-                        break;
-                    case Endian.LITTLE:
-                        writer = new PacketWriter ();
-                        break;
-                    case Endian.BIGBYTESWAP:
-                        writer = new ReverseSwapPacketWriter ();
-                        break;
-                    case Endian.LITTLEBYTESWAP:
-                        writer = new SwapPacketWriter ();
-                        break;
-                }
-            }
-            else
-            {
-                switch (endianType)
-                {
-                    case Endian.BIG:
-                        writer = new PacketWriter ();
-                        break;
-                    case Endian.LITTLE:
-                        writer = new ReversePacketWriter ();
-                        break;
-                    case Endian.BIGBYTESWAP:
-                        writer = new SwapPacketWriter ();
-                        break;
-                    case Endian.LITTLEBYTESWAP:
-                        writer = new ReverseSwapPacketWriter ();
-                        break;
-                }
+                case Endian.BIG:
+                    writer = IPacketWriter.BigEndian;
+                    break;
+                case Endian.LITTLE:
+                    writer = IPacketWriter.LittleEndian;
+                    break;
+                case Endian.BIGBYTESWAP:
+                    writer = IPacketWriter.BigEndianSwap;
+                    break;
+                case Endian.LITTLEBYTESWAP:
+                    writer = IPacketWriter.LittleEndianSwap;
+                    break;
             }
         }
 
