@@ -16,10 +16,18 @@ namespace BytePacketSupport
         {
             FieldInfo[] fields = typeof (TSource).GetFields (BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             var attribute = (EndianAttribute)Attribute.GetCustomAttribute (typeof (TSource), typeof (EndianAttribute));
-            PacketBuilder packetBuilder = new PacketBuilder (new PacketBuilderConfiguration ()
+            PacketBuilder packetBuilder = null;
+            if (attribute == null)
             {
-                DefaultEndian = attribute._endian
-            });
+                packetBuilder = new PacketBuilder ();
+            }
+            else
+            {
+                 packetBuilder = new PacketBuilder (new PacketBuilderConfiguration ()
+                {
+                    DefaultEndian = attribute._endian
+                });
+            }
             foreach (FieldInfo field in fields)
             {
                 object value = field.GetValue (AppendClass);
@@ -31,7 +39,7 @@ namespace BytePacketSupport
                 }
                 else if (field.FieldType == typeof (short))
                 {
-                    packetBuilder.AppendInt16((short)value);
+                    packetBuilder.AppendInt16 ((short)value);
                 }
                 else if (field.FieldType == typeof (int))
                 {
@@ -43,7 +51,7 @@ namespace BytePacketSupport
                 }
                 else if (field.FieldType == typeof (ushort))
                 {
-                    packetBuilder.AppendUInt16((ushort)value);
+                    packetBuilder.AppendUInt16 ((ushort)value);
                 }
                 else if (field.FieldType == typeof (uint))
                 {
@@ -57,9 +65,14 @@ namespace BytePacketSupport
                 {
                     packetBuilder.AppendByte (value.Cast<byte> ());
                 }
-                else if (field.FieldType == typeof (byte[]) || field.FieldType == typeof (List<byte>))
+                else if (field.FieldType == typeof (byte[]))
                 {
-                    packetBuilder.AppendBytes(value.Cast<byte[]> ());
+                    packetBuilder.AppendBytes (value.Cast<byte[]> ());
+                }
+
+                else if (field.FieldType == typeof (List<byte>))
+                {
+                    packetBuilder.AppendBytes (value.Cast<List<byte>> ());
                 }
             }
 
