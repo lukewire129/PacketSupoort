@@ -23,7 +23,6 @@
 #### Serialize&Deserialize of class attribute Type Add
 - [Endian(Endian.Big)] or [Endian(Endian.Endian)]
   
-  ![image](https://github.com/lukewire129/BytePacketSupport/assets/54387261/b8b8483b-dcc1-454f-8e64-b8e00a28e350)
   
 # OVERVIEW
 1. [Print](#Print)
