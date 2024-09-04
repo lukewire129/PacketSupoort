@@ -2,7 +2,6 @@
 using BytePacketSupport.Extentions;
 using System;
 using System.Buffers;
-using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +15,35 @@ namespace BytePacketSupport
 
         private readonly Endian endianType;
         private readonly IPacketWriter writer;
+        private IPacketWriter LittleEndian()
+        {
+            if (BitConverter.IsLittleEndian)
+                return new PacketWriter ();
+
+            return new ReversePacketWriter ();
+        }
+        private IPacketWriter BigEndian()
+        {
+            if (BitConverter.IsLittleEndian)
+                return new ReversePacketWriter ();
+
+            return new PacketWriter ();
+        }
+        private IPacketWriter LittleEndianSwap()
+        {
+            if (BitConverter.IsLittleEndian)
+                return new SwapPacketWriter ();
+
+            return new ReverseSwapPacketWriter ();
+        }
+        private IPacketWriter BigEndianSwap()
+        {
+            if (BitConverter.IsLittleEndian)
+                return new ReverseSwapPacketWriter ();
+
+            return new SwapPacketWriter ();
+        }
+
         public PacketBuilder()
         {
             this._configuration = new PacketBuilderConfiguration ();
@@ -24,16 +52,16 @@ namespace BytePacketSupport
             switch (endianType)
             {
                 case Endian.BIG:
-                    writer = IPacketWriter.BigEndian;
+                    writer = BigEndian();
                     break;
                 case Endian.LITTLE:
-                    writer = IPacketWriter.LittleEndian;
+                    writer = LittleEndian();
                     break;
                 case Endian.BIGBYTESWAP:
-                    writer = IPacketWriter.BigEndianSwap;
+                    writer = BigEndianSwap();
                     break;
                 case Endian.LITTLEBYTESWAP:
-                    writer = IPacketWriter.LittleEndianSwap;
+                    writer = LittleEndianSwap();
                     break;
             }
         }
@@ -46,16 +74,16 @@ namespace BytePacketSupport
             switch (endianType)
             {
                 case Endian.BIG:
-                    writer = IPacketWriter.BigEndian;
+                    writer = BigEndian ();
                     break;
                 case Endian.LITTLE:
-                    writer = IPacketWriter.LittleEndian;
+                    writer = LittleEndian ();
                     break;
                 case Endian.BIGBYTESWAP:
-                    writer = IPacketWriter.BigEndianSwap;
+                    writer = BigEndianSwap ();
                     break;
                 case Endian.LITTLEBYTESWAP:
-                    writer = IPacketWriter.LittleEndianSwap;
+                    writer = LittleEndianSwap ();
                     break;
             }
         }
@@ -136,32 +164,8 @@ namespace BytePacketSupport
         private PacketBuilder Append<TSource>(TSource AppendClass) where TSource : class
         {
             byte[] datas = PacketParse.Serialize (AppendClass);
-            this.AppendBytes (datas);
+            AppendBytes (datas.ToList());
             return this;
-        }
-        public PacketBuilder AppendByte(byte data)
-        {
-            return Append (data);
-        }
-
-        public PacketBuilder AppendBytes(IEnumerable<byte> datas)
-        {
-            return Append (datas);
-        }
-
-        public PacketBuilder AppendString(string ascii)
-        {
-            return Append (ascii);
-        }
-
-        public PacketBuilder AppendPacketBuilder(PacketBuilder builder)
-        {
-            return AppendBytes (builder.Build ());
-        }
-
-        public PacketBuilder AppendClass<TSource>(TSource AppendClass) where TSource : class
-        {
-            return Append (AppendClass);
         }
 
         public byte[] Build()

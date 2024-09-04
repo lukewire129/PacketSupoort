@@ -136,5 +136,23 @@ namespace AppendTest
             Assert.True (test3.ToHexString () == "34127856BC9AF0DE");
             Assert.True (test4.ToHexString () == "DEF09ABC56781234");
         }
+
+        [Fact]
+        public void ShortDataTest()
+        {
+            Random random = new Random ();
+            ushort test = (ushort)random.Next (0, 65535);
+            Console.WriteLine (test);
+            byte[] b = BitConverter.GetBytes (test);
+
+            var test2 = new PacketBuilder (new PacketBuilderConfiguration ()
+            {
+                DefaultEndian = BytePacketSupport.Enums.Endian.LITTLE
+            }).@ushort (test);
+
+            var array = b.ToHexString ();
+            var builderArray = test2.Build ().ToHexString ();
+            Console.ReadKey ();
+        }
     }
 }
