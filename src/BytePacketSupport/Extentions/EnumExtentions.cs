@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BytePacketSupport.Extentions
 {
-    [AttributeUsage (AttributeTargets.Enum, Inherited = false, AllowMultiple = false)]
-    public class AutoFlagsAttribute : Attribute
-    {
-    }
     public static class EnumHelper
     {
-        private static readonly Dictionary<Type, byte[]> BitValuesCache = new Dictionary<Type, byte[]> ();
-
         public static byte Byte<T>(params T[] enumValues) where T : Enum
         {
             byte result = 0;
@@ -27,7 +20,7 @@ namespace BytePacketSupport.Extentions
             return result;
         }
 
-        public static List<string> ToEnumString<T>(this byte byteValue) where T : Enum
+        public static List<string> ToEnumDataString<T>(this byte byteValue) where T : Enum
         {
             var result = new List<string> ();
 
@@ -49,7 +42,7 @@ namespace BytePacketSupport.Extentions
             return result;
         }
 
-        public static List<T> ToEnum<T>(this byte byteValue) where T : Enum
+        public static List<T> ToEnumData<T>(this byte byteValue) where T : Enum
         {
             var result = new List<T> ();
             int bitPosition = 0;
@@ -69,6 +62,16 @@ namespace BytePacketSupport.Extentions
             }
 
             return result;
+        }
+
+        public static T ToEnum<T>(this byte byteValue) where T : Enum
+        {
+            return (T)Enum.ToObject (typeof (T), byteValue);
+        }
+
+        public static byte ToByte(this Enum enumValue)
+        {
+            return Convert.ToByte (enumValue);
         }
     }
 }
