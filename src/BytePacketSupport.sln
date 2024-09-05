@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{82
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmark", "benchmark", "{4BC5215C-2970-48BB-8253-B83FE73FD927}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumByteTest", "EnumByteTest\EnumByteTest.csproj", "{8B55AAC8-CC2E-4BBE-9B37-C78E292A55A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{85B11766-D9F7-4DD8-9823-7B46FC89231D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85B11766-D9F7-4DD8-9823-7B46FC89231D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85B11766-D9F7-4DD8-9823-7B46FC89231D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B55AAC8-CC2E-4BBE-9B37-C78E292A55A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B55AAC8-CC2E-4BBE-9B37-C78E292A55A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B55AAC8-CC2E-4BBE-9B37-C78E292A55A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B55AAC8-CC2E-4BBE-9B37-C78E292A55A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +62,7 @@ Global
 		{85B11766-D9F7-4DD8-9823-7B46FC89231D} = {4BC5215C-2970-48BB-8253-B83FE73FD927}
 		{826A35E2-02FD-4C0D-BF6C-177549B2FCC2} = {863A1FE7-A99E-49CD-91B2-62EEC87AE5F4}
 		{4BC5215C-2970-48BB-8253-B83FE73FD927} = {863A1FE7-A99E-49CD-91B2-62EEC87AE5F4}
+		{8B55AAC8-CC2E-4BBE-9B37-C78E292A55A0} = {826A35E2-02FD-4C0D-BF6C-177549B2FCC2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B64C059-6D1A-4E07-A5ED-A36BDE7CA1CB}

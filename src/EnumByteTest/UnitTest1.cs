@@ -1,0 +1,70 @@
+using BytePacketSupport.Extentions;
+namespace EnumByteTest
+{
+    public class UnitTest1
+    {
+        public enum MACHINE
+        {
+            NONE,
+            POWER,
+            RIGHT,
+            TOP,
+            LIGHT,
+            TEMP,
+            RUN,
+            SOUND,
+            ETC
+        }
+
+        [Fact]
+        public void EnumToByteTest1()
+        {
+            var rest = EnumExtentions.EnumByte (MACHINE.POWER, MACHINE.TOP);
+
+            // Result : 0x05;
+        }
+        [Fact]
+        public void EnumString1()
+        {
+            byte data = 0x05;
+            var enums = data.ToEnumString (typeof (MACHINE));
+
+            // Result :  [POWER, TOP]
+        }
+        [Fact]
+        public void EnumString2()
+        {
+            byte data = 0x0A;
+            var enums = data.ToEnumString (typeof(MACHINE));
+
+            // Result :  [RIGHT, LIGHT]
+        }
+
+        [Fact]
+        public void EnumNull()
+        {
+            byte data = 0x00;
+            var enums = data.ToEnumString (typeof (MACHINE));
+
+            // Result []
+        }
+
+        [Fact]
+        public void ToEnumTest1()
+        {
+            byte data = 0x10;
+            var enums = data.ToEnum<MACHINE> ();
+
+            // Result : Temp
+        }
+
+        [Fact]
+        public void ToEnumTest2()
+        {
+            byte data = 0x05;
+            var enums = data.ToEnum<MACHINE> ();
+
+            // Result : POWER, TOP
+        }
+    }
+}
