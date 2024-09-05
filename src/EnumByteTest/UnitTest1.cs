@@ -5,7 +5,6 @@ namespace EnumByteTest
     {
         public enum MACHINE
         {
-            NONE,
             POWER,
             RIGHT,
             TOP,
@@ -19,15 +18,23 @@ namespace EnumByteTest
         [Fact]
         public void EnumToByteTest1()
         {
-            var rest = EnumExtentions.EnumByte (MACHINE.POWER, MACHINE.TOP);
+            var rest = EnumHelper.Byte (MACHINE.POWER, MACHINE.TOP);
 
             // Result : 0x05;
         }
         [Fact]
+        public void EnumToByteTest2()
+        {
+            var rest = EnumHelper.Byte (MACHINE.POWER, MACHINE.RIGHT);
+
+            // Result : 0x03;
+        }
+
+        [Fact]
         public void EnumString1()
         {
             byte data = 0x05;
-            var enums = data.ToEnumString (typeof (MACHINE));
+            var enums = data.ToEnumString<MACHINE> ();
 
             // Result :  [POWER, TOP]
         }
@@ -35,7 +42,7 @@ namespace EnumByteTest
         public void EnumString2()
         {
             byte data = 0x0A;
-            var enums = data.ToEnumString (typeof(MACHINE));
+            var enums = data.ToEnumString<MACHINE> ();
 
             // Result :  [RIGHT, LIGHT]
         }
@@ -44,9 +51,9 @@ namespace EnumByteTest
         public void EnumNull()
         {
             byte data = 0x00;
-            var enums = data.ToEnumString (typeof (MACHINE));
+            var enums = data.ToEnumString<MACHINE> ();
 
-            // Result []
+            // Result null
         }
 
         [Fact]
@@ -65,6 +72,15 @@ namespace EnumByteTest
             var enums = data.ToEnum<MACHINE> ();
 
             // Result : POWER, TOP
+        }
+
+        [Fact]
+        public void ToEnumTest3()
+        {
+            byte data = 0x00;
+            var enums = data.ToEnum<MACHINE> ();
+
+            // Result : NULL
         }
     }
 }

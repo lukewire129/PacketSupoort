@@ -9,106 +9,66 @@ namespace BytePacketSupport.Extentions
     public class AutoFlagsAttribute : Attribute
     {
     }
-    public static class EnumExtentions
+    public static class EnumHelper
     {
         private static readonly Dictionary<Type, byte[]> BitValuesCache = new Dictionary<Type, byte[]> ();
 
-        public static byte EnumByte<T>(params T[] enumValues) where T : Enum
+        public static byte Byte<T>(params T[] enumValues) where T : Enum
         {
             byte result = 0;
             var values = Enum.GetValues (typeof (T)).Cast<Enum> ().ToArray ();
-
-            bool isNone = values.Any (x => x.ToString ().ToUpper () == "NONE");
             foreach (var value in enumValues)
             {
                 int idx = Convert.ToInt32 (value);
-                if(isNone)
 
-                result |= (byte)(1 << Convert.ToInt32 (value));
-            }
-
-            return result;
-        }
-        private static byte[] GetBitValues(Type enumType)
-        {
-            if (BitValuesCache.TryGetValue (enumType, out var bitValues))
-                return bitValues;
-
-            var attribute = enumType.GetCustomAttributes (typeof (AutoFlagsAttribute), false)
-                .Cast<AutoFlagsAttribute> ()
-                .SingleOrDefault ();
-
-            if (attribute != null)
-            {
-                var values = Enum.GetValues (enumType).Cast<Enum> ().ToArray ();
-                var bitValuesArray = new byte[values.Length];
-                for (int i = 0; i < values.Length; i++)
-                {
-                    bitValuesArray[i] = (byte)(1 << i);
-                }
-                BitValuesCache[enumType] = bitValuesArray;
-                return bitValuesArray;
-            }
-
-            throw new InvalidOperationException ($"Enum type {enumType} does not have the AutoFlags attribute.");
-        }
-
-        public static byte ToByte(this Enum enumValue)
-        {
-            byte result = 0;
-            var enumType = enumValue.GetType ();
-            var bitValues = GetBitValues (enumType);
-            var values = Enum.GetValues (enumType).Cast<Enum> ().ToArray ();
-            int index = Array.IndexOf (values, enumValue);
-
-            if (index != -1)
-            {
-                result = bitValues[index];
+                result |= (byte)(1 << idx);
             }
 
             return result;
         }
 
-        public static List<string> ToEnumString(this byte byteValue, Type enumType)
+        public static List<string> ToEnumString<T>(this byte byteValue) where T : Enum
         {
             var result = new List<string> ();
-            var bitValues = GetBitValues (enumType);
-            var values = Enum.GetValues (enumType).Cast<Enum> ().ToArray ();
 
-            for (int i = 0; i < values.Length; i++)
+            int bitPosition = 0;
+            if (byteValue == 0)
+                return null;
+
+            foreach (T value in Enum.GetValues (typeof (T)).Cast<T> ().ToArray ())
             {
-                if ((byteValue & bitValues[i]) != 0)
+                byte bitValue = (byte)(1 << bitPosition);
+                bitPosition++;
+
+                if ((byteValue & bitValue) == bitValue)
                 {
-                    result.Add (values[i].ToString ());
+                    result.Add (value.ToString ());
                 }
             }
 
-            return result.Count > 0 ? result : new List<string> { "NONE" };
+            return result;
         }
 
-        public static T ToEnum<T>(this byte byteValue) where T : Enum
+        public static List<T> ToEnum<T>(this byte byteValue) where T : Enum
         {
-            var enumType = typeof (T);
-            var bitValues = GetBitValues (enumType);
-            var values = Enum.GetValues (enumType).Cast<Enum> ().ToArray ();
-            int result = 0;
+            var result = new List<T> ();
+            int bitPosition = 0;
 
-            for (int i = 0; i < values.Length; i++)
+            if (byteValue == 0)
+                return null;
+
+            foreach (T value in Enum.GetValues (typeof (T)).Cast<T> ().ToArray ())
             {
-                if ((byteValue & bitValues[i]) != 0)
+                byte bitValue = (byte)(1 << bitPosition);
+                bitPosition++;
+
+                if ((byteValue & bitValue) == bitValue)
                 {
-                    result |= (int)bitValues[i];
+                    result.Add (value);
                 }
             }
 
-            return (T)Enum.ToObject (enumType, result);
-        }
-
-        public static bool HasFlag<T>(this T state, T flag) where T : Enum
-        {
-            var stateValue = (int)(object)state;
-            var flagValue = (int)(object)flag;
-            return (stateValue & flagValue) == flagValue;
+            return result;
         }
     }
 }
