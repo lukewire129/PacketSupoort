@@ -1,18 +1,25 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace BytePacketSupportCore 
+namespace BytePacketSupportCore
 {
     [Generator]
     public class EnumFlagGenerator : IIncrementalGenerator
     {
+        private const string AttributeSource = @"
+namespace BytePacketSupportCore.Attributes
+{
+    [System.AttributeUsage(System.AttributeTargets.Enum)]
+    public class BitSupportFlagsAttribute : System.Attribute
+    {
+    }
+}";
+
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             // Attribute를 소스 코드로 추가
@@ -35,6 +42,12 @@ namespace BytePacketSupportCore
                 {
                     var source = GenerateEnumFlags (enumModel);
                     spc.AddSource ($"{enumModel.Name}Flags.g.cs", SourceText.From (source, Encoding.UTF8));
+                }
+
+                if (enumModel is not null)
+                {
+                    var source = GenerateEnumFlagsExtentions (enumModel);
+                    spc.AddSource ($"{enumModel.Name}FlagsExtentions.g.cs", SourceText.From (source, Encoding.UTF8));
                 }
             });
         }
@@ -61,10 +74,22 @@ namespace BytePacketSupportCore
             {
                 Name = enumSymbol.Name,
                 Namespace = enumSymbol.ContainingNamespace.ToString (),
-                Members = enumDeclaration.Members.Select ((member, index) => new EnumMember
+                Members = enumDeclaration.Members.Select ((member, index) =>
                 {
-                    Name = member.Identifier.Text,
-                    Value = 1 << index // 각 멤버의 비트값을 계산
+                    bool isNoneField = enumDeclaration.Members.Any (x => x.Identifier.Text.ToUpper () == "NONE");
+                    if (isNoneField && member.Identifier.Text.ToUpper () == "NONE")
+                    {
+                        return new EnumMember
+                        {
+                            Name = member.Identifier.Text,
+                            Value = 0
+                        };
+                    }
+                    return new EnumMember
+                    {
+                        Name = member.Identifier.Text,
+                        Value = isNoneField ? (index - 1) : index // 각 멤버의 비트값을 계산
+                    };
                 }).ToList ()
             };
         }
@@ -72,10 +97,28 @@ namespace BytePacketSupportCore
         // 소스 코드를 생성하는 메서드
         private static string GenerateEnumFlags(EnumModel enumModel)
         {
-            var members = string.Join ("\n", enumModel.Members.Select (m => $"    {m.Name} = {m.Value},"));
+            if (enumModel.Members.FirstOrDefault (x => x.Name.ToUpper () == "NONE") == null)
+            {
+                enumModel.Members.Insert (0, new EnumMember ()
+                {
+                    Name = "NONE",
+                    Value = 0
+                });
+            }
+            List<string> memberString = new List<string> ();
+            foreach (var member in enumModel.Members)
+            {
+                if (member.Name.ToUpper () == "NONE")
+                {
+                    memberString.Add ("          NONE,");
+                    continue;
+                }
+                memberString.Add ($"          {member.Name} = 1 << {enumModel.Namespace}.{enumModel.Name}.{member.Name},");
+            }
 
-            return $@"
-namespace {enumModel.Namespace}
+            var members = string.Join ("\n", memberString);
+
+            return $@"namespace {enumModel.Namespace}
 {{
     [System.Flags]
     public enum {enumModel.Name}Flags
@@ -85,14 +128,33 @@ namespace {enumModel.Namespace}
 }}";
         }
 
-        private const string AttributeSource = @"
-namespace System
-{
-    [System.AttributeUsage(System.AttributeTargets.Enum)]
-    public class BitSupportFlagsAttribute : System.Attribute
-    {
-    }
-}";
+        // 소스 코드를 생성하는 메서드2
+        private static string GenerateEnumFlagsExtentions(EnumModel enumModel)
+        {
+            var FlagsName = $"{enumModel.Namespace}.{ enumModel.Name }Flags";
+            return $@"namespace {enumModel.Namespace}
+{{
+    public static class {enumModel.Name}FlagsExtensions
+    {{
+        public static {FlagsName} ToFlags(this {enumModel.Namespace}.{enumModel.Name} d) => ({FlagsName})(1 << (int)d);
+
+        // 여러 플래그가 모두 설정되었는지 확인 
+        public static bool HasFlags(this {FlagsName} value, {FlagsName} flags) => (Convert.ToByte (value) & Convert.ToByte (flags)) == Convert.ToByte (flags);
+
+        // 여러 플래그 중 하나라도 설정되었는지 확인
+        public static bool HasAnyFlag(this {FlagsName} value, {FlagsName} flags) => (value & flags) != 0;
+
+        // 플래그가 설정되지 않았는지 확인
+        public static bool HasNotFlag(this {FlagsName} value, {FlagsName} flags) => (value & flags) == 0;
+
+        // 여러 플래그 중 하나라도 설정되었는지 확인
+        public static bool HasAnyFlag(this {FlagsName} value, {enumModel.Namespace}.{enumModel.Name} d) => (value & ({FlagsName})(1 << (int)d)) != 0;
+
+        // 플래그가 설정되지 않았는지 확인
+        public static bool HasNotFlag(this {FlagsName} value, {enumModel.Namespace}.{enumModel.Name} d) => (value & ({FlagsName})(1 << (int)d)) == 0;
+    }}
+}}";
+        }
 
         // enum 정보 모델
         private class EnumModel
