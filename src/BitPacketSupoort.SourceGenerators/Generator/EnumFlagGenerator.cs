@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace BytePacketSupportCore
+namespace BitPacketSupoort.SourceGenerators
 {
     [Generator]
     public class EnumFlagGenerator : IIncrementalGenerator
     {
         private const string AttributeSource = @"
-namespace BytePacketSupportCore.Attributes
+namespace BitPacketSupoort.SourceGenerators.Attributes
 {
     [System.AttributeUsage(System.AttributeTargets.Enum)]
     public class BitSupportFlagsAttribute : System.Attribute
@@ -152,6 +152,37 @@ namespace BytePacketSupportCore.Attributes
 
         // 플래그가 설정되지 않았는지 확인
         public static bool HasNotFlag(this {FlagsName} value, {enumModel.Namespace}.{enumModel.Name} d) => (value & ({FlagsName})(1 << (int)d)) == 0;
+
+        // ToEnum Mode 1
+        public static {FlagsName} ToEnum<T> (this byte byteValue) where T : Enum
+        {{
+            var enumType = typeof(T);
+            
+            if(enumType.Name == ""{enumModel.Name}Flags"")
+                return ({FlagsName})Enum.ToObject (typeof(T), byteValue);
+                
+            var attributes = enumType.GetCustomAttributes(false);
+            string attributeName = ""BitSupportFlagsAttribute"";
+            bool hasAttribute = attributes.Any(attr => attr.GetType().Name == attributeName);
+            if (hasAttribute)
+            {{
+                string flagsEnumName = $""{{enumType.Name}}Flags"";
+                var assembly = enumType.Assembly;
+                var flagsEnumType = assembly.GetType(enumType.Namespace + ""."" + flagsEnumName);
+                if (flagsEnumType != null && flagsEnumType.IsEnum)
+                {{
+                    var flagsEnumValue = Enum.ToObject(flagsEnumType, byteValue);
+                    return ({FlagsName})flagsEnumValue;                
+                }}
+            }}
+
+            throw new InvalidOperationException ($""Enum type '{FlagsName}' not found."");
+        }}        
+
+        public static byte ToByte(this Enum enumValue)
+        {{
+            return Convert.ToByte (enumValue);
+        }}
     }}
 }}";
         }

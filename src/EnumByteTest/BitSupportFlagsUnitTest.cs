@@ -1,6 +1,4 @@
-﻿using BytePacketSupportCore.Attributes;
-using BytePacketSupport.Extentions;
-
+﻿using BitPacketSupoort.SourceGenerators.Attributes;
 namespace EnumByteTest
 {
     [BitSupportFlags]
@@ -19,7 +17,7 @@ namespace EnumByteTest
     public class BitSupportFlagsUnitTest
     {
         [Fact]
-        public void EnumFlagsMode()
+        public void FlagsTypeChange()
         {
             MACHINEFlags aaa = MACHINE.POWER.ToFlags () | MACHINE.RIGHT.ToFlags ();
 
@@ -28,7 +26,7 @@ namespace EnumByteTest
         }
 
         [Fact]
-        public void EnumToByte()
+        public void FlagsTypeChangeToByte()
         {
             MACHINEFlags aaa = MACHINE.POWER.ToFlags () | MACHINE.RIGHT.ToFlags ();
 
@@ -36,27 +34,96 @@ namespace EnumByteTest
         }
 
         [Fact]
-        public void EnumToByteTest2()
+        public void ByteToEnum_TEST1()
         {
             byte data = 0x05;
 
-            var aa = data.ToEnum<MACHINEFlags> ();
+            var enumData = data.ToEnum<MACHINEFlags> ();
 
-            var bbb = aa.HasFlags (MACHINEFlags.TOP | MACHINEFlags.NONE);
-            var ccc = aa.HasNotFlag (MACHINEFlags.LIGHT | MACHINEFlags.NONE);
-            var ddd = aa.HasNotFlag (MACHINEFlags.TOP | MACHINEFlags.NONE);
+            if (enumData.HasFlags (MACHINEFlags.POWER | MACHINEFlags.TOP))
+            {
+                Console.WriteLine ("POWER ON, TOP ON");
+            }
+            if (enumData.HasFlags (MACHINEFlags.POWER | MACHINEFlags.LIGHT))
+            {
+                Console.WriteLine ("POWER ON, TOP ON");
+            }
 
-            var aaaa = aa.HasAnyFlag (MACHINE.POWER);
-            var bbbb = aa.HasAnyFlag (MACHINE.TOP);
-            var cccc = aa.HasAnyFlag (MACHINE.LIGHT);
-            var dddd = aa.HasAnyFlag (MACHINE.ETC);
-
-            // Expected result: MACHINE.POWER | MACHINE.TOP
-            //Assert.True ();
-            //Assert.True (aa.HasFlag (MACHINE.TOP));
-            //Assert.False (aa.HasFlag (MACHINE.RIGHT));
+            if (enumData.HasAnyFlag (MACHINEFlags.POWER))
+            {
+                Console.WriteLine ("POWER ON");
+            }
+            if (enumData.HasAnyFlag (MACHINEFlags.TOP))
+            {
+                Console.WriteLine ("TOP True");
+            }
+            if (enumData.HasAnyFlag (MACHINEFlags.LIGHT))
+            {
+                Console.WriteLine ("LIGHT True");
+            }
+            if (enumData.HasNotFlag (MACHINEFlags.LIGHT))
+            {
+                Console.WriteLine ("LIGHT False");
+            }
         }
 
-        private bool test(EnumByteTest.MACHINEFlags value, EnumByteTest.MACHINEFlags flags) => (value.ToByte() & flags.ToByte ()) != flags.ToByte ();
+        [Fact]
+        public void ByteToEnum_TEST2()
+        {
+            byte data = 0x05;
+
+            var enumData = data.ToEnum<MACHINE> ();
+
+            if (enumData.HasFlags (MACHINEFlags.POWER | MACHINEFlags.TOP))
+            {
+                Console.WriteLine ("POWER ON, TOP ON");
+            }
+            if (enumData.HasFlags (MACHINEFlags.POWER | MACHINEFlags.LIGHT))
+            {
+                Console.WriteLine ("POWER ON, TOP ON");
+            }
+
+            if (enumData.HasAnyFlag (MACHINEFlags.POWER))
+            {
+                Console.WriteLine ("POWER ON");
+            }
+            if (enumData.HasAnyFlag (MACHINEFlags.TOP))
+            {
+                Console.WriteLine ("TOP True");
+            }
+            if (enumData.HasAnyFlag (MACHINEFlags.LIGHT))
+            {
+                Console.WriteLine ("LIGHT True");
+            }
+            if (enumData.HasNotFlag (MACHINEFlags.LIGHT))
+            {
+                Console.WriteLine ("LIGHT False");
+            }
+        }
+
+        [Fact]
+        public void ByteToEnum_TEST3()
+        {
+            byte data = 0x05;
+
+            var enumData = data.ToEnum<MACHINE> ();
+
+            if (enumData.HasAnyFlag (MACHINE.POWER))
+            {
+                Console.WriteLine ("POWER ON");
+            }
+            if (enumData.HasAnyFlag (MACHINE.TOP))
+            {
+                Console.WriteLine ("TOP True");
+            }
+            if (enumData.HasAnyFlag (MACHINE.LIGHT))
+            {
+                Console.WriteLine ("LIGHT True");
+            }
+            if (enumData.HasNotFlag (MACHINE.LIGHT))
+            {
+                Console.WriteLine ("LIGHT False");
+            }
+        }
     }
 }

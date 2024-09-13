@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BytePacketSupport.Extentions
+namespace BytePacketSupportCore.Extentions
 {
     public static class EnumHelper
     {
@@ -68,6 +68,7 @@ namespace BytePacketSupport.Extentions
         {
             return (T)Enum.ToObject (typeof (T), byteValue);
         }
+
 
         public static byte ToByte(this Enum enumValue)
         {
