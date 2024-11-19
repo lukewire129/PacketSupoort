@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BitPacketSupoort.Extentions
+namespace BitSupport.Extentions
 {
     public static class EnumHelper
     {

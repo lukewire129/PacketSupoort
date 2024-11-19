@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmark", "benchmark", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnumByteTest", "EnumByteTest\EnumByteTest.csproj", "{8B55AAC8-CC2E-4BBE-9B37-C78E292A55A0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitPacketSupport", "BitPacketSupport\BitPacketSupport.csproj", "{D3513EC3-AEF9-409D-9808-F8E536479617}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitSupport", "BitSupoort\BitSupport.csproj", "{D3513EC3-AEF9-409D-9808-F8E536479617}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitSupport.SourceGenerators", "BitSupoort.SourceGenerators\BitSupport.SourceGenerators.csproj", "{4BBBF91D-ED08-48D0-A28E-948E80D83ADC}"
 EndProject
