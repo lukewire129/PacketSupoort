@@ -1,8 +1,10 @@
-# PacketSupoort
-
+**PacketSupoort**
 [![latest version](https://img.shields.io/nuget/v/PacketSupoort)](https://www.nuget.org/packages/PacketSupoort)
 [![downloads](https://img.shields.io/nuget/dt/PacketSupoort)](https://www.nuget.org/packages/PacketSupoort)
 
+**BitSupport**
+[![latest version](https://img.shields.io/nuget/v/BitSupport)](https://www.nuget.org/packages/BitSupport)
+[![downloads](https://img.shields.io/nuget/dt/BitSupport)](https://www.nuget.org/packages/BitSupport)
 
 ### Version 2.0.* Update
 #### Append Type 3(CLR, CSharp, Custom by @Dimohy)
