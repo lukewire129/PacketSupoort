@@ -19,7 +19,6 @@
   <ItemGroup>
     <Analyzer Include="..\BitSupoort.SourceGenerators\bin\Debug\netstandard2.0\BitSupport.SourceGenerators.dll" />
   </ItemGroup>
-
   <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>

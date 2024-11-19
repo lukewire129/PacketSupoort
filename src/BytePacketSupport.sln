@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitSupport", "BitSupoort\Bi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitSupport.SourceGenerators", "BitSupoort.SourceGenerators\BitSupport.SourceGenerators.csproj", "{4BBBF91D-ED08-48D0-A28E-948E80D83ADC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitStatClassUnitTest", "BitStatClassUnitTest\BitStatClassUnitTest.csproj", "{909362EF-9B1D-40B2-ACDA-A031B7E6B8FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{4BBBF91D-ED08-48D0-A28E-948E80D83ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BBBF91D-ED08-48D0-A28E-948E80D83ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BBBF91D-ED08-48D0-A28E-948E80D83ADC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{909362EF-9B1D-40B2-ACDA-A031B7E6B8FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{909362EF-9B1D-40B2-ACDA-A031B7E6B8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{909362EF-9B1D-40B2-ACDA-A031B7E6B8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{909362EF-9B1D-40B2-ACDA-A031B7E6B8FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{826A35E2-02FD-4C0D-BF6C-177549B2FCC2} = {863A1FE7-A99E-49CD-91B2-62EEC87AE5F4}
 		{4BC5215C-2970-48BB-8253-B83FE73FD927} = {863A1FE7-A99E-49CD-91B2-62EEC87AE5F4}
 		{8B55AAC8-CC2E-4BBE-9B37-C78E292A55A0} = {826A35E2-02FD-4C0D-BF6C-177549B2FCC2}
+		{909362EF-9B1D-40B2-ACDA-A031B7E6B8FB} = {826A35E2-02FD-4C0D-BF6C-177549B2FCC2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B64C059-6D1A-4E07-A5ED-A36BDE7CA1CB}

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace BitSupport.SourceGenerators.SourceGenerators
+namespace BitSupport.SourceGenerators.Generator
 {
     [Generator]
     public class EnumFlagGenerator : IIncrementalGenerator
