@@ -168,12 +168,6 @@ namespace BytePacketSupport
             return this;
         }
 
-        private PacketBuilder Append(Enum value)
-        {
-            this.Append(value.ToByte());
-            return this;
-        }
-
         public byte[] Build()
         {
             return this.packetData.ToArray();

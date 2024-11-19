@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace BitPacketSupoort.SourceGenerators
+namespace BitSupport.SourceGenerators.SourceGenerators
 {
     [Generator]
     public class EnumFlagGenerator : IIncrementalGenerator
     {
         private const string AttributeSource = @"
-namespace BitPacketSupoort.SourceGenerators.Attributes
+namespace BitSupport.SourceGenerators.Attributes
 {
     [System.AttributeUsage(System.AttributeTargets.Enum)]
     public class BitSupportFlagsAttribute : System.Attribute
@@ -38,13 +38,13 @@ namespace BitPacketSupoort.SourceGenerators.Attributes
             // Enum 정보를 기반으로 소스 코드 생성
             context.RegisterSourceOutput (enumDeclarations, (spc, enumModel) =>
             {
-                if (enumModel is not null)
+                if (enumModel != null)
                 {
                     var source = GenerateEnumFlags (enumModel);
                     spc.AddSource ($"{enumModel.Name}Flags.g.cs", SourceText.From (source, Encoding.UTF8));
                 }
 
-                if (enumModel is not null)
+                if (enumModel != null)
                 {
                     var source = GenerateEnumFlagsExtentions (enumModel);
                     spc.AddSource ($"{enumModel.Name}FlagsExtentions.g.cs", SourceText.From (source, Encoding.UTF8));

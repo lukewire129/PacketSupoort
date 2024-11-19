@@ -17,8 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BitPacketSupoort.SourceGenerators\BitPacketSupoort.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
-    <ProjectReference Include="..\BitPacketSupport\BitPacketSupport.csproj" />
+    <Analyzer Include="..\BitSupoort.SourceGenerators\bin\Debug\netstandard2.0\BitSupoort.SourceGenerators.dll" />
   </ItemGroup>
 
   <ItemGroup>

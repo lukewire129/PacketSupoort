@@ -1,4 +1,4 @@
-﻿using BitPacketSupoort.SourceGenerators.Attributes;
+﻿using BitSupoort.SourceGenerators.Attributes;
 namespace EnumByteTest
 {
     [BitSupportFlags]

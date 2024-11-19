@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BitPacketSupoort.SourceGenerators\BitPacketSupoort.SourceGenerators.csproj" />
+    <Analyzer Include="..\BitSupoort.SourceGenerators\bin\Debug\netstandard2.0\BitSupoort.SourceGenerators.dll" />
   </ItemGroup>
 
 </Project>
