@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -76,6 +77,15 @@ namespace BitSupport.SourceGenerators.Attributes
             var enumType = attribute.ConstructorArguments[0].Value as INamedTypeSymbol;
             if (enumType == null)
                 return string.Empty;
+
+            // 전달된 타입이 Enum인지 확인
+            if (enumType.TypeKind != TypeKind.Enum)
+                throw new InvalidOperationException ($"{enumType.Name}은 Enum 타입이 아닙니다.");
+
+            // [Flags] 특성 확인
+            var hasFlagsAttribute = enumType.GetAttributes ().Any (attr => attr.AttributeClass?.ToDisplayString () == "System.FlagsAttribute");
+            if (!hasFlagsAttribute)
+                throw new InvalidOperationException ($"{enumType.Name}은 [Flags] 특성이 없습니다.");
 
             // 클래스 및 Enum 이름 추출
             var namespaceName = classSymbol.ContainingNamespace.ToDisplayString ();
