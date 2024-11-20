@@ -17,4 +17,7 @@
   <ItemGroup>
     <None Include="brick-wall.png" Pack="true" PackagePath="" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BitSupoort\BitSupport.csproj" />
+  </ItemGroup>
 </Project>
