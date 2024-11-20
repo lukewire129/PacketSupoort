@@ -90,11 +90,13 @@ namespace {namespaceName}
 {{
     public partial class {className}
     {{
+        private byte tempByte;
         private {enumName} _currentState;
 
         public void SetState({enumName} state)
         {{
             _currentState |= state;
+            tempByte = _currentState.ToByte ();
         }}
 
         public void RemoveState({enumName} state)
@@ -103,6 +105,7 @@ namespace {namespaceName}
             {{
                 _currentState &= ~state;
             }}
+            tempByte = _currentState.ToByte ();
         }}
 
         public bool IsState({enumName} state)
@@ -112,7 +115,7 @@ namespace {namespaceName}
 
         public byte GetByte()
         {{
-            return _currentState.ToByte ()
+            return tempByte;
         }}
     }}
 }}
