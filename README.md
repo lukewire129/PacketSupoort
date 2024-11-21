@@ -59,63 +59,45 @@ Console.WriteLine (builder.GetString ());
 ```
 
 ## PacketBuilder
-- Append Byte
+- Append int32
   
   **CRL Type**
   ```csharp
   var builder = new PacketBuilder ()
-               .AppendByte (0x40)
-               .AppendByte (0x41)
-               .AppendByte (0x42)
-               .AppendByte (0x43)
-               .AppendByte (0x44)
-               .AppendByte (0x45)
+               .AppendInt32 (10)
                .Build();
   ```
   **csharp Type**
   ```csharp
   var builder = new PacketBuilder ()
-               .AppendByte (0x40)
-               .AppendByte (0x41)
-               .AppendByte (0x42)
-               .AppendByte (0x43)
-               .AppendByte (0x44)
-               .AppendByte (0x45)
+               .Appendint (10)
                .Build();
   ```
   **CusotmType (feat. @Dimohy)**
   ```csharp
   var builder = new PacketBuilder ()
-                 .@byte (0x40)
-                 .@byte (0x41)
-                 .@byte (0x42)
-                 .@byte (0x43)
-                 .@byte (0x44)
-                 .@byte (0x45)
-                 .Build();
+               .@int (10)
+               .Build();
   ```
-- Append ByteArray
+- Append unsigned int 32
   
   **CRL Type**
   ```csharp
-  byte[] AddData = new byte[]{0x40, 0x41, 0x42, 0x43, 0x44, 0x45};
   var builder = new PacketBuilder ()
-               .AppendBytes (AddData)
+               .AppendUInt32(10)
                .Build();
   ```
   **csharp Type**
   ```csharp
-  byte[] AddData = new byte[]{0x40, 0x41, 0x42, 0x43, 0x44, 0x45};
   var builder = new PacketBuilder ()
-               .AppendBytes (AddData)
+               .Appenduint(10)
                .Build();
   ```
   **CusotmType (feat. @Dimohy)**
   ```csharp
-  byte[] AddData = new byte[]{0x40, 0x41, 0x42, 0x43, 0x44, 0x45};
   var builder = new PacketBuilder ()
-                 .@bytes (AddData)
-                 .Build();
+               .@uint(10)
+               .Build();
   ```
 ## AppendExtentions 
 
