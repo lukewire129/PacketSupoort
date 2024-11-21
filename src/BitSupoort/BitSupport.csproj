@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>BitSupport</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <Description>Bit to Byte, Byte to Bit Support</Description>
     <PackageProjectUrl>https://github.com/lukewire129/BytePacketSupport</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lukewire129/BytePacketSupport</RepositoryUrl>
@@ -13,13 +13,10 @@
     <Copyright>Copyright © 2024 lukewire129.</Copyright>
     <PackageIcon>brick-wall.png</PackageIcon>
     <Authors>lukewire129</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-
   <ItemGroup>
-    <Analyzer Include="..\BitSupoort.SourceGenerators\bin\Debug\netstandard2.0\BitSupoort.SourceGenerators.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="brick-wall.png" />
+    <None Include="brick-wall.png" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BitSupoort.SourceGenerators\BitSupport.SourceGenerators.csproj" />
