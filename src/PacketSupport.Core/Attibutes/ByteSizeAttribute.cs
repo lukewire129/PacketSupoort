@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BytePacketSupport.Attibutes
+namespace PacketSupport.Core.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     public class ByteSizeAttribute : Attribute

@@ -1,4 +1,4 @@
-﻿namespace BytePacketSupport.Enums
+﻿namespace PacketSupport.Core.Enums
 {
     public enum Endian
     {

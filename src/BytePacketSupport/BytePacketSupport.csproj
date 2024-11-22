@@ -19,5 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BitSupoort\BitSupport.csproj" />
+    <ProjectReference Include="..\PacketSupport.Core\PacketSupport.Core.csproj" />
   </ItemGroup>
 </Project>

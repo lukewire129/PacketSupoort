@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitSupport.SourceGenerators
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitStatClassUnitTest", "BitStatClassUnitTest\BitStatClassUnitTest.csproj", "{909362EF-9B1D-40B2-ACDA-A031B7E6B8FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacketSupport.Core", "PacketSupport.Core\PacketSupport.Core.csproj", "{A61D5317-CB93-414F-B2DE-D5692AFFB8CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{909362EF-9B1D-40B2-ACDA-A031B7E6B8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{909362EF-9B1D-40B2-ACDA-A031B7E6B8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{909362EF-9B1D-40B2-ACDA-A031B7E6B8FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A61D5317-CB93-414F-B2DE-D5692AFFB8CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A61D5317-CB93-414F-B2DE-D5692AFFB8CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A61D5317-CB93-414F-B2DE-D5692AFFB8CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A61D5317-CB93-414F-B2DE-D5692AFFB8CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

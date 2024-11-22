@@ -1,7 +1,7 @@
-﻿using BytePacketSupport.Attibutes;
-using BytePacketSupport.Enums;
+﻿using PacketSupport.Core.Attibutes;
+using PacketSupport.Core.Converter;
+using PacketSupport.Core.Enums;
 using System;
-using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -198,7 +198,7 @@ namespace BytePacketSupport
                 return bytes;
             Endian endian = attribute._endian;
 
-            return GetBytes (bytes, endian);
+            return ByteConverter.GetBytes (bytes, endian);
         }
 
         private static byte[] UnSignedGetBytes(FieldInfo field, BinaryReader br, int length)
@@ -210,7 +210,7 @@ namespace BytePacketSupport
                 return bytes;
             Endian endian = attribute._endian;
 
-            return GetBytes (bytes, endian);
+            return ByteConverter.GetBytes (bytes, endian);
         }
 
         private static byte[] EndianChange(byte[] byteArray, Endian endian)
@@ -224,26 +224,6 @@ namespace BytePacketSupport
             else
             {
                 Array.Reverse (byteArray);
-            }
-
-            return byteArray;
-        }
-
-        private static byte[] GetBytes(byte[] byteArray, Endian endian)
-        {
-            bool isByteArray = endian == Endian.LITTLE || endian == Endian.LITTLEBYTESWAP;
-            if (BitConverter.IsLittleEndian != isByteArray)
-                Array.Reverse (byteArray);
-
-            if (endian == Endian.LITTLEBYTESWAP || endian == Endian.BIGBYTESWAP)
-            {
-                byte[] temp = new byte[0];
-                for (int i = 0; i < byteArray.Length; i += 2)
-                {
-                    temp = temp.AppendBytes (EndianChange (byteArray.Skip (0 + i).Take (2).ToArray (), endian));
-                }
-
-                byteArray = temp;
             }
 
             return byteArray;

@@ -1,4 +1,4 @@
-﻿using BytePacketSupport.Enums;
+﻿using PacketSupport.Core.Enums;
 
 namespace BytePacketSupport
 {

@@ -1,8 +1,8 @@
-﻿using BytePacketSupport.Converter;
-using BytePacketSupport.Enums;
+﻿using PacketSupport.Core.Converter;
+using PacketSupport.Core.Enums;
 using System.Collections.Generic;
 
-namespace BytePacketSupport
+namespace PacketSupport.Core.Helper
 {
     public static partial class AppendHelper
     {

@@ -1,8 +1,8 @@
-﻿using BytePacketSupport.Converter;
-using BytePacketSupport.Enums;
+﻿using PacketSupport.Core.Converter;
+using PacketSupport.Core.Enums;
 using System.Collections.Generic;
 
-namespace BytePacketSupport
+namespace PacketSupport.Core.Helper
 {
     public static partial class AppendHelper
     {
@@ -51,27 +51,6 @@ namespace BytePacketSupport
         {
             byte[] bytes = ByteConverter.GetBytes (ulongByte, endian);
             return bs.@bytes (bytes, offset, count);
-        }
-        public static byte[] AppendClass<TSource>(this byte b, TSource AppenClass) where TSource : class
-        {
-            byte[] result = new byte[] { b };
-            return result.@bytes (PacketParse.Serialize (AppenClass));
-        }
-
-        public static byte[] AppendClass<TSource>(this IEnumerable<byte> b, TSource AppenClass) where TSource : class
-        {
-            var result = b;
-            return result.@bytes (PacketParse.Serialize (AppenClass));
-        }
-
-        public static byte[] AppendPacketBuilder(this byte b, PacketBuilder packetBuilder)
-        {
-            return b.@bytes (packetBuilder.Build ());
-        }
-
-        public static byte[] AppendPacketBuilder(this IEnumerable<byte> bs, PacketBuilder packetBuilder)
-        {
-            return bs.@bytes (packetBuilder.Build ());
         }
     }
 }

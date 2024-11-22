@@ -1,10 +1,8 @@
-﻿using BytePacketSupport.Enums;
+﻿using PacketSupport.Core.Enums;
 using System;
-using System.Buffers;
-using System.Linq;
 using System.Text;
 
-namespace BytePacketSupport.Converter
+namespace PacketSupport.Core.Converter
 {
     public static class ByteConverter
     {
@@ -32,7 +30,7 @@ namespace BytePacketSupport.Converter
             return byteArray;
         }
 
-        private static byte[] GetBytes(byte[] byteArray, Endian endian)
+        public static byte[] GetBytes(byte[] byteArray, Endian endian)
         {
             bool isByteArray = endian == Endian.LITTLE || endian == Endian.LITTLEBYTESWAP;
             if (BitConverter.IsLittleEndian != isByteArray)
@@ -40,10 +38,19 @@ namespace BytePacketSupport.Converter
 
             if (endian == Endian.LITTLEBYTESWAP || endian == Endian.BIGBYTESWAP)
             {
-                byte[] temp = new byte[0];
+                // 결과를 저장할 배열 생성 (원본 배열과 동일한 크기)
+                byte[] temp = new byte[byteArray.Length];
+
                 for (int i = 0; i < byteArray.Length; i += 2)
                 {
-                    temp = temp.AppendBytes (EndianChange (byteArray.Skip (0 + i).Take (2).ToArray (), endian));
+                    // 2바이트씩 추출하여 EndianChange 수행
+                    byte[] chunk = { byteArray[i], i + 1 < byteArray.Length ? byteArray[i + 1] : (byte)0 };
+                    byte[] changedChunk = EndianChange (chunk, endian);
+
+                    // 결과 배열에 직접 복사
+                    temp[i] = changedChunk[0];
+                    if (i + 1 < byteArray.Length)
+                        temp[i + 1] = changedChunk[1];
                 }
 
                 byteArray = temp;

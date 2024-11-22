@@ -1,7 +1,7 @@
-﻿using BytePacketSupport.Enums;
+﻿using PacketSupport.Core.Enums;
 using System;
 
-namespace BytePacketSupport.Attibutes
+namespace PacketSupport.Core.Attibutes
 {
     [AttributeUsage (AttributeTargets.Class, AllowMultiple = false)]
     public class EndianAttribute : Attribute

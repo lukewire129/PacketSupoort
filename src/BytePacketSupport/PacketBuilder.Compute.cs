@@ -53,12 +53,12 @@ namespace BytePacketSupport
         {
             if(BitConverter.IsLittleEndian == true)
             {
-                if (endianType == Enums.Endian.BIG || endianType == Enums.Endian.LITTLEBYTESWAP)
+                if (endianType == PacketSupport.Core.Enums.Endian.BIG || endianType == PacketSupport.Core.Enums.Endian.LITTLEBYTESWAP)
                     return true;
             }
             else
             {
-                if (endianType == Enums.Endian.LITTLE || endianType == Enums.Endian.BIGBYTESWAP)
+                if (endianType == PacketSupport.Core.Enums.Endian.LITTLE || endianType == PacketSupport.Core.Enums.Endian.BIGBYTESWAP)
                     return true;
             }
             return false;
