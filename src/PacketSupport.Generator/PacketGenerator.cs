@@ -1,22 +1,36 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace BitSupport.SourceGenerators.Generator
+namespace PacketSupport.Generator
 {
     [Generator]
-    public class ClassEnumFlagGenerator : IIncrementalGenerator
+    public class PacketGenerator : IIncrementalGenerator
     {
+        private const string AttributeSource = @"
+namespace PacketSupport.Generator.Attributes
+{
+    [System.AttributeUsage(System.AttributeTargets.Class)]
+    public class PacketAttribute : System.Attribute
+    {
+    }
+}";
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            //if (!Debugger.IsAttached)
-            //{
-            //    Debugger.Launch ();
-            //}
+            // Attribute를 소스 코드로 추가
+            context.RegisterPostInitializationOutput (ctx =>
+            {
+                ctx.AddSource ("PacketAttribute.g.cs", SourceText.From (AttributeSource, Encoding.UTF8));
+            });
 
-            // 1. 클래스 선언에서 [BitStateGenerator]가 적용된 클래스 탐지
+            if (!Debugger.IsAttached)
+            {
+                Debugger.Launch ();
+            }
+            // 1. 클래스 선언에서 [PacketGenerator]가 적용된 클래스 탐지
             var classDeclarations = context.SyntaxProvider
                 .CreateSyntaxProvider (
                     predicate: (s, _) => IsClassWithAttribute (s),
@@ -39,7 +53,7 @@ namespace BitSupport.SourceGenerators.Generator
         private bool IsClassWithAttribute(SyntaxNode syntaxNode)
         {
             return syntaxNode is ClassDeclarationSyntax classDeclaration &&
-                   classDeclaration.AttributeLists.Any (attr => attr.Attributes.Any (a => a.Name.ToString () == "BitState"));
+                   classDeclaration.AttributeLists.Any (attr => attr.Attributes.Any (a => a.Name.ToString () == "Packet"));
         }
 
         private INamedTypeSymbol GetClassSemanticModel(GeneratorSyntaxContext context)
@@ -48,7 +62,6 @@ namespace BitSupport.SourceGenerators.Generator
             var model = context.SemanticModel.GetDeclaredSymbol (classDeclaration);
             return model as INamedTypeSymbol;
         }
-
         private static string GenerateStateMethods(INamedTypeSymbol classSymbol)
         {
             // Attribute에서 Enum 타입 가져오기
@@ -74,33 +87,15 @@ namespace {namespaceName}
 {{
     public partial class {className}
     {{
-        private byte tempByte;
-        private {enumName} _currentState;
+       public static Test2Packet Serialize(byte[] data)
+       {{
+          return BytePacketSupport.PacketParse.Serialize<{className}>(data);
+       }}
 
-        public void SetState({enumName} state)
-        {{
-            _currentState |= state;
-            tempByte = _currentState.ToByte();
-        }}
-
-        public void RemoveState({enumName} state)
-        {{
-            if ((_currentState & state) == state)
-            {{
-                _currentState &= ~state;
-            }}
-            tempByte = _currentState.ToByte();
-        }}
-
-        public bool IsState({enumName} state)
-        {{
-            return (_currentState & state) == state;
-        }}
-
-        public byte GetByte()
-        {{
-            return tempByte;
-        }}
+       public static byte[] Deserialize()
+       {{
+          return BytePacketSupport.PacketParse.Deserialize<{className}>(data);
+       }}
     }}
 }}
 ";

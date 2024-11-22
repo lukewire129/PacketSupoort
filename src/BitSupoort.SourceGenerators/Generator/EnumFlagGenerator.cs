@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -11,23 +12,12 @@ namespace BitSupport.SourceGenerators.Generator
     [Generator]
     public class EnumFlagGenerator : IIncrementalGenerator
     {
-        private const string AttributeSource = @"
-namespace BitSupport.SourceGenerators.Attributes
-{
-    [System.AttributeUsage(System.AttributeTargets.Enum)]
-    public class BitSupportFlagsAttribute : System.Attribute
-    {
-    }
-}";
-
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            // Attribute를 소스 코드로 추가
-            context.RegisterPostInitializationOutput (ctx =>
+            if (!Debugger.IsAttached)
             {
-                ctx.AddSource ("BitSupportFlagsAttribute.g.cs", SourceText.From (AttributeSource, Encoding.UTF8));
-            });
-
+                Debugger.Launch ();
+            }
             // Enum과 속성을 찾기 위한 증분 처리
             var enumDeclarations = context.SyntaxProvider
                 .CreateSyntaxProvider (

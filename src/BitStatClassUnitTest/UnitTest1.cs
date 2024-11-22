@@ -1,4 +1,4 @@
-using BitSupport.SourceGenerators.Attributes;
+using BitSupport.Attributes;
 
 namespace BitStatClassUnitTest
 {

@@ -163,7 +163,7 @@ namespace BytePacketSupport
 
         private PacketBuilder Append<TSource>(TSource AppendClass) where TSource : class
         {
-            byte[] datas = PacketParse.Serialize (AppendClass);
+            byte[] datas = PacketParse.Deserialize (AppendClass);
             AppendBytes (datas.ToList());
             return this;
         }

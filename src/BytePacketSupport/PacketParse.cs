@@ -12,7 +12,7 @@ namespace BytePacketSupport
 {
     public static class PacketParse
     {
-        public static byte[] Serialize<TSource>(TSource AppendClass) where TSource : class
+        public static byte[] Deserialize<TSource>(TSource AppendClass) where TSource : class
         {
             FieldInfo[] fields = typeof (TSource).GetFields (BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             var attribute = (EndianAttribute)Attribute.GetCustomAttribute (typeof (TSource), typeof (EndianAttribute));
@@ -79,7 +79,7 @@ namespace BytePacketSupport
             return packetBuilder.Build ();
         }
 
-        public static T Deserialize<T>(byte[] bytes) where T : new()
+        public static T Serialize<T>(byte[] bytes) where T : new()
         {
             FieldInfo[] fields = typeof (T).GetFields (BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             var instance = Activator.CreateInstance<T> ();

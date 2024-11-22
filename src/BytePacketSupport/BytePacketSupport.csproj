@@ -20,5 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BitSupoort\BitSupport.csproj" />
     <ProjectReference Include="..\PacketSupport.Core\PacketSupport.Core.csproj" />
+    <ProjectReference Include="..\PacketSupport.Generator\PacketSupport.Generator.csproj" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
-﻿using BitSupport.SourceGenerators.Attributes;
+﻿using BitSupport.Attributes;
+
 namespace EnumByteTest
 {
     [BitSupportFlags]

@@ -1,6 +1,6 @@
 ﻿using BytePacketSupport;
-using BytePacketSupport.Attibutes;
-using BytePacketSupport.Enums;
+using PacketSupport.Core.Attibutes;
+using PacketSupport.Core.Enums;
 
 namespace AppendTest_preview
 {
@@ -20,7 +20,7 @@ namespace AppendTest_preview
         public void DeserializeEndianAttribute()
         {
             var test = new byte[] { 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63 };
-            var aaa = PacketParse.Deserialize<Test3Packet> (test);
+            var aaa = PacketParse.Serialize<Test3Packet> (test);
         }
         [Fact]
         public void SerializeEndianAttribute()
@@ -32,10 +32,11 @@ namespace AppendTest_preview
                 Value3 = "abc",
             };
 
-            var abc = PacketParse.Serialize (aaa);
+            var abc = PacketParse.Deserialize (aaa);
         }
 
         [Endian (Endian.LITTLE)]
+        []
         public class Test2Packet
         {
             public int Value;
@@ -54,9 +55,18 @@ namespace AppendTest_preview
         public void TestDeserializeObject()
         {
             var test = new byte[] { 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43 };
-            var aaa = PacketParse.Deserialize<Test2Packet> (test);
+            var aaa = PacketParse.Serialize<Test2Packet> (test);
 
-            var abc = PacketParse.Serialize (aaa);
+            var abc = PacketParse.Deserialize<Test2Packet> (aaa);
+        }
+
+        [Fact]
+        public void TestDeserializeObject()
+        {
+            var test = new byte[] { 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43 };
+            var aaa = PacketParse.Serialize<Test2Packet> (test);
+
+            var abc = PacketParse.Deserialize (aaa);
         }
     }
 }
