@@ -36,7 +36,7 @@
 
 The current difference between **Extentions** and **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
 
-## Print
+# Print
 1. ToHexString() => only byte
 2. GetString() => AsciiCode Byte // or GetString(Encoding)
 ```csharp
@@ -58,7 +58,7 @@ Console.WriteLine (builder.GetString ());
 // @ABCDE
 ```
 
-## PacketBuilder
+# PacketBuilder
 - Append int32
   
   **CRL Type**
@@ -99,7 +99,7 @@ Console.WriteLine (builder.GetString ());
                .@uint(10)
                .Build();
   ```
-## AppendExtentions 
+# AppendExtentions 
 
   **CRL Type**
   ``` csharp
@@ -122,7 +122,7 @@ Console.WriteLine (builder.GetString ());
   byte[] addBytes = new byte[]{0x52, 0x53}; // or  List<byte> addBytes = new List<byte>(){0x52, 0x53};
   summaryByts = testByte.@bytes(addBytes);
   ```
-## PacketCheckSum
+# PacketCheckSum
 - There are two ways to do this
 The first ErrorDetection method
 ``` csharp
@@ -156,7 +156,7 @@ var packet = pb
 // extentions ex)
 var savePacket = packet.GetSection("ChecksumPacking");
 ```
-## EndianPacket
+# EndianPacket
 You can create packets that match the endian type.
 ```csharp
 short test = 0x0102;
@@ -205,7 +205,7 @@ Console.WriteLine ("display2 {0}", abcBig.Display ());
 // display1 01020201
 // display2 01020102
 ```
-## bytearray<->class(Serialization,Deserialization)
+# bytearray<->class(Serialization,Deserialization)
 - For an array or string, you must size it.
 - The size should be set via attribute (ByteSize), and in the case of 'List' Type, it can be handled by adjusting the Capacity value.
   If there is no capacity or attribute value, an empty value is returned.
