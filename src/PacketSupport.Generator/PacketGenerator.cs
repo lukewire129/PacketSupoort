@@ -81,7 +81,7 @@ namespace {namespaceName}
 {{
     public partial class {className}
     {{
-       public {className} Serialize(byte[] data)
+       public static {className} Serialize(byte[] data)
        {{
           return BytePacketSupport.PacketParse.Serialize<{className}>(data);
        }}
