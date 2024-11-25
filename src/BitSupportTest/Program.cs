@@ -2,4 +2,5 @@
 
 Console.WriteLine ("Hello, World!");
 
-MaChineFlags
+
+MaChineFlags flags;

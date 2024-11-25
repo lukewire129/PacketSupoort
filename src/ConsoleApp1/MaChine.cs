@@ -1,6 +1,6 @@
 ﻿using BitSupport.Attributes;
 
-namespace BitSupportTest
+namespace ConsoleApp1
 {
     [BitSupportFlags]
     public enum MaChine

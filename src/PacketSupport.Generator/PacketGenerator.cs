@@ -26,10 +26,10 @@ namespace PacketSupport.Generator.Attributes
                 ctx.AddSource ("PacketAttribute.g.cs", SourceText.From (AttributeSource, Encoding.UTF8));
             });
 
-            if (!Debugger.IsAttached)
-            {
-                Debugger.Launch ();
-            }
+            //if (!Debugger.IsAttached)
+            //{
+            //    Debugger.Launch ();
+            //}
             // 1. 클래스 선언에서 [PacketGenerator]가 적용된 클래스 탐지
             var classDeclarations = context.SyntaxProvider
                 .CreateSyntaxProvider (
@@ -65,19 +65,13 @@ namespace PacketSupport.Generator.Attributes
         private static string GenerateStateMethods(INamedTypeSymbol classSymbol)
         {
             // Attribute에서 Enum 타입 가져오기
-            var attribute = classSymbol.GetAttributes ().FirstOrDefault (a => a.AttributeClass?.Name == "BitStateAttribute");
+            var attribute = classSymbol.GetAttributes ().FirstOrDefault (a => a.AttributeClass?.Name == "PacketAttribute");
             if (attribute == null)
-                return string.Empty;
-
-
-            var enumType = attribute.ConstructorArguments[0].Value as INamedTypeSymbol;
-            if (enumType == null)
                 return string.Empty;
 
             // 클래스 및 Enum 이름 추출
             var namespaceName = classSymbol.ContainingNamespace.ToDisplayString ();
             var className = classSymbol.Name;
-            var enumName = enumType.Name;
 
             // 코드 생성
             return $@"
@@ -87,12 +81,12 @@ namespace {namespaceName}
 {{
     public partial class {className}
     {{
-       public static Test2Packet Serialize(byte[] data)
+       public {className} Serialize(byte[] data)
        {{
           return BytePacketSupport.PacketParse.Serialize<{className}>(data);
        }}
 
-       public static byte[] Deserialize()
+       public byte[] Deserialize()
        {{
           return BytePacketSupport.PacketParse.Deserialize<{className}>(data);
        }}

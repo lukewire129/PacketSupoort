@@ -7,17 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace BitSupport.SourceGenerators.Generator
+namespace BitSupport.SourceGenerators
 {
     [Generator]
     public class EnumFlagGenerator : IIncrementalGenerator
     {
+        private const string AttributeSource = @"
+using System;
+
+namespace BitSupport.Attributes
+{
+    [AttributeUsage (AttributeTargets.Enum)]
+    public class BitSupportFlagsAttribute : Attribute
+    {
+    }
+}";
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            if (!Debugger.IsAttached)
+            //if (!Debugger.IsAttached)
+            //{
+            //    Debugger.Launch ();
+            //}
+
+            // Attribute를 소스 코드로 추가
+            context.RegisterPostInitializationOutput (ctx =>
             {
-                Debugger.Launch ();
-            }
+                ctx.AddSource ("BitSupportFlagsAttribute.g.cs", SourceText.From (AttributeSource, Encoding.UTF8));
+            });
             // Enum과 속성을 찾기 위한 증분 처리
             var enumDeclarations = context.SyntaxProvider
                 .CreateSyntaxProvider (

@@ -4,17 +4,38 @@ using Microsoft.CodeAnalysis.Text;
 using System.Linq;
 using System.Text;
 
-namespace BitSupport.SourceGenerators.Generator
+namespace BitSupport.SourceGenerators
 {
     [Generator]
     public class ClassEnumFlagGenerator : IIncrementalGenerator
     {
+        private const string AttributeSource = @"
+using System;
+
+namespace BitSupport.Attributes
+{
+    [AttributeUsage (AttributeTargets.Class)]
+    public class BitStateAttribute : Attribute
+    {
+        public Type StateEnumType { get; }
+
+        public BitStateAttribute(Type stateEnumType)
+        {
+            StateEnumType = stateEnumType;
+        }
+    }
+}";
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             //if (!Debugger.IsAttached)
             //{
             //    Debugger.Launch ();
             //}
+            // Attribute를 소스 코드로 추가
+            context.RegisterPostInitializationOutput (ctx =>
+            {
+                ctx.AddSource ("BitStateAttribute.g.cs", SourceText.From (AttributeSource, Encoding.UTF8));
+            });
 
             // 1. 클래스 선언에서 [BitStateGenerator]가 적용된 클래스 탐지
             var classDeclarations = context.SyntaxProvider

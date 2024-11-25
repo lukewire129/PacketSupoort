@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BitSupport" Version="1.2.0" />
+    <PackageReference Include="PacketSupoort" Version="2.2.14-preview" />
   </ItemGroup>
 
 </Project>
