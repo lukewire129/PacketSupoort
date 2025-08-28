@@ -2,6 +2,23 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Authors>lukewire129</Authors>
   </PropertyGroup>
-
+  <PropertyGroup>
+    <PackageId>PacketSupport.Core</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Description>PacketByte Support Core</Description>
+    <PackageProjectUrl>https://github.com/lukewire129/BytePacketSupport</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lukewire129/BytePacketSupport</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>lukewire; Packet; PacketSupport;</PackageTags>
+    <Copyright>Copyright © 2023 lukewire129.</Copyright>
+    <PackageIcon>brick-wall.png</PackageIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="brick-wall.png" Pack="true" PackagePath="" />
+  </ItemGroup>
 </Project>
