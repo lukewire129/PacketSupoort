@@ -35,44 +35,44 @@ namespace BytePacketSupport
                 // 필드의 타입으로 캐스팅
                 if (field.FieldType == typeof (string))
                 {
-                    packetBuilder.AppendString (value.Cast<string> ());
+                    packetBuilder.Append (value.Cast<string> ());
                 }
                 else if (field.FieldType == typeof (short))
                 {
-                    packetBuilder.AppendInt16 ((short)value);
+                    packetBuilder.Append ((short)value);
                 }
                 else if (field.FieldType == typeof (int))
                 {
-                    packetBuilder.AppendInt32 ((int)value);
+                    packetBuilder.Append ((int)value);
                 }
                 else if (field.FieldType == typeof (long))
                 {
-                    packetBuilder.AppendInt64 ((long)value);
+                    packetBuilder.Append ((long)value);
                 }
                 else if (field.FieldType == typeof (ushort))
                 {
-                    packetBuilder.AppendUInt16 ((ushort)value);
+                    packetBuilder.Append ((ushort)value);
                 }
                 else if (field.FieldType == typeof (uint))
                 {
-                    packetBuilder.AppendUInt32 ((uint)value);
+                    packetBuilder.Append ((uint)value);
                 }
                 else if (field.FieldType == typeof (ulong))
                 {
-                    packetBuilder.AppendUInt64 ((ulong)value);
+                    packetBuilder.Append ((ulong)value);
                 }
                 else if (field.FieldType == typeof (byte))
                 {
-                    packetBuilder.AppendByte (value.Cast<byte> ());
+                    packetBuilder.Append (value.Cast<byte> ());
                 }
                 else if (field.FieldType == typeof (byte[]))
                 {
-                    packetBuilder.AppendBytes (value.Cast<byte[]> ());
+                    packetBuilder.Append (value.Cast<byte[]> ());
                 }
 
                 else if (field.FieldType == typeof (List<byte>))
                 {
-                    packetBuilder.AppendBytes (value.Cast<List<byte>> ());
+                    packetBuilder.Append (value.Cast<List<byte>> ());
                 }
             }
 

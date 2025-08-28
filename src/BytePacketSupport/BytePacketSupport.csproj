@@ -7,7 +7,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>PacketSupoort</PackageId>
-    <PackageVersion>2.3.0</PackageVersion>
+    <PackageVersion>3.0.0</PackageVersion>
     <Description>PacketByte Support</Description>
     <PackageProjectUrl>https://github.com/lukewire129/BytePacketSupport</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lukewire129/BytePacketSupport</RepositoryUrl>
@@ -21,14 +21,9 @@
   <ItemGroup>
     <None Include="brick-wall.png" Pack="true" PackagePath="" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BitSupoort\BitSupport.csproj" PrivateAssets="all"/>
-    <ProjectReference Include="..\PacketSupport.Core\PacketSupport.Core.csproj" PrivateAssets="all" />
-    <ProjectReference Include="..\PacketSupport.Generator\PacketSupport.Generator.csproj" PrivateAssets="all"/>
-  </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\BitSupoort\bin\$(Configuration)\netstandard2.0\BitSupport.dll" Pack="true" PackagePath="analyzers/dotnet/cs"/>
-    <None Include="..\PacketSupport.Generator\bin\$(Configuration)\netstandard2.0\PacketSupport.Generator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
+    <PackageReference Include="BitSupport" Version="1.2.0" />
+    <PackageReference Include="PacketSupport.Core" Version="1.0.0" />
   </ItemGroup>
 </Project>

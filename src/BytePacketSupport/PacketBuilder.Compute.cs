@@ -1,4 +1,4 @@
-﻿using BytePacketSupport.Extentions;
+﻿using BytePacketSupport.Extensions;
 using BytePacketSupport.Integrity;
 using BytePacketSupport.Integrity.Checksum;
 using BytePacketSupport.Integrity.CRC;
@@ -13,7 +13,7 @@ namespace BytePacketSupport
         private void Compute(ErrorDetection detection, byte[] data)
         {
             byte[] errorcheck = detection.Compute (data).ToArray();
-            this.AppendBytes (errorcheck);
+            this.Append (errorcheck);
         }
         public PacketBuilder Compute(Checksum8Type type)
         {

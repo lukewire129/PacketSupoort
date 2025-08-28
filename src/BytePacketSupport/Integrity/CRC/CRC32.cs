@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Buffers;
 using System.Buffers.Binary;
-using BytePacketSupport.Extentions;
+using BytePacketSupport.Extensions;
 
 namespace BytePacketSupport.Integrity.CRC
 {

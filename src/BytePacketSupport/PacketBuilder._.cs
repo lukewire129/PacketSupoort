@@ -1,5 +1,5 @@
 ﻿using PacketSupport.Core.Enums;
-using BytePacketSupport.Extentions;
+using BytePacketSupport.Extensions;
 using System;
 using System.Buffers;
 using System.Collections.Generic;
@@ -87,8 +87,7 @@ namespace BytePacketSupport
                     break;
             }
         }
-
-        private PacketBuilder Append(byte data)
+        public PacketBuilder Append(byte data)
         {
             using (var span = packetData.Reserve (sizeof (byte)))
             {
@@ -98,18 +97,23 @@ namespace BytePacketSupport
             return this;
         }
 
-        private PacketBuilder Append(IEnumerable<byte> datas)
+        public PacketBuilder Append(params byte[] datas)
+        {
+            packetData.Write (datas);
+            return this;
+        }
+
+        public PacketBuilder Append(IEnumerable<byte> datas)
         {
             if (!(datas is byte[] b))
             {
                 b = datas.ToArray ();
             }
 
-            packetData.Write (b);
-            return this;
+            return this.Append (b);
         }
 
-        private PacketBuilder Append(string ascii)
+        public PacketBuilder Append(string ascii)
         {
             var length = Encoding.ASCII.GetByteCount (ascii);
 
@@ -117,7 +121,8 @@ namespace BytePacketSupport
             Encoding.ASCII.GetBytes (ascii, span);
             return this;
         }
-        private PacketBuilder Append(short value)
+
+        public PacketBuilder Append(short value)
         {
             using var span = packetData.Reserve (sizeof (short));
 
@@ -125,7 +130,7 @@ namespace BytePacketSupport
             return this;
         }
 
-        private PacketBuilder Append(int value)
+        public PacketBuilder Append(int value)
         {
             using var span = packetData.Reserve (sizeof (int));
 
@@ -133,38 +138,38 @@ namespace BytePacketSupport
             return this;
         }
 
-        private PacketBuilder Append(long value)
+        public PacketBuilder Append(long value)
         {
             using var span = packetData.Reserve (sizeof (long));
             writer.@long (span, value);
             return this;
         }
 
-        private PacketBuilder Append(ushort value)
+        public PacketBuilder Append(ushort value)
         {
             using var span = packetData.Reserve (sizeof (ushort));
             writer.@ushort (span, value);
             return this;
         }
 
-        private PacketBuilder Append(uint value)
+        public PacketBuilder Append(uint value)
         {
             using var span = packetData.Reserve (sizeof (uint));
             writer.@uint (span, value);
             return this;
         }
 
-        private PacketBuilder Append(ulong value)
+        public PacketBuilder Append(ulong value)
         {
             using var span = packetData.Reserve (sizeof (ulong));
             writer.@ulong (span, value);
             return this;
         }
 
-        private PacketBuilder Append<TSource>(TSource AppendClass) where TSource : class
+        public PacketBuilder Append<TSource>(TSource AppendClass) where TSource : class
         {
             byte[] datas = PacketParse.Deserialize (AppendClass);
-            AppendBytes (datas.ToList());
+            Append (datas.ToList());
             return this;
         }
 

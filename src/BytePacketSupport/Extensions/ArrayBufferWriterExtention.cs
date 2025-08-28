@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Buffers;
 
-namespace BytePacketSupport.Extentions
+namespace BytePacketSupport.Extensions
 {
     public static class ArrayBufferWriterExtension
     {

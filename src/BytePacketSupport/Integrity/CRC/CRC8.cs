@@ -1,4 +1,4 @@
-﻿using BytePacketSupport.Extentions;
+﻿using BytePacketSupport.Extensions;
 using System;
 using System.Buffers;
 using System.Collections.Generic;
