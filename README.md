@@ -1,238 +1,139 @@
-**PacketSupoort**
+# PacketSupoort
+
 [![latest version](https://img.shields.io/nuget/v/PacketSupoort)](https://www.nuget.org/packages/PacketSupoort)
 [![downloads](https://img.shields.io/nuget/dt/PacketSupoort)](https://www.nuget.org/packages/PacketSupoort)
 
-**BitSupport**
-[![latest version](https://img.shields.io/nuget/v/BitSupport)](https://www.nuget.org/packages/BitSupport)
-[![downloads](https://img.shields.io/nuget/dt/BitSupport)](https://www.nuget.org/packages/BitSupport)
+**PacketSupoort**는 다양한 타입을 손쉽게 `Append` 하여  
+**byte 배열(Packet)**을 만들고, 파싱할 수 있는 .NET 라이브러리입니다.
 
-### Version 2.0.* Update
-#### Append Type 3(CLR, CSharp, Custom by @Dimohy)
+이 라이브러리는 `StringBuilder`에서 영감을 얻어,  
+네트워크 패킷 · IoT 프로토콜 · 바이너리 파일 작성 등  
+**바이트 배열 조작**이 필요한 곳에서 간결하고 안전한 코드를 제공합니다.
 
-|CLR|CSharp|Custom by @Dimohy|
-|:---|:---|:---|
-|AppendInt16|Appendshort|@short|
-|AppendInt32|Appendint|@int|
-|AppendInt64|Appendlong|@long|
-|AppendUInt16|Appendushort|@ushort|
-|AppendUInt32|Appenduint|@uint|
-|AppendUInt64|Appendulong|@ulong|
-|AppendByte|AppendByte|@byte|
-|AppendBytes|AppendBytes|@bytes|
-|AppendClass|AppendClass|@Class|
-|AppendString|AppendString|@string|
+---
 
-#### Serialize&Deserialize of class attribute Type Add
-- [Endian(Endian.Big)] or [Endian(Endian.Endian)]
-  
-  
-# OVERVIEW
-1. [Print](#Print)
-2. [PacketBuilder](#PacketBuilder)
-3. [Append Extentions](#AppendExtentions)
-4. [PacketCheckSum](#PacketCheckSum) **(feat. [Mythosia.Integrity](https://github.com/AJ-comp/Mythosia/tree/master/Mythosia.Integrity))**
-5. [EndianPacket](#EndianPacket)
-6. [bytearray-class(Serialization,Deserialization)](#bytearray<->class(Serialization,Deserialization)))
+## ✨ 주요 특징
+- **단일 `Append()` 메서드로 모든 타입 지원**  
+  (byte, short, int, string, class …)
+- **체인 메서드 방식** → 가독성 높은 코드
+- **Endian 제어** (Little / Big Endian)
+- **체크섬 계산** (Checksum8Type 지원)
+- **클래스 직렬화/역직렬화** → byte 배열 <-> 객체 변환
+- **기존 메서드(`AppendInt32`, `Appendint`, `@int`)도 호환 가능**  
+  *(네임스페이스 분리로 유지)*
 
-The current difference between **Extentions** and **PacketBuilder** is that Extentions supports the Chain Method, while **PacketBuilder** is intended to provide more functionality in the future.
+---
 
-# Print
-1. ToHexString() => only byte
-2. GetString() => AsciiCode Byte // or GetString(Encoding)
+## 📦 설치
+
+NuGet 패키지를 통해 설치할 수 있습니다.
+
+```sh
+dotnet add package PacketSupoort
+```
+
+## 🚀 빠른 시작 (Quick Start)
 ```csharp
-var builder = new PacketBuilder ()
-               .AppendByte (0x40)
-               .AppendByte (0x41)
-               .AppendByte (0x42)
-               .AppendByte (0x43)
-               .AppendByte (0x44)
-               .AppendByte (0x45)
-               .Build();
+using BytePacketSupport;
 
-Console.WriteLine (builder.ToHexString ());
-Console.WriteLine (builder.GetString ());
+var builder = new PacketBuilder()
+    .Append(0x01, 0x02, 0x03, 0x04, 0x05)
+    .Build();
 
-// output
-
-// 404142434445
-// @ABCDE
+Console.WriteLine(builder.ToHexString());
+// 출력: 0102030405
 ```
-
-# PacketBuilder
-- Append int32
-  
-  **CRL Type**
-  ```csharp
-  var builder = new PacketBuilder ()
-               .AppendInt32 (10)
-               .Build();
-  ```
-  **csharp Type**
-  ```csharp
-  var builder = new PacketBuilder ()
-               .Appendint (10)
-               .Build();
-  ```
-  **CusotmType (feat. @Dimohy)**
-  ```csharp
-  var builder = new PacketBuilder ()
-               .@int (10)
-               .Build();
-  ```
-- Append unsigned int 32
-  
-  **CRL Type**
-  ```csharp
-  var builder = new PacketBuilder ()
-               .AppendUInt32(10)
-               .Build();
-  ```
-  **csharp Type**
-  ```csharp
-  var builder = new PacketBuilder ()
-               .Appenduint(10)
-               .Build();
-  ```
-  **CusotmType (feat. @Dimohy)**
-  ```csharp
-  var builder = new PacketBuilder ()
-               .@uint(10)
-               .Build();
-  ```
-# AppendExtentions 
-
-  **CRL Type**
-  ``` csharp
-  byte[] summaryByts;
-  byte testByte = 0x51;
-  byte[] addBytes = new byte[]{0x52, 0x53}; // or  List<byte> addBytes = new List<byte>(){0x52, 0x53};
-  summaryByts = testByte.AppendBytes(addBytes); 
-  ```
-  **csharp Type**
-  ``` csharp
-  byte[] summaryByts;
-  byte testByte = 0x51;
-  byte[] addBytes = new byte[]{0x52, 0x53}; // or  List<byte> addBytes = new List<byte>(){0x52, 0x53};
-  summaryByts = testByte.AppendBytes(addBytes);
-  ```
-  **CusotmType (feat. @Dimohy)**
-  ``` csharp
-  byte[] summaryByts;
-  byte testByte = 0x51;
-  byte[] addBytes = new byte[]{0x52, 0x53}; // or  List<byte> addBytes = new List<byte>(){0x52, 0x53};
-  summaryByts = testByte.@bytes(addBytes);
-  ```
-# PacketCheckSum
-- There are two ways to do this
-The first ErrorDetection method
-``` csharp
-var packet = pb
-  .@byte(0x01)  // CMD
-  .@byte(0x02)
-  .@byte(0x03)
-  .@byte(0x04)
-  .@byte(0x05)
-  .Compute(Checksum8Type.Xor) 
-  .Build();
-// or
-//   .Compute(Checksum8Type.Xor, start index);
-// or
-//   .Compute(Checksum8Type.Xor, start index, count); 
-```
-The second PointSave method
-SavePoint can be used to extend beyond checksums to areas that need to be temporarily stored.
-``` csharp
-var packet = pb
-  .@byte(0x01)  // CMD
-  .BeginSection("ChecksumPacking")
-  .@byte(0x02)
-  .@byte(0x03)
-  .@byte(0x04)
-  .@byte(0x05)
-  .EndSection("ChecksumPacking");
-  .Compute("ChecksumPacking", Checksum8Type.Xor) // 8비트 체크섬이 삽입되는 위치
-  .Build();
-
-// extentions ex)
-var savePacket = packet.GetSection("ChecksumPacking");
-```
-# EndianPacket
-You can create packets that match the endian type.
+## 🧱 PacketBuilder 기본 사용법
+### 정수추가
 ```csharp
-short test = 0x0102;
- short testAdd = 0x0304;
-
- var littlEndianType = new PacketBuilder (); 
-
- var bigEndianType = new PacketBuilder (new PacketBuilderConfiguration ()
- {
-     DefaultEndian = BytePacketSupport.Enums.Endian.BIG
- });
-
- var display1 = littlEndianType.@short (test)
-                               .@short (testAdd)
-                               .Build ();
-
- var display2 = bigEndianType.@short (test)
-                             .@short (testAdd)
-                             .Build ();
-
- Console.WriteLine ("display1 {0}", display1.Display ());
- Console.WriteLine ("display2 {0}", display2.Display ());
-// output
-// display1 02010403
-// display2 01020304
+var builder = new PacketBuilder()
+    .Append(1234)            // int
+    .Append((short)1234)     // short
+    .Append((uint)1234)      // uint
+    .Build();
 ```
-For Append Extensions, the 
-out of respect for developers' freedom to customize, you can set your own
+
+### 문자열 추가
 ```csharp
-// Extentions 활용 시
-short test = 0x0102;
-byte[] abclittle = new byte[] { 0x01, 0x02 };
-byte[] abcBig = new byte[] { 0x01, 0x02 };
-
-// 정수형 Append 메서드 기본적으로 LittleEnidianType으로 동작합니다.
-// @int (int intByte, bool isLittleEndian = true)
-
-abclittle = abclittle.@short (test);
-abcBig = abcBig.@short (test, false);
-
-
-Console.WriteLine ("display1 {0}", abclittle.Display ());
-Console.WriteLine ("display2 {0}", abcBig.Display ());
-
-// output
-// display1 01020201
-// display2 01020102
+var builder = new PacketBuilder()
+    .Append("HELLO")         // 기본 ASCII
+    .Build();
 ```
-# bytearray<->class(Serialization,Deserialization)
-- For an array or string, you must size it.
-- The size should be set via attribute (ByteSize), and in the case of 'List' Type, it can be handled by adjusting the Capacity value.
-  If there is no capacity or attribute value, an empty value is returned.
+### 여러 바이트 한 번에 추가
 ```csharp
-public class Test2Packet
+var builder = new PacketBuilder()
+    .Append(0xAA, 0xBB, 0xCC)
+    .Build();
+```
+
+### 🔁 Endian 제어
+```csharp
+short value = 0x0102;
+
+// 기본: Little Endian
+var littleEndianPacket = new PacketBuilder()
+    .Append(value)
+    .Build();
+
+// Big Endian
+var bigEndianPacket = new PacketBuilder(
+    new PacketBuilderConfiguration() { DefaultEndian = Endian.BIG })
+    .Append(value)
+    .Build();
+```
+
+## 🧮 체크섬 (Checksum)
+### 1) 인덱스 범위 지정 방식
+```csharp
+var packet = new PacketBuilder()
+    .Append(0x01, 0x02, 0x03, 0x04)
+    .Compute(Checksum8Type.Xor)  // 전체 구간 XOR 체크섬 추가
+    .Build();
+```
+### 2) BeginSection / EndSection 방식
+```csharp
+var packet = new PacketBuilder()
+    .Append(0x01) // CMD
+    .BeginSection("ChecksumArea")
+    .Append(0x02, 0x03, 0x04, 0x05)
+    .EndSection("ChecksumArea")
+    .Compute("ChecksumArea", Checksum8Type.Xor)
+    .Build();
+```
+
+## 📦 클래스 직렬화/역직렬화
+```csharp
+public class TestPacket
 {
     public int Value;
-    [ByteSize (3)]
-    public string Value1;
-    [ByteSize (3)]
-    public string Value2;
-    [ByteSize(4)]
-    public byte[] abc;            
-    public byte[] efg = new byte[5];
-    public List<byte> qqq= new List<byte>(5);
-    public List<byte> qqq1= new List<byte>();
+    [ByteSize(3)] public string Value1;
+    [ByteSize(4)] public byte[] Data;
 }
 
-[Fact]
-public void TestDeserializeObject()
+var packetData = PacketParse.Serialize(new TestPacket
 {
-    var test = new byte[] { 0x01, 0x00, 0x00, 0x00, 0x61, 0x62,0x63,0x41,0x42,0x43, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43, 0x01, 0x00, 0x00, 0x00, 0x61, 0x62, 0x63, 0x41, 0x42, 0x43 };
-    var aaa = PacketParse.Deserialize<Test2Packet> (test);
+    Value = 100,
+    Value1 = "ABC",
+    Data = new byte[] { 0x10, 0x11, 0x12, 0x13 }
+});
 
-    var abc  = PacketParse.Serialize (aaa);
-}
+var parsed = PacketParse.Deserialize<TestPacket>(packetData);
 ```
+## 🕒 호환성 안내 (Versioning)
+
+3.0부터는 Append() 하나로 타입을 자동 처리하는 방식을 권장합니다.
+
+기존 메서드 (AppendInt32, Appendint, @int)는 삭제되지 않았으며
+별도의 네임스페이스 참조 시 그대로 사용 가능합니다.
+
+버전별 상세 변경점은 CHANGELOG
+에서 확인하세요.
+
+## 💡 설계 철학
+
+PacketSupoort는 네트워크 프로그래밍을 위한 "문자열 빌더" 같은 역할을 목표로 합니다.
+타입에 상관없이 Append() 메서드로 데이터를 이어 붙이고,
+최종적으로 byte 배열을 얻는 직관적 인터페이스를 제공합니다.
 
 ---
 
