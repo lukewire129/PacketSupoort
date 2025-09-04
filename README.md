@@ -3,8 +3,7 @@
 [![latest version](https://img.shields.io/nuget/v/PacketSupoort)](https://www.nuget.org/packages/PacketSupoort)
 [![downloads](https://img.shields.io/nuget/dt/PacketSupoort)](https://www.nuget.org/packages/PacketSupoort)
 
-**PacketSupoort**는 다양한 타입을 손쉽게 `Append` 하여  
-**byte 배열(Packet)**을 만들고, 파싱할 수 있는 .NET 라이브러리입니다.
+**PacketSupoort**는 다양한 타입을 손쉽게 `Append` 하여 **byte 배열(Packet)** 을 만들고, 파싱할 수 있는 .NET 라이브러리입니다.
 
 이 라이브러리는 `StringBuilder`에서 영감을 얻어,  
 네트워크 패킷 · IoT 프로토콜 · 바이너리 파일 작성 등  
